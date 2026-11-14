@@ -1,0 +1,16 @@
+{
+  "origin": "https://www.thinkmarketingbend.com",
+  "name": "Think Marketing",
+  "email": "thinkmarketingbend@gmail.com",
+  "telephone": "+15413160735",
+  "areaServed": ["Bend, Oregon", "Central Oregon"],
+  "description": "Website design, local SEO and Search & AI Visibility reviews for businesses in Bend and Central Oregon.",
+  "pages": {
+    "": {"title": "Web Design & Local SEO in Bend, OR | Think Marketing", "description": "Websites, local SEO and AI search visibility for Bend businesses. Clear pricing, client ownership and practical help. Explore Think Marketing’s services.", "label": "Home"},
+    "websites": {"title": "Website Design & Pricing in Bend, OR | Think Marketing", "description": "Compare Essential, Growth and Enterprise websites. Essential starts at $1,995 plus $50/month. E-commerce and custom projects quoted around your needs.", "label": "Websites & pricing"},
+    "local-seo": {"title": "Local SEO & Google Business Profile | Bend, Oregon", "description": "Local SEO help in Bend and Central Oregon. Google Business Profile creation assistance for $200, plus practical website, listing and review improvements.", "label": "Local SEO"},
+    "ai-search-visibility": {"title": "AI Search Visibility & SEO Reviews | Think Marketing", "description": "Get a $350 Search & AI Visibility Review: up to 10 pages, five questions and two AI services. Clear findings and prioritized next steps for your business.", "label": "AI & Search Visibility"},
+    "contact": {"title": "Contact Think Marketing | Web Design & SEO in Bend", "description": "Talk to Think Marketing about websites, local SEO or AI search visibility. Call or text (541) 316-0735, or email us to discuss your project.", "label": "Contact"},
+    "privacy": {"title": "Privacy | Think Marketing", "description": "Privacy information for the Think Marketing local website preview, including direct contact links and services that are not enabled.", "label": "Privacy"}
+  }
+}
