@@ -1,0 +1,16 @@
+HTTP/2 200 
+accept-ranges: bytes
+access-control-allow-origin: *
+age: 0
+cache-control: public, max-age=0, must-revalidate
+content-disposition: inline; filename="llms.txt"
+content-type: text/plain; charset=utf-8
+date: Sat, 14 Nov 2026 20:19:49 GMT
+etag: "cad5e44762d546b32db1fae64d3301f1"
+last-modified: Sat, 14 Nov 2026 20:19:49 GMT
+server: Vercel
+strict-transport-security: max-age=63072000
+x-vercel-cache: MISS
+x-vercel-id: pdx1::j7xrp-1794687589424-456142bf3e49
+content-length: 1580
+

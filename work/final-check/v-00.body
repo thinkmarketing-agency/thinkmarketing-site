@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- SEO Meta Tags -->
+    
+    
+    
+    
+    
+    <!-- Favicon -->
+    
+
+        <!-- Local Business Schema -->
+    
+    
+    <link rel="stylesheet" href="/home.css">
+<title>Web Design &amp; Local SEO in Bend, OR | Think Marketing</title>
+<meta name="description" content="Websites, local SEO and AI search visibility for Bend businesses. Clear pricing, client ownership and practical help. Explore Think Marketing’s services.">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<link rel="canonical" href="https://www.thinkmarketingbend.com/">
+<link rel="icon" type="image/png" href="/assets/images/favicon.png">
+<meta name="theme-color" content="#BA0C2F">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Think Marketing">
+<meta property="og:locale" content="en_US">
+<meta property="og:title" content="Web Design &amp; Local SEO in Bend, OR | Think Marketing">
+<meta property="og:description" content="Websites, local SEO and AI search visibility for Bend businesses. Clear pricing, client ownership and practical help. Explore Think Marketing’s services.">
+<meta property="og:url" content="https://www.thinkmarketingbend.com/">
+<meta property="og:image" content="https://www.thinkmarketingbend.com/assets/images/social-preview.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Think Marketing — digital marketing and web design in Bend, Oregon">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Web Design &amp; Local SEO in Bend, OR | Think Marketing">
+<meta name="twitter:description" content="Websites, local SEO and AI search visibility for Bend businesses. Clear pricing, client ownership and practical help. Explore Think Marketing’s services.">
+<meta name="twitter:image" content="https://www.thinkmarketingbend.com/assets/images/social-preview.jpg">
+<meta name="twitter:image:alt" content="Think Marketing — digital marketing and web design in Bend, Oregon">
+<link rel="preload" as="image" href="/assets/images/think-marketing-hero.jpg" fetchpriority="high">
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "Organization", "@id": "https://www.thinkmarketingbend.com/#organization", "name": "Think Marketing", "url": "https://www.thinkmarketingbend.com/", "description": "Website design, local SEO and Search & AI Visibility reviews for businesses in Bend and Central Oregon.", "email": "thinkmarketingbend@gmail.com", "telephone": "+15413160735", "areaServed": ["Bend, Oregon", "Central Oregon"], "logo": {"@type": "ImageObject", "url": "https://www.thinkmarketingbend.com/assets/images/think-marketing-logo-small.png", "width": 256, "height": 122}}, {"@type": "WebSite", "@id": "https://www.thinkmarketingbend.com/#website", "url": "https://www.thinkmarketingbend.com/", "name": "Think Marketing", "publisher": {"@id": "https://www.thinkmarketingbend.com/#organization"}, "inLanguage": "en-US"}, {"@type": "WebPage", "@id": "https://www.thinkmarketingbend.com/#webpage", "url": "https://www.thinkmarketingbend.com/", "name": "Web Design & Local SEO in Bend, OR | Think Marketing", "description": "Websites, local SEO and AI search visibility for Bend businesses. Clear pricing, client ownership and practical help. Explore Think Marketing’s services.", "inLanguage": "en-US", "isPartOf": {"@id": "https://www.thinkmarketingbend.com/#website"}, "about": {"@id": "https://www.thinkmarketingbend.com/#organization"}}]}</script>
+</head>
+<body class="homepage">
+<a class="skip" href="#main">Skip to content</a>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container header-container">
+            <a href="/" class="logo">
+                <img src="/assets/images/think-marketing-logo-small.png" alt="Think Marketing Logo" width="256" height="122" decoding="async">
+            </a>
+            <div class="header-buttons">
+                <a href="tel:+15413160735" class="btn btn-primary btn-call">Call Now</a>
+                <a href="sms:+15413160735" class="btn btn-primary btn-text">Text Us</a>
+            </div>
+        </div>
+    </header>
+
+    <nav class="home-nav" aria-label="Main navigation">
+        <a href="/websites/">Websites &amp; pricing</a><a href="/local-seo/">Local SEO</a><a href="/ai-search-visibility/">AI &amp; Search Visibility</a><a href="/contact/">Contact</a>
+    </nav>
+
+    <main id="main">
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Digital Marketing & Web Design<br>for Bend, Oregon Businesses</h1>
+            <p class="subheadline">Clear websites, local search help and practical AI visibility reporting</p>
+            <a href="/contact/" class="btn btn-primary">Get a Free Quote</a>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="services">
+        <div class="container">
+            <h2>Our Services</h2>
+            <div class="services-grid">
+                
+                <div class="service-card">
+                    <h3>Website Design</h3>
+                    <p>Clear, mobile-friendly websites that explain your services and make it easy to get in touch. Essential starts at $1,995 plus $50/month hosting.</p>
+                    <a href="/websites/">See websites &amp; pricing ↗</a>
+                </div>
+                <div class="service-card">
+                    <h3>Local SEO</h3>
+                    <p>Business profiles, accurate listings and useful local content. Google Business Profile creation assistance is $200.</p>
+                    <a href="/local-seo/">Explore local SEO ↗</a>
+                </div>
+                <div class="service-card">
+                    <h3>AI &amp; Search Visibility</h3>
+                    <p>Find what’s missing and what to fix first. Our $350 combined review includes a plain-English report and prioritized recommendations.</p>
+                    <a href="/ai-search-visibility/">Explore search &amp; AI visibility ↗</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Think Marketing Section -->
+    <section class="why-us">
+        <div class="container">
+            <h2>Why Think Marketing?</h2>
+            <div class="benefits-grid">
+                
+                <div class="benefit">
+                    <h3>Bend-Based</h3>
+                    <p>Based in Bend and working with Central Oregon businesses. Talk directly with Think Marketing about your project.</p>
+                </div>
+
+                <div class="benefit">
+                    <h3>Simple Pricing</h3>
+                    <p>Clear packages and agreed scope. We discuss additional work and costs before starting. <a href="/websites/">See website packages and ground rules.</a></p>
+                </div>
+
+                <div class="benefit">
+                    <h3>Terms That Fit the Project</h3>
+                    <p>Essential and Growth hosting is month-to-month after development is paid. Larger Enterprise sites start at $400/month with a 12-month commitment, billed from kickoff.</p>
+                </div>
+
+                <div class="benefit">
+                    <h3>Built Around Your Business</h3>
+                    <p>From focused service-business websites to larger Enterprise sites and online stores, we scope the work around what you need.</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Local SEO Section -->
+    <section class="local-seo">
+        <div class="container">
+            <h2>Helping Bend Businesses Get Found Locally</h2>
+            <p>Customers need to know what you do, where you work and how to reach you. We help connect those details across your website and local business presence.</p>
+            <p>Start with a conversation, create your business profile, or choose a combined Search &amp; AI Visibility Review to prioritize the next improvements.</p>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <a href="/contact/" class="btn btn-primary btn-quote">Get a Free Quote</a>
+            
+            <!-- Contact Info -->
+            <div class="contact-info">
+                <p><strong>Email:</strong> <a href="mailto:thinkmarketingbend@gmail.com">thinkmarketingbend@gmail.com</a></p>
+                <p><strong>Phone:</strong> <a href="tel:+15413160735">(541) 316-0735</a></p>
+
+            </div>
+
+        </div>
+    </section>
+
+    </main>
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container footer-container">
+            <div class="footer-text">
+                <p><strong>Think Marketing</strong></p>
+                <p>Digital Marketing & Web Design</p>
+                <p>Bend, Oregon</p>
+            </div>
+            <div class="footer-logo">
+                <img src="/assets/images/think-marketing-icon.png" alt="Think Marketing Icon" width="128" height="123" decoding="async" loading="lazy">
+                <p class="footer-privacy"><a href="/privacy/">Privacy</a></p>
+                <p class="copyright">&copy; 2026 Think Marketing. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

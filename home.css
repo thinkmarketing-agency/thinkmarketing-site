@@ -526,3 +526,65 @@ html {
 .homepage .container{max-width:1196px;padding-inline:48px}.homepage main>section:not(.hero){padding-block:28px}.homepage .hero{min-height:440px;padding:36px 0}.homepage .hero h1{font-size:clamp(30px,3.5vw,46px);margin-bottom:18px}.homepage .hero .subheadline{margin-bottom:22px;font-size:18px}.homepage .services h2,.homepage .why-us h2{font-size:27px;margin-bottom:20px}.homepage .services-grid,.homepage .benefits-grid{gap:20px}.homepage .service-card{padding:22px;border-width:1px;border-radius:4px}.homepage .service-card p{font-size:15px;margin-bottom:12px}.homepage .service-card>a{font-size:14px;font-weight:600}.homepage .service-card:hover{transform:none}.homepage .benefit h3{font-size:19px}.homepage .benefit p{font-size:15px;margin:0}.homepage .local-seo h2{font-size:27px;margin-bottom:14px}.homepage .local-seo p{font-size:15px;max-width:800px}.homepage .contact .container{display:flex;align-items:center;justify-content:space-between;gap:24px}.homepage .btn-quote{margin:0;font-size:16px;padding:13px 24px;max-width:none}.homepage .contact-info{margin:0;padding:0;border:0;text-align:right}.homepage .contact-info p{font-size:15px;margin-bottom:5px}.homepage .footer{padding:24px 0}.homepage .footer-logo img{height:65px}.homepage .footer-text p strong{font-size:18px}.footer-privacy{font-size:12px;margin-bottom:4px}.footer-privacy a{color:#fff;text-decoration:underline}.homepage .footer-privacy{font-size:12px}.homepage .footer-logo .copyright{font-size:12px}@media(max-width:767px){.homepage .container{padding-inline:18px}.homepage .hero{min-height:350px;padding:28px 0;background-size:160%;align-items:flex-start}.homepage .hero h1{font-size:30px}.homepage .hero .subheadline{font-size:16px;max-width:320px}.homepage main>section:not(.hero){padding-block:22px}.homepage .services-grid,.homepage .benefits-grid{gap:16px}.homepage .service-card{padding:18px}.homepage .contact .container{flex-direction:column;gap:18px}.homepage .contact-info{text-align:center}.homepage .footer-container{gap:16px}.homepage .footer-logo img{height:50px}.homepage .local-seo h2{font-size:25px}}
 
 img{max-width:100%}.breadcrumb{padding-top:16px;font-size:12px;color:#555}.breadcrumb a{color:#BA0C2F}
+
+/* One mobile header shared by home and service pages; desktop remains unchanged. */
+.mobile-menu{display:none}
+@media(max-width:767px){
+ .header .header-container{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:center;gap:8px;padding-inline:18px}
+ .header .logo{justify-self:start}
+ .header .logo img{height:34px;width:auto;max-width:none}
+ .header .header-buttons{justify-self:end;display:flex;gap:6px}
+ .header .header-buttons .btn{display:inline-flex;align-items:center;justify-content:center;font-family:Arial,Helvetica,sans-serif;font-size:11px;line-height:1.4;min-height:44px;padding:10px 9px;white-space:nowrap;transition:none}
+ .header .header-buttons .btn:hover{transform:none}
+ .header .mobile-menu{display:block;justify-self:center;font-family:Arial,Helvetica,sans-serif;font-size:12px;line-height:1.4}
+ .mobile-menu summary{display:flex;align-items:center;justify-content:center;gap:6px;min-height:44px;padding:10px 11px;background:#BA0C2F;color:#fff;border-radius:4px;cursor:pointer;font-weight:600;list-style:none;user-select:none}
+ .mobile-menu summary::-webkit-details-marker{display:none}
+ .menu-chevron{width:6px;height:6px;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;transform:rotate(45deg);margin-top:-3px}
+ .mobile-menu[open] .menu-chevron{transform:rotate(225deg);margin-top:3px}
+ .mobile-menu-links{position:absolute;left:0;right:0;top:100%;display:flex;flex-direction:column;background:#fff;border-top:1px solid #eee;border-bottom:3px solid #BA0C2F;padding:8px 18px;box-shadow:0 8px 16px #00000014;max-height:calc(100dvh - 70px);overflow-y:auto}
+ .mobile-menu:not([open]) .mobile-menu-links{display:none}
+ .mobile-menu-links a{display:block;padding:13px 10px;min-height:44px;border-bottom:1px solid #eee;color:#000;font-size:15px;text-decoration:none;text-align:left}
+ .mobile-menu-links a:last-child{border-bottom:0}
+ .mobile-menu-links a:hover{color:#BA0C2F;background:#fafafa}
+ .home-nav{display:none}
+}
+@media(max-width:359px){.header .header-container{padding-inline:12px;gap:6px}.header .logo img{height:30px}.header .header-buttons .btn{font-size:10px;padding-inline:8px}.mobile-menu summary{padding-inline:9px}}
+@media(max-width:359px){.header .header-container.container{padding-inline:12px;grid-template-columns:auto minmax(0,1fr) auto}}
+/* Reserve the bottom of the mobile hero for the logo in the artwork. */
+@media(max-width:767px){.homepage .hero{padding-bottom:68px}}
+
+.mobile-heading-break{display:none}@media(max-width:767px){.mobile-heading-break{display:inline}.desktop-heading-space{display:none}}
+
+/* Desktop navigation shares the logo and contact-button row. */
+@media(min-width:768px){
+ .header .header-container{gap:24px}
+ .header .logo,.header .header-buttons{flex-shrink:0}
+ .header .home-nav{display:flex;flex:1;justify-content:center;align-items:center;flex-wrap:nowrap;gap:20px;padding:0;border:0;font-size:13px;line-height:1.4}
+ .header .home-nav a{white-space:nowrap;padding-block:12px}
+}
+@media(min-width:768px) and (max-width:1099px){
+ .header .header-container.container{padding-inline:24px;gap:14px}
+ .header .logo img{height:45px}
+ .header .home-nav{gap:12px;font-size:11px}
+ .header .header-buttons{gap:6px}
+ .header .header-buttons .btn{font-size:12px;padding:11px 12px}
+}
+@media(max-width:767px){.header .home-nav{display:none}}
+
+/* Give the supporting homepage sections a clear, branded rhythm. */
+.homepage .why-us .benefits-grid{gap:18px}
+.homepage .why-us .benefit{position:relative;border:1px solid #e0e0e0;border-radius:4px;padding:22px 24px 22px 30px;background:#fff}
+.homepage .why-us .benefit::before{content:"";position:absolute;left:-1px;top:22px;bottom:22px;width:4px;background:#BA0C2F;border-radius:0 2px 2px 0}
+.homepage .why-us .benefit h3{margin-bottom:10px}
+.homepage .local-seo>.container{position:relative;padding:28px 36px;border:1px solid #000;border-top:4px solid #BA0C2F;border-radius:4px;width:calc(100% - 96px);max-width:1100px;text-align:left}
+.homepage .local-seo h2{max-width:850px;margin:0 0 14px}
+.homepage .local-seo p{max-width:850px;margin-left:0;margin-right:0}
+.homepage .local-seo p:last-child{margin-bottom:0}
+@media(max-width:767px){
+ .homepage .why-us .benefit{padding:18px 20px 18px 25px}
+ .homepage .why-us .benefit::before{top:18px;bottom:18px}
+ .homepage .local-seo>.container{width:calc(100% - 36px);padding:22px 20px}
+}
+@media(max-width:767px){.homepage .local-seo h2{text-align:center}}
+
+.link-arrow{display:inline-block;width:.95em;height:.95em;vertical-align:-.1em;flex-shrink:0;overflow:visible}

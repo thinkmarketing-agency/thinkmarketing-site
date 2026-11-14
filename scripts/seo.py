@@ -85,6 +85,8 @@ def enrich(html, slug, production=False):
     if slug:
         crumb = f'<nav class="breadcrumb wrap" aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true"> / </span><span aria-current="page">{escape(data["label"])}</span></nav>'
         html = html.replace('<main id="main">', '<main id="main">' + crumb)
+    arrow = '<svg class="link-arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 13 13 3M4 3h9v9"/></svg>'
+    html = html.replace('↗\ufe0f', arrow).replace('↗', arrow)
     return html
 
 def artifacts(output, production=False):

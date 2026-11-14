@@ -1,0 +1,10 @@
+[
+  {
+    "mode": "mobile",
+    "error": "HTTP Error 429: Too Many Requests"
+  },
+  {
+    "mode": "desktop",
+    "error": "HTTP Error 429: Too Many Requests"
+  }
+]

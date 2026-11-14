@@ -1,0 +1,250 @@
+[
+  {
+    "requested": "https://www.thinkmarketingbend.com/",
+    "final_url": "https://thinkmarketingbend.com/",
+    "status": 200,
+    "headers": {
+      "Accept-Ranges": "bytes",
+      "Age": "1",
+      "Cache-Control": "public,max-age=0,must-revalidate",
+      "Cache-Status": "\"Netlify Edge\"; fwd=miss; fwd-status=200; stored",
+      "Content-Length": "9487",
+      "Content-Type": "text/html; charset=UTF-8",
+      "Date": "Sat, 14 Nov 2026 20:17:39 GMT",
+      "Etag": "\"94ff35af418b300742b5eb0d6695e379-ssl\"",
+      "Server": "Netlify",
+      "Strict-Transport-Security": "max-age=31536000",
+      "Vary": "Accept-Encoding",
+      "X-Nf-Request-Id": "01M7DVAQHYQJK5V2V8RTSNCE9D",
+      "Connection": "close"
+    },
+    "bytes": 9487
+  },
+  {
+    "requested": "https://thinkmarketingbend.com/",
+    "final_url": "https://thinkmarketingbend.com/",
+    "status": 200,
+    "headers": {
+      "Accept-Ranges": "bytes",
+      "Age": "0",
+      "Cache-Control": "public,max-age=0,must-revalidate",
+      "Cache-Status": "\"Netlify Edge\"; fwd=miss; fwd-status=200; stored",
+      "Content-Length": "9487",
+      "Content-Type": "text/html; charset=UTF-8",
+      "Date": "Sat, 14 Nov 2026 20:17:39 GMT",
+      "Etag": "\"94ff35af418b300742b5eb0d6695e379-ssl\"",
+      "Server": "Netlify",
+      "Strict-Transport-Security": "max-age=31536000",
+      "Vary": "Accept-Encoding",
+      "X-Nf-Request-Id": "01M7DVAR6JKZ9WQFNZH4QWXAEP",
+      "Connection": "close"
+    },
+    "bytes": 9487
+  },
+  {
+    "requested": "http://thinkmarketingbend.com/",
+    "final_url": "https://thinkmarketingbend.com/",
+    "status": 200,
+    "headers": {
+      "Accept-Ranges": "bytes",
+      "Age": "2452",
+      "Cache-Control": "public,max-age=0,must-revalidate",
+      "Cache-Status": "\"Netlify Edge\"; hit; ttl=31533548",
+      "Content-Length": "9487",
+      "Content-Type": "text/html; charset=UTF-8",
+      "Date": "Sat, 14 Nov 2026 20:17:40 GMT",
+      "Etag": "\"94ff35af418b300742b5eb0d6695e379-ssl\"",
+      "Server": "Netlify",
+      "Strict-Transport-Security": "max-age=31536000",
+      "Vary": "Accept-Encoding",
+      "X-Nf-Request-Id": "01M7DVARTTAS3R5K44ARNJZRE0",
+      "Connection": "close"
+    },
+    "bytes": 9487
+  },
+  {
+    "requested": "https://www.thinkmarketingbend.com/websites/",
+    "final_url": "https://thinkmarketingbend.com/websites/",
+    "status": 200,
+    "headers": {
+      "Accept-Ranges": "bytes",
+      "Age": "1",
+      "Cache-Control": "public,max-age=0,must-revalidate",
+      "Cache-Status": "\"Netlify Edge\"; fwd=miss; fwd-status=200; stored",
+      "Content-Length": "13306",
+      "Content-Type": "text/html; charset=UTF-8",
+      "Date": "Sat, 14 Nov 2026 20:17:41 GMT",
+      "Etag": "\"3410bf3c92eeba8f305932e488f7cfc7-ssl\"",
+      "Server": "Netlify",
+      "Strict-Transport-Security": "max-age=31536000",
+      "Vary": "Accept-Encoding",
+      "X-Nf-Request-Id": "01M7DVASHSDD76R4S3XRYC20MJ",
+      "Connection": "close"
+    },
+    "bytes": 13306
+  },
+  {
+    "requested": "https://www.thinkmarketingbend.com/local-seo/",
+    "final_url": "https://thinkmarketingbend.com/local-seo/",
+    "status": 200,
+    "headers": {
+      "Accept-Ranges": "bytes",
+      "Age": "0",
+      "Cache-Control": "public,max-age=0,must-revalidate",
+      "Cache-Status": "\"Netlify Edge\"; fwd=miss; fwd-status=200; stored",
+      "Content-Length": "11336",
+      "Content-Type": "text/html; charset=UTF-8",
+      "Date": "Sat, 14 Nov 2026 20:17:41 GMT",
+      "Etag": "\"2e02e9e487fa57de5de0e223310762a0-ssl\"",
+      "Server": "Netlify",
+      "Strict-Transport-Security": "max-age=31536000",
+      "Vary": "Accept-Encoding",
+      "X-Nf-Request-Id": "01M7DVATD7ZQG4VVJC532XR7BP",
+      "Connection": "close"
+    },
+    "bytes": 11336
+  },
+  {
+    "requested": "https://www.thinkmarketingbend.com/ai-search-visibility/",
+    "final_url": "https://thinkmarketingbend.com/ai-search-visibility/",
+    "status": 200,
+    "headers": {
+      "Accept-Ranges": "bytes",
+      "Age": "0",
+      "Cache-Control": "public,max-age=0,must-revalidate",
+      "Cache-Status": "\"Netlify Edge\"; fwd=miss; fwd-status=200; stored",
+      "Content-Length": "11586",
+      "Content-Type": "text/html; charset=UTF-8",
+      "Date": "Sat, 14 Nov 2026 20:17:42 GMT",
+      "Etag": "\"10875ebbf1e0449e3b76a0738e3b2ac3-ssl\"",
+      "Server": "Netlify",
+      "Strict-Transport-Security": "max-age=31536000",
+      "Vary": "Accept-Encoding",
+      "X-Nf-Request-Id": "01M7DVAV8YSZFZK6SP3VA8ZWC4",
+      "Connection": "close"
+    },
+    "bytes": 11586
+  },
+  {
+    "requested": "https://www.thinkmarketingbend.com/contact/",
+    "final_url": "https://thinkmarketingbend.com/contact/",
+    "status": 200,
+    "headers": {
+      "Accept-Ranges": "bytes",
+      "Age": "0",
+      "Cache-Control": "public,max-age=0,must-revalidate",
+      "Cache-Status": "\"Netlify Edge\"; fwd=miss; fwd-status=200; stored",
+      "Content-Length": "6663",
+      "Content-Type": "text/html; charset=UTF-8",
+      "Date": "Sat, 14 Nov 2026 20:17:43 GMT",
+      "Etag": "\"4953045c1b85aa465819b70222abdcfc-ssl\"",
+      "Server": "Netlify",
+      "Strict-Transport-Security": "max-age=31536000",
+      "Vary": "Accept-Encoding",
+      "X-Nf-Request-Id": "01M7DVAW6HZ55JBR90C7G1RPEG",
+      "Connection": "close"
+    },
+    "bytes": 6663
+  },
+  {
+    "requested": "https://www.thinkmarketingbend.com/privacy/",
+    "final_url": "https://thinkmarketingbend.com/privacy/",
+    "status": 200,
+    "headers": {
+      "Accept-Ranges": "bytes",
+      "Age": "0",
+      "Cache-Control": "public,max-age=0,must-revalidate",
+      "Cache-Status": "\"Netlify Edge\"; fwd=miss; fwd-status=200; stored",
+      "Content-Length": "6148",
+      "Content-Type": "text/html; charset=UTF-8",
+      "Date": "Sat, 14 Nov 2026 20:17:44 GMT",
+      "Etag": "\"7f5b2ed0854b818be66895296f9348bf-ssl\"",
+      "Server": "Netlify",
+      "Strict-Transport-Security": "max-age=31536000",
+      "Vary": "Accept-Encoding",
+      "X-Nf-Request-Id": "01M7DVAWYW7MR4JZ9AHSZF4RA7",
+      "Connection": "close"
+    },
+    "bytes": 6148
+  },
+  {
+    "requested": "https://www.thinkmarketingbend.com/robots.txt",
+    "final_url": "https://thinkmarketingbend.com/robots.txt",
+    "status": 200,
+    "headers": {
+      "Accept-Ranges": "bytes",
+      "Age": "0",
+      "Cache-Control": "public,max-age=0,must-revalidate",
+      "Cache-Status": "\"Netlify Edge\"; fwd=miss; fwd-status=200; stored",
+      "Content-Length": "26",
+      "Content-Type": "text/plain; charset=UTF-8",
+      "Date": "Sat, 14 Nov 2026 20:17:45 GMT",
+      "Etag": "\"0e7a01f2317cedade20d0c54ffc8fb36-ssl\"",
+      "Server": "Netlify",
+      "Strict-Transport-Security": "max-age=31536000",
+      "X-Nf-Request-Id": "01M7DVAXS691P4JFSJ1RA7GX2C",
+      "Connection": "close"
+    },
+    "bytes": 26
+  },
+  {
+    "requested": "https://www.thinkmarketingbend.com/sitemap.xml",
+    "final_url": "https://thinkmarketingbend.com/sitemap.xml",
+    "status": 200,
+    "headers": {
+      "Accept-Ranges": "bytes",
+      "Age": "0",
+      "Cache-Control": "public,max-age=0,must-revalidate",
+      "Cache-Status": "\"Netlify Edge\"; fwd=miss; fwd-status=200; stored",
+      "Content-Length": "101",
+      "Content-Type": "application/xml",
+      "Date": "Sat, 14 Nov 2026 20:17:46 GMT",
+      "Etag": "\"237380cdb1f75a50c661b98e11380563-ssl\"",
+      "Server": "Netlify",
+      "Strict-Transport-Security": "max-age=31536000",
+      "X-Nf-Request-Id": "01M7DVAYHG12FDMRZ2CZQYQTYW",
+      "Connection": "close"
+    },
+    "bytes": 101
+  },
+  {
+    "requested": "https://www.thinkmarketingbend.com/llms.txt",
+    "final_url": "https://thinkmarketingbend.com/llms.txt",
+    "status": 200,
+    "headers": {
+      "Accept-Ranges": "bytes",
+      "Age": "1",
+      "Cache-Control": "public,max-age=0,must-revalidate",
+      "Cache-Status": "\"Netlify Edge\"; fwd=miss; fwd-status=200; stored",
+      "Content-Length": "1580",
+      "Content-Type": "text/plain; charset=UTF-8",
+      "Date": "Sat, 14 Nov 2026 20:17:47 GMT",
+      "Etag": "\"d74070d8e2fccf2a077e959210cb8d8f-ssl\"",
+      "Server": "Netlify",
+      "Strict-Transport-Security": "max-age=31536000",
+      "Vary": "Accept-Encoding",
+      "X-Nf-Request-Id": "01M7DVAZDD8SQ46PW7EHRHJPB8",
+      "Connection": "close"
+    },
+    "bytes": 1580
+  },
+  {
+    "requested": "https://www.thinkmarketingbend.com/this-page-does-not-exist-final-check/",
+    "final_url": "https://thinkmarketingbend.com/this-page-does-not-exist-final-check/",
+    "status": 404,
+    "headers": {
+      "Age": "0",
+      "Cache-Control": "public,max-age=0,must-revalidate",
+      "Cache-Status": "\"Netlify Edge\"; fwd=miss; fwd-status=404; stored",
+      "Content-Length": "542",
+      "Content-Type": "text/html; charset=utf-8",
+      "Date": "Sat, 14 Nov 2026 20:17:47 GMT",
+      "Etag": "1768778582-ssl",
+      "Server": "Netlify",
+      "Strict-Transport-Security": "max-age=31536000",
+      "X-Nf-Request-Id": "01M7DVB08AVBV3EMEQJMFXKR26",
+      "Connection": "close"
+    },
+    "bytes": 542
+  }
+]

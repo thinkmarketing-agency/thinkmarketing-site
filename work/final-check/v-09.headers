@@ -1,0 +1,16 @@
+HTTP/2 200 
+accept-ranges: bytes
+access-control-allow-origin: *
+age: 0
+cache-control: public, max-age=0, must-revalidate
+content-disposition: inline; filename="social-preview.jpg"
+content-type: image/jpeg
+date: Sat, 14 Nov 2026 20:19:49 GMT
+etag: "4a43d044baf0452b8d78e46158d67627"
+last-modified: Sat, 14 Nov 2026 20:19:49 GMT
+server: Vercel
+strict-transport-security: max-age=63072000
+x-vercel-cache: MISS
+x-vercel-id: pdx1::2r5h2-1794687589745-0fb374c88734
+content-length: 77795
+

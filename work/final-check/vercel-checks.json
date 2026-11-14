@@ -1,0 +1,115 @@
+[
+  {
+    "path": "/",
+    "curl_exit": 0,
+    "status": "HTTP/2 200 ",
+    "server": [
+      "Vercel"
+    ],
+    "robots": [
+      "index,follow,max-image-preview:large"
+    ]
+  },
+  {
+    "path": "/websites/",
+    "curl_exit": 0,
+    "status": "HTTP/2 200 ",
+    "server": [
+      "Vercel"
+    ],
+    "robots": [
+      "index,follow,max-image-preview:large"
+    ]
+  },
+  {
+    "path": "/local-seo/",
+    "curl_exit": 0,
+    "status": "HTTP/2 200 ",
+    "server": [
+      "Vercel"
+    ],
+    "robots": [
+      "index,follow,max-image-preview:large"
+    ]
+  },
+  {
+    "path": "/ai-search-visibility/",
+    "curl_exit": 0,
+    "status": "HTTP/2 200 ",
+    "server": [
+      "Vercel"
+    ],
+    "robots": [
+      "index,follow,max-image-preview:large"
+    ]
+  },
+  {
+    "path": "/contact/",
+    "curl_exit": 0,
+    "status": "HTTP/2 200 ",
+    "server": [
+      "Vercel"
+    ],
+    "robots": [
+      "index,follow,max-image-preview:large"
+    ]
+  },
+  {
+    "path": "/privacy/",
+    "curl_exit": 0,
+    "status": "HTTP/2 200 ",
+    "server": [
+      "Vercel"
+    ],
+    "robots": [
+      "noindex,follow"
+    ]
+  },
+  {
+    "path": "/robots.txt",
+    "curl_exit": 0,
+    "status": "HTTP/2 200 ",
+    "server": [
+      "Vercel"
+    ],
+    "robots": []
+  },
+  {
+    "path": "/sitemap.xml",
+    "curl_exit": 0,
+    "status": "HTTP/2 200 ",
+    "server": [
+      "Vercel"
+    ],
+    "robots": []
+  },
+  {
+    "path": "/llms.txt",
+    "curl_exit": 0,
+    "status": "HTTP/2 200 ",
+    "server": [
+      "Vercel"
+    ],
+    "robots": []
+  },
+  {
+    "path": "/assets/images/social-preview.jpg",
+    "curl_exit": 0,
+    "status": "HTTP/2 200 ",
+    "server": [
+      "Vercel"
+    ],
+    "robots": []
+  },
+  {
+    "path": "/missing-final-release-check/",
+    "curl_exit": 0,
+    "status": "HTTP/2 404 ",
+    "server": [
+      "Vercel"
+    ],
+    "robots": [
+      "noindex,follow"
+    ]
+  }
+]
