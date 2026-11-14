@@ -550,8 +550,7 @@ img{max-width:100%}.breadcrumb{padding-top:16px;font-size:12px;color:#555}.bread
 }
 @media(max-width:359px){.header .header-container{padding-inline:12px;gap:6px}.header .logo img{height:30px}.header .header-buttons .btn{font-size:10px;padding-inline:8px}.mobile-menu summary{padding-inline:9px}}
 @media(max-width:359px){.header .header-container.container{padding-inline:12px;grid-template-columns:auto minmax(0,1fr) auto}}
-/* Reserve the bottom of the mobile hero for the logo in the artwork. */
-@media(max-width:767px){.homepage .hero{padding-bottom:68px}}
+
 
 .mobile-heading-break{display:none}@media(max-width:767px){.mobile-heading-break{display:inline}.desktop-heading-space{display:none}}
 
@@ -588,3 +587,52 @@ img{max-width:100%}.breadcrumb{padding-top:16px;font-size:12px;color:#555}.bread
 @media(max-width:767px){.homepage .local-seo h2{text-align:center}}
 
 .link-arrow{display:inline-block;width:.95em;height:.95em;vertical-align:-.1em;flex-shrink:0;overflow:visible}
+
+
+
+/* One continuous original image; content ends above the embedded logo. */
+@media(max-width:1199px),(hover:none) and (pointer:coarse){
+ .homepage .hero{background-image:url('/assets/images/think-marketing-hero.jpg');background-size:max(100%,600px) auto;background-position:bottom right;background-repeat:no-repeat;min-height:0;padding:26px 0 clamp(78px,11vw,140px);align-items:flex-start;display:flex}
+ .homepage .hero>.container{width:100%}
+ .homepage .hero h1{font-size:clamp(24px,7.2vw,32px);line-height:1.16;margin-bottom:16px}
+ .hero-title-line{display:block;white-space:nowrap}
+ .hero-desktop-break{display:none}
+ .homepage .hero .subheadline{font-size:16px;max-width:460px;margin:0 auto 18px}
+}
+/* Landscape phones: compact desktop composition without shrinking the page. */
+@media(orientation:landscape) and (min-width:568px) and (max-width:1199px) and (max-height:600px){
+ .homepage .hero{min-height:260px;padding:24px 0;background-size:cover;background-position:bottom right;text-align:left}
+ .homepage .hero>.container{padding-inline:28px}
+ .homepage .hero h1{font-size:clamp(24px,3.1vw,32px);line-height:1.15;max-width:62%;margin:0 0 12px}
+ .homepage .hero .hero-title-line{display:inline;white-space:normal}
+ .homepage .hero .hero-desktop-break{display:inline}
+ .homepage .hero .subheadline{max-width:58%;font-size:15px;line-height:1.4;margin:0 0 16px}
+ .homepage .hero .btn{padding:11px 20px;font-size:14px}
+ .homepage .services-grid,.homepage .benefits-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+ .homepage .services-grid>.service-card:last-child{grid-column:1/-1}
+ .homepage .service-card,.homepage .why-us .benefit{padding:18px 20px}
+ .homepage main>section:not(.hero){padding-block:22px}
+ .homepage .contact .container{flex-direction:row;align-items:center}
+ .homepage .contact-info{text-align:right}
+ .header{padding-block:6px}
+ .header .header-container.container{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);gap:12px;padding-inline:24px}
+ .header .logo{justify-self:start}.header .logo img{height:34px;width:auto}
+ .header .header-buttons{justify-self:end;gap:6px}
+ .header .header-buttons .btn{font-size:11px;min-height:44px;display:inline-flex;align-items:center;padding:10px 9px}
+ .header .home-nav{display:none}
+ .header .mobile-menu{display:block;justify-self:center;font-family:Arial,Helvetica,sans-serif;font-size:12px;line-height:1.4}
+ .mobile-menu summary{display:flex;align-items:center;justify-content:center;gap:6px;min-height:44px;padding:10px 11px;background:#BA0C2F;color:#fff;border-radius:4px;cursor:pointer;font-weight:600;list-style:none}
+ .mobile-menu summary::-webkit-details-marker{display:none}
+ .mobile-menu-links{position:absolute;left:0;right:0;top:100%;display:flex;flex-direction:column;background:#fff;border-top:1px solid #eee;border-bottom:3px solid #BA0C2F;padding:8px 24px;box-shadow:0 8px 16px #00000014;max-height:calc(100dvh - 60px);overflow-y:auto}
+ .mobile-menu:not([open]) .mobile-menu-links{display:none}
+ .mobile-menu-links a{display:block;padding:11px 10px;min-height:44px;border-bottom:1px solid #eee;color:#000;font-size:15px;text-decoration:none}
+}
+/* Landscape tablets have space for the normal desktop hero. */
+@media(orientation:landscape) and (min-width:960px) and (min-height:601px){
+ .homepage .hero{min-height:400px;padding:36px 0;background-size:cover;text-align:center;align-items:center}
+ .homepage .hero h1{font-size:clamp(32px,3.5vw,46px);max-width:none}
+ .homepage .hero .hero-title-line{display:inline;white-space:normal}
+ .homepage .hero .hero-desktop-break{display:inline}
+ .homepage .hero .subheadline{max-width:600px;font-size:18px;margin:0 auto 22px}
+}
+@media(orientation:landscape) and (min-width:568px) and (max-width:1199px) and (max-height:600px){.menu-chevron{width:6px;height:6px;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;transform:rotate(45deg);margin-top:-3px}.mobile-menu[open] .menu-chevron{transform:rotate(225deg);margin-top:3px}}
