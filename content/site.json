@@ -41,27 +41,22 @@
     },
     "about": {
       "title": "About Think Marketing | Custom Websites in Bend, Oregon",
-      "description": "Meet Think Marketing\u2019s approach to custom websites: explain your expertise, help customers, and build useful tools around your business. Based in Bend, Oregon.",
+      "description": "Meet Jacob and the approach behind Think Marketing: custom websites that explain your expertise and do useful work for your business. Based in Bend, Oregon.",
       "label": "About"
     },
     "faq": {
       "title": "Website Pricing, Ownership & Support FAQ | Think Marketing",
-      "description": "Answers about Think Marketing website pricing, hosting, ownership, editing, consulting and support. Explore your options with Ask Jasper or contact us.",
+      "description": "Straight answers about Think Marketing website prices, monthly hosting, ownership, content, updates and marketing. Contact us to discuss your business.",
       "label": "FAQ"
-    },
-    "ask-jasper": {
-      "title": "Ask Jasper | Website Answers & Estimates | Think Marketing",
-      "description": "Explore custom website packages, get guided answers, and calculate a starting estimate with Jasper. Standard tools included within agreed service limits.",
-      "label": "Ask Jasper"
     },
     "marketing": {
       "title": "Marketing Services in Bend | SEO, AI Visibility & PPC",
-      "description": "Connect your marketing plan: consulting, local SEO, AI and search visibility, and Google PPC. One recommended scope, clear pricing, and no duplicate work.",
+      "description": "Marketing built around customer intent and geography. Consulting, local SEO, AI/search visibility and Google paid search for Bend and Central Oregon businesses.",
       "label": "Marketing"
     },
     "estimate-reference": {
-      "title": "Service Estimate Reference | Think Marketing",
-      "description": "Detailed service scopes and estimate pricing for Think Marketing websites, business tools, consulting and search services. Final proposals require confirmation.",
+      "title": "Complete Assistant Service Reference | Think Marketing",
+      "description": "Unlisted reference for Think Marketing business facts, complete service pricing, scope limits, policies, detailed FAQs and informational estimate rules.",
       "label": "Estimate reference"
     }
   }

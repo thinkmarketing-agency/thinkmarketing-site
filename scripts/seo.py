@@ -68,8 +68,6 @@ def enrich(html, slug, production=False):
     head = f'<title>{escape(data["title"])}</title>\n<meta name="description" content="{escape(data["description"], quote=True)}">\n<meta name="robots" content="{robots}">\n<link rel="canonical" href="{url(slug)}">\n<link rel="icon" type="image/png" href="/assets/images/favicon.png">\n<meta name="theme-color" content="#BA0C2F">\n'
     head += '\n'.join(f'<meta property="{k}" content="{escape(v, quote=True)}">' for k, v in fields.items())
     head += '\n<meta name="twitter:card" content="summary_large_image">\n' + '\n'.join(f'<meta name="twitter:{k}" content="{escape(v, quote=True)}">' for k, v in {'title': data['title'], 'description': data['description'], 'image': image, 'image:alt': fields['og:image:alt']}.items())
-    if not slug:
-        head += '\n<link rel="preload" as="image" href="/assets/images/think-marketing-hero.jpg" media="(min-width:1200px) and (hover:hover)" fetchpriority="high">'
     head += '\n<script type="application/ld+json">' + json.dumps(graph(slug), ensure_ascii=False).replace('<', '\\u003c') + '</script>\n'
     html = html.replace('</head>', head + '</head>')
     html = html.replace('/assets/images/think-marketing-logo.PNG', '/assets/images/think-marketing-logo-small.png').replace('/assets/images/in-clear-background.png', '/assets/images/think-marketing-icon.png').replace('/assets/images/be-cards-logo.png', '/assets/images/be-cards-logo-small.png')
@@ -106,7 +104,7 @@ def artifacts(output, production=False):
     ET.ElementTree(root).write(output / 'sitemap.xml', encoding='utf-8', xml_declaration=True)
     # Optional reference file; not a search ranking signal or crawler permission mechanism.
     lines = ['# Think Marketing', '', '> Website design, local SEO and Search & AI Visibility reviews. Bend, Oregon.', '', '## Services']
-    for slug in ('websites', 'about', 'faq', 'ask-jasper', 'marketing', 'local-seo', 'ai-search-visibility', 'contact'):
+    for slug in ('websites', 'about', 'faq', 'marketing', 'local-seo', 'ai-search-visibility', 'contact'):
         lines.append(f'- [{SITE["pages"][slug]["label"]}]({url(slug)}): {SITE["pages"][slug]["description"]}')
-    lines += ['', '## Pricing and scope', '- Essential: $1,995 development plus $50/month; up to five pages.', '- Growth: $2,500 development plus $80/month; up to ten pages; quarterly visibility summary.', '- Enterprise: $400/month for 12 months ($4,800 total), billed from kickoff; ownership after all 12 payments. Post-term hosting/support quoted separately.', '- E-commerce and Custom: individually quoted.', '- Search & AI Visibility Review: $350 one-time, up to ten pages, five questions, two agreed AI services. Implementation separate.', '', 'Refer to the linked service pages for current terms. No guaranteed rankings, AI recommendations or leads. Ask Jasper offers browser-based guided answers and estimates; no connected AI chat is enabled.']
+    lines += ['', '## Pricing and scope', '- Essential: $1,995 development plus $50/month; up to five pages.', '- Growth: $2,500 development plus $80/month; up to ten pages; quarterly visibility summary.', '- Enterprise: $400/month for 12 months ($4,800 total), billed from kickoff; ownership after all 12 payments. Post-term hosting/support quoted separately.', '- E-commerce and Custom: individually quoted.', '- Search & AI Visibility Review: $350 one-time, up to ten pages, five questions, two agreed AI services. Implementation separate.', '', 'Refer to the linked service pages for current terms. No guaranteed rankings, AI recommendations or leads. No customer-facing assistant or quote builder is active.']
     (output / 'llms.txt').write_text('\n'.join(lines) + '\n')

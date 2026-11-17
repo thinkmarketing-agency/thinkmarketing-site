@@ -36,5 +36,12 @@
         }
       ]
     }
+  ],
+  "redirects": [
+    {
+      "source": "/ask-jasper/:path*",
+      "destination": "/contact/",
+      "permanent": true
+    }
   ]
 }

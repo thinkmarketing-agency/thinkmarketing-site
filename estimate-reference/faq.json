@@ -5,7 +5,7 @@
   },
   {
     "question": "What will my website actually cost?",
-    "answer": "Essential is $1,995 to build plus $50/month. Growth is $2,500 to build plus $80/month. Enterprise is $400/month for 12 months ($4,800 total), with ownership after all 12 payments. Those prices cover the features listed in each package. If you need business email, scheduling, an admin panel, or other systems, we’ll include them in a complete proposal with one upfront total and one monthly total. <a href=\"/ask-jasper/\">Ask Jasper for a starting estimate</a> or <a href=\"/contact/\">talk to us</a>."
+    "answer": "Essential is $1,995 to build plus $50/month. Growth is $2,500 to build plus $80/month. Enterprise is $400/month for 12 months ($4,800 total), with ownership after all 12 payments. Those prices cover the features listed in each package. If you need business email, scheduling, an admin panel, or other systems, we’ll include them in a complete proposal with one upfront total and one monthly total. <a href=\"/contact/\">talk to us</a>."
   },
   {
     "question": "Can I get a useful website at the advertised price?",
@@ -54,10 +54,6 @@
   {
     "question": "How long will the project take?",
     "answer": "We confirm a schedule after reviewing requirements, content readiness, and integrations. You’ll know what we need from you and the milestones before the build starts."
-  },
-  {
-    "question": "What can I ask Jasper?",
-    "answer": "<a href=\"/ask-jasper/\">Ask Jasper</a> can help you explore website packages, understand common questions, and build a starting estimate. This first version provides guided answers from Think Marketing’s published information and a calculator. It is not yet an open-ended AI chat. Estimates require human confirmation; Jasper cannot approve discounts, promise availability, or accept a project."
   },
   {
     "question": "What counts as a minor update?",

@@ -97,6 +97,13 @@ def check(root, production):
         for css in ('home.css','styles.css'):
             for asset in re.findall(r'url\([\'\"]?([^\)\'\"]+)', (root/css).read_text()):
                 test(f'{label}: CSS asset {asset}', (root/asset.lstrip('/')).is_file())
+    for slug,page in parsed.items():
+        if slug == 'estimate-reference': continue
+        test(f'{slug or "home"}: no retired assistant or unlisted reference links', all('/ask-jasper' not in a.get('href','') and '/estimate-reference' not in a.get('href','') for a in page.links))
+    test('Retired assistant: no generated interface', not (root/'ask-jasper/index.html').exists() and not (root/'assets/js/jasper.mjs').exists())
+    catalog=json.loads((root/'estimate-reference/catalog.json').read_text())
+    test('Reference: every service preserved in readable HTML', all('service-'+i['id'] in parsed['estimate-reference'].ids for i in catalog['items']))
+    test('Reference: scope and estimate sections preserved', all(i in parsed['estimate-reference'].ids for i in ('policies','estimating','reference-faq','business-facts')))
     test('Site: distinct titles and descriptions', len(set(titles)) == len(titles) and len(set(descriptions)) == len(descriptions))
     sitemap = ET.parse(root / 'sitemap.xml').getroot()
     locations = [n.text for n in sitemap.iter('{http://www.sitemaps.org/schemas/sitemap/0.9}loc')]

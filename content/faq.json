@@ -1,82 +1,42 @@
 [
   {
-    "question": "Who is Think Marketing a good fit for?",
-    "answer": "Small and medium-sized businesses that want a custom website and someone to help plan, build, and support it. We’re based in Bend, Oregon, and work with businesses across Central Oregon."
+    "question": "What does a website cost?",
+    "answer": "Essential is $1,995 plus $50/month. Growth is $2,500 plus $80/month. Enterprise is $400/month for 12 months ($4,800 total). <a href=\"/websites/\">Compare the packages</a>. Extra capabilities are included in your proposal before you commit."
   },
   {
-    "question": "What will my website actually cost?",
-    "answer": "Essential is $1,995 to build plus $50/month. Growth is $2,500 to build plus $80/month. Enterprise is $400/month for 12 months ($4,800 total), with ownership after all 12 payments. Those prices cover the features listed in each package. If you need business email, scheduling, an admin panel, or other systems, we’ll include them in a complete proposal with one upfront total and one monthly total. <a href=\"/ask-jasper/\">Ask Jasper for a starting estimate</a> or <a href=\"/contact/\">talk to us</a>."
+    "question": "What does the monthly fee cover?",
+    "answer": "Essential and Growth include hosting, basic monitoring, and one or two minor updates per month respectively. Additional systems include their agreed standard tools and support within defined limits. Advertising spend, payment processing, taxes, and exceptional purchases are separate when applicable."
   },
   {
-    "question": "Can I get a useful website at the advertised price?",
-    "answer": "Yes. Essential provides a complete website of up to five pages, with mobile-friendly design, a standard contact form, basic search setup, hosting, basic monitoring, and one minor monthly update. It is intended for businesses that need to explain their services and receive inquiries. Business systems such as staff editing or booking are scoped separately."
+    "question": "How do payments and ownership work?",
+    "answer": "Essential and Growth development is paid 50% to start and 50% on completion. You own the site after development is paid, with month-to-month hosting. Enterprise is a 12-month commitment starting at kickoff; you own the site after all 12 payments. Hosting and support after year one are quoted separately."
   },
   {
-    "question": "Why is there a build fee and a monthly fee?",
-    "answer": "The build fee covers planning, design, configuration, and launch of the agreed website. The monthly fee covers hosting, basic monitoring, and the updates in your package. Additional systems bring their own ongoing infrastructure and support responsibilities."
+    "question": "Can I update the site myself?",
+    "answer": "Yes, with an agreed editing system. We define what staff need to change and show you how. The standard packages include small updates performed by Think Marketing; staff editing is a separately scoped capability."
   },
   {
-    "question": "Will I need separate software subscriptions?",
-    "answer": "Standard tools needed for the configuration we agree on are included in its monthly service price. Advertising spend, payment processing fees, taxes, and exceptional purchases are separate where applicable and identified before you commit. Existing business software remains under your existing arrangement unless we agree otherwise."
+    "question": "What do you need from me?",
+    "answer": "Your business information, final written content, images, and branding. We organize those materials into the website. Content production and review responses are outside our services. We confirm the schedule once the scope and materials are clear."
   },
   {
-    "question": "Can I update the website myself?",
-    "answer": "Yes, when an editing system is included in your configuration. We agree on what staff need to edit and provide a handoff. Essential and Growth include limited updates performed by Think Marketing; a staff editing system is separately scoped."
+    "question": "What if I need more later?",
+    "answer": "We discuss the work and any price change before starting. A minor update is a small change to existing hours, contact details, or a short text correction. Extra work billed by time is $75/hour, with a $37.50 minimum. Existing agreements remain in effect."
   },
   {
-    "question": "Do you write content or manage reviews?",
-    "answer": "You provide your final written content, images, branding, and business information. We organize and present those materials within the agreed website. We can configure a reviews display or scope a review-request workflow. Content production, writing reviews, and responding to customer reviews are outside our services. PPC campaign ad text is included in PPC management."
+    "question": "Can you improve my existing website?",
+    "answer": "We can assess it first. A targeted improvement may be a better investment than a rebuild. We explain what your platform supports and what makes sense for your goals."
   },
   {
-    "question": "Do I own my website and domain?",
-    "answer": "For Essential and Growth, ownership of the website transfers after development is paid in full. For Enterprise, ownership transfers after all 12 monthly payments are made. Continued hosting and support after that year are agreed separately. Your domain should be registered in your name or your business’s name. Third-party platforms and licenses have their own terms; any transfer limitations are identified in your proposal."
+    "question": "Do I need local SEO, AI visibility, or paid ads?",
+    "answer": "That depends on how your customers look for help. We start with their intent and your service area, then recommend the work that fits. Local SEO and AI/search visibility often overlap; shared work is scoped once. <a href=\"/marketing/\">See our approach to marketing</a>."
   },
   {
-    "question": "What happens if I need something new later?",
-    "answer": "We explain the additional work and any effect on your monthly price before starting. Additional work billed by time is $75/hour, with a $37.50 minimum. Your included update allowance is used where the request fits its scope. New terms do not change an existing client agreement."
+    "question": "Can you guarantee rankings or leads?",
+    "answer": "No. We agree on the work, track useful measures where data is available, and explain what the results show. Search rankings, AI recommendations, and lead volumes cannot be guaranteed."
   },
   {
-    "question": "Can you help with my existing website?",
-    "answer": "We can assess it first. Depending on its condition and platform, targeted improvements may be appropriate. We explain what we can support and whether a rebuild would serve your needs."
-  },
-  {
-    "question": "Why hire Think Marketing when I could use an AI website builder?",
-    "answer": "An AI website builder can be a practical option if you want to build and manage the website yourself. Think Marketing provides planning, custom implementation, testing, and agreed ongoing support. The decision comes down to the work you want to handle and the responsibility you want us to take on."
-  },
-  {
-    "question": "Will my website appear in Google or AI recommendations?",
-    "answer": "We build with clear business information and basic search practices in mind. Search and AI visibility depend on many factors; placement and recommendations cannot be guaranteed. <a href=\"/ai-search-visibility/\">Visibility reviews and implementation</a> are separately scoped services."
-  },
-  {
-    "question": "How do your marketing services fit together?",
-    "answer": "Marketing is the overall plan. Consulting helps set priorities; local SEO and AI/search visibility help people find and understand your business; paid search reaches people through advertising. You may need one service or a connected scope, not every option. Shared work is scoped once. <a href=\"/marketing/\">Explore the marketing overview</a>."
-  },
-  {
-    "question": "How long will the project take?",
-    "answer": "We confirm a schedule after reviewing requirements, content readiness, and integrations. You’ll know what we need from you and the milestones before the build starts."
-  },
-  {
-    "question": "What can I ask Jasper?",
-    "answer": "<a href=\"/ask-jasper/\">Ask Jasper</a> can help you explore website packages, understand common questions, and build a starting estimate. This first version provides guided answers from Think Marketing’s published information and a calculator. It is not yet an open-ended AI chat. Estimates require human confirmation; Jasper cannot approve discounts, promise availability, or accept a project."
-  },
-  {
-    "question": "What counts as a minor update?",
-    "answer": "A small change to existing information, such as hours, contact details, or a short text correction. Essential includes one per month; Growth includes two. New pages, new functionality, extensive changes, and daily content management are outside that allowance."
-  },
-  {
-    "question": "What does Growth’s quarterly visibility summary include?",
-    "answer": "A brief review of available search performance and identifiable AI referral data, plus a small agreed set of dated visibility observations and next steps. Questions, data availability, and access are confirmed in your proposal. The $350 assessment, new content, and ongoing SEO implementation are separate."
-  },
-  {
-    "question": "Can I leave or move my website?",
-    "answer": "Essential and Growth hosting is month-to-month after development is paid. We help coordinate a reasonable transfer of your paid-for website. Third-party platform and license restrictions, and any costs for additional transfer work, are explained before proceeding. Custom and Enterprise commitments follow the agreed proposal."
-  },
-  {
-    "question": "How does the $400/month Enterprise website work?",
-    "answer": "Enterprise includes the agreed custom website build, hosting, and support at $400/month for 12 months: $4,800 total, with billing beginning at kickoff. There is no separate development fee for that agreed build. You own your website after all 12 payments are made. Page count, features, additional capabilities, support, and early departure obligations are defined before work begins. Hosting and support after year one are quoted separately. Third-party software remains subject to its provider’s terms."
-  },
-  {
-    "question": "Do I need both local SEO and AI visibility?",
-    "answer": "Not automatically. Local SEO focuses on your local presence, including Maps, business profiles, and listings. AI/search visibility looks at whether your expertise can be found, understood, and referenced. There is overlap, so we identify the gaps and recommend a combined scope where useful. The $350 review is an assessment; implementation is quoted separately. <a href=\"/marketing/#visibility\">See how the services connect</a>."
+    "question": "Can I move my website elsewhere?",
+    "answer": "We help coordinate a reasonable transfer of your paid-for website. Your domain should be registered in your name or business name. Provider licensing limits and additional transfer work are explained before proceeding. Enterprise early departure terms are defined in the proposal."
   }
 ]

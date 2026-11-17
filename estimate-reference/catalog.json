@@ -1,6 +1,6 @@
 {
-  "version": "2026-11-17-v3",
-  "status": "Published estimate reference; final proposals require Think Marketing confirmation",
+  "version": "2026-11-17-v4",
+  "status": "Unlisted assistant reference; no customer-facing assistant or quote builder is active",
   "currency": "USD",
   "effective_on_publication": true,
   "hourly_rate": 75,
@@ -546,6 +546,7 @@
     "included_support": "Support allowances are per calendar month, do not roll over, and cover the installed configuration. New features, content creation and major revisions excluded; approved extra work is $75/hour, $37.50 minimum.",
     "hosting": "Feature add-ons do not include the base website hosting unless expressly stated. Determine whether the customer already has suitable hosting. Do not force a new website purchase for standalone email, scheduling or domains.",
     "exclusions": "No general copywriting, photography/video production, social content creation or review responses. Campaign ad text is included only in PPC.",
-    "custom_work": "Custom project prices are starting estimates until requirements and delivery are confirmed."
+    "custom_work": "Custom project prices are starting estimates until requirements and delivery are confirmed.",
+    "assistant_status": "No live Jasper chat or customer-facing estimate builder is active. This reference can be explicitly loaded by a future assistant. Presence of this page does not connect or train an AI."
   }
 }
