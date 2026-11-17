@@ -14,7 +14,7 @@ args = parser.parse_args()
 OUTPUT = ROOT / 'dist' if args.production else ROOT
 OUTPUT.mkdir(exist_ok=True)
 
-NAV = [('websites', 'Websites & pricing'), ('marketing', 'Marketing'), ('about', 'About')]
+NAV = [('websites', 'Websites & Pricing'), ('local-seo', 'Local SEO'), ('ai-search-visibility', 'AI & Search Visibility'), ('contact', 'Contact')]
 
 def money(value):
     return f'${value:,.0f}'
@@ -26,7 +26,7 @@ def row(number, title, copy):
     return f'<article class="service-row"><span class="number">{number}</span><h3>{title}</h3><p>{copy}</p></article>'
 
 def cta():
-    return '<section class="cta wrap"><div><h2>Let’s talk about your business.</h2><p>What would you like your website to do?</p></div><a class="button light" href="/contact/">Let’s talk ↗</a></section>'
+    return '<section class="cta wrap"><div><h2>Let’s find your next step.</h2><p>Tell us about your business and what you need.</p></div><a class="button light" href="/contact/">Let’s talk ↗</a></section>'
 
 HOME = (ROOT / 'content/home.html').read_text()
 
