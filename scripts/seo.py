@@ -68,6 +68,8 @@ def enrich(html, slug, production=False):
     head = f'<title>{escape(data["title"])}</title>\n<meta name="description" content="{escape(data["description"], quote=True)}">\n<meta name="robots" content="{robots}">\n<link rel="canonical" href="{url(slug)}">\n<link rel="icon" type="image/png" href="/assets/images/favicon.png">\n<meta name="theme-color" content="#BA0C2F">\n'
     head += '\n'.join(f'<meta property="{k}" content="{escape(v, quote=True)}">' for k, v in fields.items())
     head += '\n<meta name="twitter:card" content="summary_large_image">\n' + '\n'.join(f'<meta name="twitter:{k}" content="{escape(v, quote=True)}">' for k, v in {'title': data['title'], 'description': data['description'], 'image': image, 'image:alt': fields['og:image:alt']}.items())
+    if not slug:
+        head += '\n<link rel="preload" as="image" href="/assets/images/think-marketing-hero.jpg" media="(min-width:1200px) and (hover:hover)" fetchpriority="high">'
     head += '\n<script type="application/ld+json">' + json.dumps(graph(slug), ensure_ascii=False).replace('<', '\\u003c') + '</script>\n'
     html = html.replace('</head>', head + '</head>')
     html = html.replace('/assets/images/think-marketing-logo.PNG', '/assets/images/think-marketing-logo-small.png').replace('/assets/images/in-clear-background.png', '/assets/images/think-marketing-icon.png').replace('/assets/images/be-cards-logo.png', '/assets/images/be-cards-logo-small.png')
