@@ -39,6 +39,11 @@
   ],
   "redirects": [
     {
+      "source": "/ask-jasper/",
+      "destination": "/contact/",
+      "permanent": true
+    },
+    {
       "source": "/ask-jasper/:path*",
       "destination": "/contact/",
       "permanent": true
