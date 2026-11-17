@@ -5,7 +5,7 @@
   },
   {
     "question": "What will my website actually cost?",
-    "answer": "Essential is $1,995 to build plus $50/month. Growth is $2,500 to build plus $80/month. Those prices cover the features listed in each package. If you need business email, scheduling, an admin panel, or other systems, we’ll include them in a complete proposal with one upfront total and one monthly total. <a href=\"/ask-jasper/\">Ask Jasper for a starting estimate</a> or <a href=\"/contact/\">talk to us</a>."
+    "answer": "Essential is $1,995 to build plus $50/month. Growth is $2,500 to build plus $80/month. Enterprise is $400/month for 12 months ($4,800 total), with ownership after all 12 payments. Those prices cover the features listed in each package. If you need business email, scheduling, an admin panel, or other systems, we’ll include them in a complete proposal with one upfront total and one monthly total. <a href=\"/ask-jasper/\">Ask Jasper for a starting estimate</a> or <a href=\"/contact/\">talk to us</a>."
   },
   {
     "question": "Can I get a useful website at the advertised price?",
@@ -29,7 +29,7 @@
   },
   {
     "question": "Do I own my website and domain?",
-    "answer": "For Essential and Growth, ownership of the website transfers after development is paid in full. Your domain should be registered in your name or your business’s name. Third-party platforms and licenses have their own terms; any transfer limitations are identified in your proposal."
+    "answer": "For Essential and Growth, ownership of the website transfers after development is paid in full. For Enterprise, ownership transfers after all 12 monthly payments are made. Continued hosting and support after that year are agreed separately. Your domain should be registered in your name or your business’s name. Third-party platforms and licenses have their own terms; any transfer limitations are identified in your proposal."
   },
   {
     "question": "What happens if I need something new later?",
@@ -48,8 +48,8 @@
     "answer": "We build with clear business information and basic search practices in mind. Search and AI visibility depend on many factors; placement and recommendations cannot be guaranteed. <a href=\"/ai-search-visibility/\">Visibility reviews and implementation</a> are separately scoped services."
   },
   {
-    "question": "Do you offer consulting and paid search?",
-    "answer": "Yes. Marketing consulting can help you assess your position and prioritize your next steps. Paid search management is separately scoped; management fees and advertising spend are distinguished in your proposal. <a href=\"/marketing/\">Explore consulting and paid search</a>."
+    "question": "How do your marketing services fit together?",
+    "answer": "Marketing is the overall plan. Consulting helps set priorities; local SEO and AI/search visibility help people find and understand your business; paid search reaches people through advertising. You may need one service or a connected scope, not every option. Shared work is scoped once. <a href=\"/marketing/\">Explore the marketing overview</a>."
   },
   {
     "question": "How long will the project take?",
@@ -70,5 +70,13 @@
   {
     "question": "Can I leave or move my website?",
     "answer": "Essential and Growth hosting is month-to-month after development is paid. We help coordinate a reasonable transfer of your paid-for website. Third-party platform and license restrictions, and any costs for additional transfer work, are explained before proceeding. Custom and Enterprise commitments follow the agreed proposal."
+  },
+  {
+    "question": "How does the $400/month Enterprise website work?",
+    "answer": "Enterprise includes the agreed custom website build, hosting, and support at $400/month for 12 months: $4,800 total, with billing beginning at kickoff. There is no separate development fee for that agreed build. You own your website after all 12 payments are made. Page count, features, additional capabilities, support, and early departure obligations are defined before work begins. Hosting and support after year one are quoted separately. Third-party software remains subject to its provider’s terms."
+  },
+  {
+    "question": "Do I need both local SEO and AI visibility?",
+    "answer": "Not automatically. Local SEO focuses on your local presence, including Maps, business profiles, and listings. AI/search visibility looks at whether your expertise can be found, understood, and referenced. There is overlap, so we identify the gaps and recommend a combined scope where useful. The $350 review is an assessment; implementation is quoted separately. <a href=\"/marketing/#visibility\">See how the services connect</a>."
   }
 ]

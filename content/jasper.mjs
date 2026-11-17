@@ -23,8 +23,9 @@ function render(){
  const note=document.createElement('p');note.textContent='Standard tools within listed limits included. Taxes excluded. Scope, availability, and final proposal require human confirmation.';result.append(note);
  const warnings=[...q.questions,...q.warnings];if(plan.value==='existing')warnings.unshift('This is an add-ons-only estimate. Existing website hosting is excluded; we’ll confirm compatibility.');
  warnings.forEach(w=>{const p=document.createElement('p');p.className='estimate-note';p.textContent=w;result.append(p)});
+ const commitment=q.commitments?.map(c=>`${c.months}-month commitment: ${money(c.total)} for Enterprise; ownership after all payments. Post-term hosting/support quoted separately.`).join('\n')||'';
  const summary=q.lines.map(l=>`${l.quantity} × ${l.name}: ${money(l.setup)} setup + ${money(l.monthly)}/month`).join('\n');
- const text=`Hello Think Marketing,\n\nI’d like to discuss this starting estimate:\n\n${summary}\n\nTotal: ${money(q.setup)} setup + ${money(q.monthly)}/month.\n${plan.value==='existing'?'Existing hosting excluded.\n':''}Standard tools within limits included; taxes excluded. Please confirm scope and availability.\nCatalog: ${q.catalog_version}\n\nMy business and what I want to accomplish:\n`;
+ const text=`Hello Think Marketing,\n\nI’d like to discuss this starting estimate:\n\n${summary}\n\nTotal: ${money(q.setup)} setup + ${money(q.monthly)}/month.\n${commitment}\n${plan.value==='existing'?'Existing hosting excluded.\n':''}Standard tools within limits included; taxes excluded. Please confirm scope and availability.\nCatalog: ${q.catalog_version}\n\nMy business and what I want to accomplish:\n`;
  email.href='mailto:thinkmarketingbend@gmail.com?subject='+encodeURIComponent('My website starting estimate')+'&body='+encodeURIComponent(text);email.removeAttribute('aria-disabled');
  }catch(e){result.textContent=e.message+'. Please enter whole, nonnegative quantities.';email.removeAttribute('href');email.setAttribute('aria-disabled','true');}
 }
@@ -34,7 +35,8 @@ function query(text){
  const t=text.toLowerCase();
  if(/discount|waiv|coupon|free setup/.test(t)){tell('Setup discounts require Think Marketing approval. This preview uses the standard listed prices and cannot approve a discount.');return;}
  if(/booking|calendar|schedul|appointment/.test(t)){tell('Staff email includes its ordinary calendar. Public appointment booking is a separate capability: $250 setup for the first staff seat, $75 for each additional seat, and $35/month per seat. Team routing and complex requirements are scoped separately. Try quantities in the estimator below.','#estimate','Build an estimate');return;}
- const rules=[[/price|pricing|cost|estimate|quote|budget/,1],[/edit|admin|update.*(?:myself|staff)|cms/,5],[/own|domain|transfer/,7],[/content|writ|review/,6],[/month|hosting|subscription/,3],[/cancel|leave|move.*site/,17],[/time|long|launch|week/,13],[/consult|ppc|advertis|paid search/,12],[/google|ai|rank|recommend|seo/,11],[/existing|rebuild|current/,9],[/jasper|chat/,14],[/support|changes|hour/,8]];
+ if(/enterprise|400|12.month/.test(t)){showFAQ(faqs.findIndex(f=>f.question.includes('Enterprise')));return;}
+ const rules=[[/price|pricing|cost|estimate|quote|budget/,1],[/edit|admin|update.*(?:myself|staff)|cms/,5],[/own|domain|transfer/,7],[/content|writ|review/,6],[/month|hosting|subscription/,3],[/cancel|leave|move.*site/,17],[/time|long|launch|week/,13],[/marketing|consult|ppc|advertis|paid search/,12],[/google|ai|rank|recommend|seo/,11],[/existing|rebuild|current/,9],[/jasper|chat/,14],[/support|changes|hour/,8]];
  const found=rules.find(([pattern])=>pattern.test(t));if(found){showFAQ(found[1]);return;}
  const normalize=s=>new Set((s.toLowerCase().match(/[a-z]{4,}/g)||[]).filter(w=>!['what','that','this','with','your','have','does','will','could','would','about'].includes(w)));
  const terms=normalize(t);const matches=faqs.map((f,index)=>({index,score:[...normalize(f.question)].filter(w=>terms.has(w)).length})).sort((a,b)=>b.score-a.score);

@@ -11,8 +11,8 @@ export function estimate(catalog, selections) {
     selected.set(entry.id, {item, quantity:qty});
   }
   const warnings = [], questions = [], suppressed = new Set();
-  if (selected.has('essential') && selected.has('growth')) throw new Error('Choose one website package.');
-  for (const id of ['essential','growth','team_routing','audit','retainer','ppc','action_plan','portal_discovery']) {
+  if (['essential','growth','enterprise'].filter(id=>selected.has(id)).length>1) throw new Error('Choose one website package.');
+  for (const id of ['essential','growth','enterprise','team_routing','audit','retainer','ppc','action_plan','portal_discovery']) {
     if (selected.has(id) && selected.get(id).quantity !== 1) throw new Error(`${id} requires one project per estimate.`);
   }
   if (selected.has('local_seo')) {
@@ -31,8 +31,9 @@ export function estimate(catalog, selections) {
   if (selected.has('crm') && selected.has('automation')) questions.push('Confirm these are separate workflows; one workflow must not be billed twice.');
   if (selected.has('gbp_setup') && selected.has('gbp_care')) questions.push('For the same location, waive $100 GBP maintenance onboarding after profile setup. Owner must confirm the location match.');
   if (selected.has('audit') && selected.has('monitoring')) questions.push('If this review qualifies for monitoring onboarding, owner should apply the $150 onboarding waiver.');
+  if(selected.has('enterprise')) warnings.push('Enterprise requires 12 monthly payments of $400 ($4,800 total), starting at kickoff. Ownership transfers after all 12 payments. Hosting/support after year one are quoted separately. Selected add-ons are additional to this commitment.');
   const websiteNeeded=['admin','reviews','form','payment','page','landing','site_migration','analytics','store','membership','calculator','chat','assistant'];
-  if (websiteNeeded.some(id=>selected.has(id)) && !selected.has('essential') && !selected.has('growth')) warnings.push('Website hosting is not included in this estimate. Confirm existing suitable hosting or add a website/hosting quote.');
+  if (websiteNeeded.some(id=>selected.has(id)) && !selected.has('essential') && !selected.has('growth') && !selected.has('enterprise')) warnings.push('Website hosting is not included in this estimate. Confirm existing suitable hosting or add a website/hosting quote.');
   if (selected.has('domain')) warnings.push('Confirm the actual domains: each must qualify for standard managed-domain pricing. Specialty or premium domains need a confirmed bundled price before purchase.');
   if (selected.has('ppc')) warnings.push('Advertising spend is additional and paid to Google.');
   if (selected.has('payment') || selected.has('store') || selected.has('membership')) warnings.push('Payment processing and transaction fees are additional.');
@@ -46,5 +47,6 @@ export function estimate(catalog, selections) {
   return {catalog_version:catalog.version,status:'Informational estimate; owner confirmation required',lines,setup,monthly,annual,
     twelve_recurring_payments_plus_setup:setup+monthly*12+annual,
     starting_estimate:lines.some(l=>l.price_kind==='from'),requires_scope_review:questions.length>0,questions,warnings,
+    commitments:[...selected.values()].filter(({item})=>item.commitment_months).map(({item,quantity})=>({id:item.id,months:item.commitment_months,total:item.monthly*quantity*item.commitment_months})),
     exclusions:catalog.rules.exceptions,discounts_applied:[],valid_days:30};
 }

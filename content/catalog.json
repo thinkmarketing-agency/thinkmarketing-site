@@ -1,5 +1,5 @@
 {
-  "version": "2026-11-17-v2",
+  "version": "2026-11-17-v3",
   "status": "Published estimate reference; final proposals require Think Marketing confirmation",
   "currency": "USD",
   "effective_on_publication": true,
@@ -31,6 +31,20 @@
       "price_kind": "fixed",
       "scope": "Up to 10 pages; 2 minor edits/month; quarterly Search & AI Visibility summary; supplied content; standard hosting. Website development payments 50% to start, 50% on completion.",
       "delivery": "Confirm availability and scope before accepting a project."
+    },
+    {
+      "id": "enterprise",
+      "group": "Websites",
+      "name": "Enterprise website",
+      "setup": 0,
+      "monthly": 400,
+      "annual": 0,
+      "unit": "website",
+      "additional_setup": null,
+      "price_kind": "fixed",
+      "commitment_months": 12,
+      "scope": "Custom website with development, hosting and an agreed level of support in one monthly plan. $400/month for 12 months, $4,800 total commitment; billing begins at kickoff. Own the site after all 12 payments are made. Page count, features, supplied content and support are agreed in the proposal. Continued hosting/support after the year is quoted separately; third-party licenses retain provider terms.",
+      "delivery": "Confirm scope and availability before accepting the project."
     },
     {
       "id": "reviews",
