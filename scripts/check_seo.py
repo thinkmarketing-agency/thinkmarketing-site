@@ -32,8 +32,11 @@ class Page(HTMLParser):
         if tag in ('a', 'link'): self.links.append(a)
         if tag == 'img': self.images.append(a)
         if tag == 'script':
-            assert a.get('type') == 'application/ld+json', 'Unexpected executable script'
-            self.in_json = True; self.buffer = ''
+            if a.get('type') == 'application/ld+json':
+                self.in_json = True; self.buffer = ''
+            else:
+                assert a.get('type') == 'module' and a.get('src') == '/assets/js/jasper.mjs', 'Unexpected executable script'
+                self.links.append({'href': a['src']})
     def handle_data(self, data):
         if self.in_title: self.title += data
         if self.in_json: self.buffer += data
@@ -60,7 +63,7 @@ def check(root, production):
         titles.append(page.title); descriptions.append(page.meta['description'])
         canonicals = [a['href'] for a in page.links if a.get('rel') == 'canonical']
         test(f'{label}: one canonical on confirmed domain', canonicals == [url(slug)])
-        should_index = production and slug != 'privacy'
+        should_index = production and slug not in ('privacy','estimate-reference')
         test(f'{label}: correct indexing mode', page.meta.get('robots') == ('index,follow,max-image-preview:large' if should_index else 'noindex,follow'))
         test(f'{label}: social sharing metadata', page.meta.get('og:url') == url(slug) and page.meta.get('og:title') == page.title and page.meta.get('twitter:card') == 'summary_large_image' and page.meta.get('og:image:width') == '1200' and page.meta.get('og:image:height') == '630')
         test(f'{label}: one JSON-LD graph', len(page.scripts) == 1 and page.scripts[0].get('@context') == 'https://schema.org')
@@ -97,7 +100,7 @@ def check(root, production):
     test('Site: distinct titles and descriptions', len(set(titles)) == len(titles) and len(set(descriptions)) == len(descriptions))
     sitemap = ET.parse(root / 'sitemap.xml').getroot()
     locations = [n.text for n in sitemap.iter('{http://www.sitemaps.org/schemas/sitemap/0.9}loc')]
-    expected = [url(s) for s in SITE['pages'] if s != 'privacy'] if production else []
+    expected = [url(s) for s in SITE['pages'] if s not in ('privacy','estimate-reference')] if production else []
     test('Sitemap: canonical indexable pages only', locations == expected)
     robot = RobotFileParser(); robot.parse((root/'robots.txt').read_text().splitlines())
     for bot in ('Googlebot','Bingbot','OAI-SearchBot','ChatGPT-User','PerplexityBot','Claude-SearchBot'):

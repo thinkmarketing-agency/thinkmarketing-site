@@ -20,7 +20,7 @@ def graph(slug):
            'url': url(), 'description': SITE['description'], 'email': SITE['email'],
            'telephone': SITE['telephone'], 'areaServed': SITE['areaServed'],
            'logo': {'@type': 'ImageObject', 'url': ORIGIN + '/assets/images/think-marketing-logo-small.png', 'width': 256, 'height': 122}}
-    page = {'@type': 'ContactPage' if slug == 'contact' else 'WebPage',
+    page = {'@type': 'ContactPage' if slug == 'contact' else 'AboutPage' if slug == 'about' else 'WebPage',
             '@id': canonical + '#webpage', 'url': canonical,
             'name': SITE['pages'][slug]['title'], 'description': SITE['pages'][slug]['description'],
             'inLanguage': 'en-US', 'isPartOf': {'@id': website_id}, 'about': {'@id': org_id}}
@@ -59,7 +59,7 @@ def enrich(html, slug, production=False):
     html = re.sub(r'<script\b[^>]*type=["\']application/ld\+json["\'][^>]*>.*?</script>', '', html, flags=re.S | re.I)
     html = re.sub(r'<link\b[^>]*rel=["\'](?:canonical|icon)["\'][^>]*>', '', html, flags=re.I)
     image = ORIGIN + '/assets/images/social-preview.jpg'
-    robots = 'index,follow,max-image-preview:large' if production and slug != 'privacy' else 'noindex,follow'
+    robots = 'index,follow,max-image-preview:large' if production and slug not in ('privacy','estimate-reference') else 'noindex,follow'
     fields = {'og:type': 'website', 'og:site_name': SITE['name'], 'og:locale': 'en_US', 'og:title': data['title'],
               'og:description': data['description'], 'og:url': url(slug), 'og:image': image,
               'og:image:width': '1200', 'og:image:height': '630', 'og:image:alt': 'Think Marketing — digital marketing and web design in Bend, Oregon'}
@@ -98,13 +98,13 @@ def artifacts(output, production=False):
     root = ET.Element('{http://www.sitemaps.org/schemas/sitemap/0.9}urlset')
     if production:
         for slug in SITE['pages']:
-            if slug == 'privacy': continue
+            if slug in ('privacy','estimate-reference'): continue
             entry = ET.SubElement(root, '{http://www.sitemaps.org/schemas/sitemap/0.9}url')
             ET.SubElement(entry, '{http://www.sitemaps.org/schemas/sitemap/0.9}loc').text = url(slug)
     ET.ElementTree(root).write(output / 'sitemap.xml', encoding='utf-8', xml_declaration=True)
     # Optional reference file; not a search ranking signal or crawler permission mechanism.
     lines = ['# Think Marketing', '', '> Website design, local SEO and Search & AI Visibility reviews. Bend, Oregon.', '', '## Services']
-    for slug in ('websites', 'local-seo', 'ai-search-visibility', 'contact'):
+    for slug in ('websites', 'about', 'faq', 'ask-jasper', 'marketing', 'local-seo', 'ai-search-visibility', 'contact'):
         lines.append(f'- [{SITE["pages"][slug]["label"]}]({url(slug)}): {SITE["pages"][slug]["description"]}')
-    lines += ['', '## Pricing and scope', '- Essential: $1,995 development plus $50/month; up to five pages.', '- Growth: $2,500 development plus $80/month; up to ten pages; quarterly visibility summary.', '- Enterprise: starting at $400/month, 12-month commitment billed from kickoff; individually scoped.', '- E-commerce and Custom: individually quoted.', '- Search & AI Visibility Review: $350 one-time, up to ten pages, five questions, two agreed AI services. Implementation separate.', '', 'Refer to the linked service pages for current terms. No guaranteed rankings, AI recommendations or leads. No chat assistant is enabled.']
+    lines += ['', '## Pricing and scope', '- Essential: $1,995 development plus $50/month; up to five pages.', '- Growth: $2,500 development plus $80/month; up to ten pages; quarterly visibility summary.', '- Enterprise: starting at $400/month, 12-month commitment billed from kickoff; individually scoped.', '- E-commerce and Custom: individually quoted.', '- Search & AI Visibility Review: $350 one-time, up to ten pages, five questions, two agreed AI services. Implementation separate.', '', 'Refer to the linked service pages for current terms. No guaranteed rankings, AI recommendations or leads. Ask Jasper offers browser-based guided answers and estimates; no connected AI chat is enabled.']
     (output / 'llms.txt').write_text('\n'.join(lines) + '\n')

@@ -1,0 +1,19 @@
+import fs from 'node:fs';
+import assert from 'node:assert/strict';
+import {estimate} from '../content/estimator.mjs';
+const catalog=JSON.parse(fs.readFileSync(new URL('../content/catalog.json',import.meta.url)));
+const packages=JSON.parse(fs.readFileSync(new URL('../content/packages.json',import.meta.url)));
+const selections=o=>Object.entries(o).map(([id,quantity])=>({id,quantity}));
+for(const p of packages){const i=catalog.items.find(i=>i.id===p.name.toLowerCase());assert.deepEqual([i.setup,i.monthly],[p.development,p.monthly]);}
+let q=estimate(catalog,selections({email:3,scheduling:3,admin:1,domain:2}));
+assert.deepEqual([q.setup,q.monthly],[1500,240]);
+q=estimate(catalog,selections({essential:1,email:3,scheduling:3,admin:1,domain:2}));assert.deepEqual([q.setup,q.monthly],[3495,290]);
+assert.throws(()=>estimate(catalog,selections({email:1.5})),/Invalid quantity/);
+assert.throws(()=>estimate(catalog,selections({email:-1})),/Invalid quantity/);
+assert.throws(()=>estimate(catalog,selections({missing:1})),/Unknown service/);
+assert.throws(()=>estimate(catalog,selections({essential:1,growth:1})),/Choose one/);
+assert.equal(estimate(catalog,selections({labor:0.5})).setup,37.5);
+assert.equal(estimate(catalog,selections({store:1})).starting_estimate,true);
+assert.equal(estimate(catalog,selections({local_seo:1,monitoring:1})).requires_scope_review,true);
+assert.equal(estimate(catalog,selections({domain:1,domain_transfer:1})).requires_scope_review,true);
+console.log('PASS: estimate examples, package consistency, quantities and scope-overlap checks.');
