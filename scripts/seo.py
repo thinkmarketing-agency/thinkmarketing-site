@@ -33,7 +33,7 @@ def graph(slug):
         nodes.append({'@type':'BreadcrumbList','@id':canonical+'#breadcrumb','itemListElement':crumbs})
         page['breadcrumb'] = {'@id': canonical + '#breadcrumb'}
     services = {
-        'websites': ('Website design and development', 'Essential and Growth development packages; larger Enterprise, e-commerce and custom websites scoped individually.'),
+        'websites': ('Website design and development', 'Essential starting websites with optional capabilities; Enterprise larger projects individually scoped, with monthly development plans available.'),
         'local-seo': ('Local SEO and Google Business Profile assistance', 'Google Business Profile creation assistance and separately scoped local search improvements.'),
         'ai-search-visibility': ('Search & AI Visibility Review', 'Assessment of up to 10 pages and five customer questions across two agreed AI services. Report and recommendations; implementation separate.')}
     if slug in services:
@@ -50,7 +50,7 @@ def graph(slug):
                 {'@type': 'Offer', 'name': f"{p['name']} development; hosting additional at ${p['monthly']}/month", 'price': str(p['development']), 'priceCurrency': 'USD', 'url': canonical,
                  'itemOffered': {'@type': 'Service', 'name': p['name'] + ' website development', 'description': f"Up to {p['pages']} pages. 50% at start, 50% on completion."}} for p in plans]}
         if slug == 'websites':
-            service['hasOfferCatalog']['itemListElement'].append({'@type':'Offer','name':'Enterprise website: $400/month for 12 months; ownership after all 12 payments','price':'4800','priceCurrency':'USD','url':canonical,'description':'$4,800 total over 12 monthly payments, billed from kickoff. Agreed development, hosting and support included. Continued hosting/support after the year quoted separately.'})
+            service['hasOfferCatalog']['itemListElement'].append({'@type':'Offer','name':'Enterprise: individually scoped larger websites','url':canonical,'description':'Custom project pricing. Monthly development plans available. Payment term, ownership and ongoing service are agreed in the proposal.'})
         nodes.append(service)
         page['mainEntity'] = {'@id': service['@id']}
     return {'@context': 'https://schema.org', '@graph': nodes}
@@ -111,5 +111,5 @@ def artifacts(output, production=False):
     lines = ['# Think Marketing', '', '> Website design, local SEO and Search & AI Visibility reviews. Bend, Oregon.', '', '## Services']
     for slug in ('websites', 'about', 'faq', 'marketing', 'local-seo', 'ai-search-visibility', 'contact'):
         lines.append(f'- [{SITE["pages"][slug]["label"]}]({url(slug)}): {SITE["pages"][slug]["description"]}')
-    lines += ['', '## Pricing and scope', '- Essential: $1,995 development plus $50/month; up to five pages.', '- Growth: $2,500 development plus $80/month; up to ten pages; quarterly visibility summary.', '- Enterprise: $400/month for 12 months ($4,800 total), billed from kickoff; ownership after all 12 payments. Post-term hosting/support quoted separately.', '- E-commerce and Custom: individually quoted.', '- Search & AI Visibility Review: $350 one-time, up to ten pages, five questions, two agreed AI services. Implementation separate.', '', 'Refer to the linked service pages for current terms. No guaranteed rankings, AI recommendations or leads. Ask Jasper and Portfolio have Coming Soon pages. No customer-facing assistant or quote builder is active.']
+    lines += ['', '## Pricing and scope', '- Essential: $1,995 development plus $50/month; up to five pages.', '- Enterprise: individually scoped larger websites. Custom project pricing; monthly development plans available. No universal monthly price.', '- E-commerce and Custom: individually quoted.', '- Search & AI Visibility Review: $350 one-time, up to ten pages, five questions, two agreed AI services. Implementation separate.', '', 'Refer to the linked service pages for current terms. No guaranteed rankings, AI recommendations or leads. Ask Jasper and Portfolio have Coming Soon pages. No customer-facing assistant or quote builder is active.']
     (output / 'llms.txt').write_text('\n'.join(lines) + '\n')

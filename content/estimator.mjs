@@ -4,6 +4,8 @@ export function estimate(catalog, selections) {
   for (const entry of selections) {
     const item = catalog.items.find(i => i.id === entry.id);
     if (!item) throw new Error(`Unknown service: ${entry.id}`);
+    if(item.available_for_new_projects===false) throw new Error('Legacy package: unavailable for new projects.');
+    if(item.price_kind==='custom') throw new Error('Custom project: individually scoped quote required.');
     const qty = entry.quantity;
     const fractional = entry.id === 'labor';
     if (!Number.isFinite(qty) || qty <= 0 || (fractional ? !Number.isInteger(qty * 2) : !Number.isInteger(qty))) throw new Error(`Invalid quantity for ${entry.id}`);
@@ -31,7 +33,6 @@ export function estimate(catalog, selections) {
   if (selected.has('crm') && selected.has('automation')) questions.push('Confirm these are separate workflows; one workflow must not be billed twice.');
   if (selected.has('gbp_setup') && selected.has('gbp_care')) questions.push('For the same location, waive $100 GBP maintenance onboarding after profile setup. Owner must confirm the location match.');
   if (selected.has('audit') && selected.has('monitoring')) questions.push('If this review qualifies for monitoring onboarding, owner should apply the $150 onboarding waiver.');
-  if(selected.has('enterprise')) warnings.push('Enterprise requires 12 monthly payments of $400 ($4,800 total), starting at kickoff. Ownership transfers after all 12 payments. Hosting/support after year one are quoted separately. Selected add-ons are additional to this commitment.');
   const websiteNeeded=['admin','reviews','form','payment','page','landing','site_migration','analytics','store','membership','calculator','chat','assistant'];
   if (websiteNeeded.some(id=>selected.has(id)) && !selected.has('essential') && !selected.has('growth') && !selected.has('enterprise')) warnings.push('Website hosting is not included in this estimate. Confirm existing suitable hosting or add a website/hosting quote.');
   if (selected.has('domain')) warnings.push('Confirm the actual domains: each must qualify for standard managed-domain pricing. Specialty or premium domains need a confirmed bundled price before purchase.');

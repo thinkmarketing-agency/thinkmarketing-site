@@ -1,15 +1,15 @@
 [
   {
     "question": "What does a website cost?",
-    "answer": "Essential is $1,995 plus $50/month. Growth is $2,500 plus $80/month. Enterprise is $400/month for 12 months ($4,800 total). <a href=\"/websites/\">Compare the packages</a>. Extra capabilities are included in your proposal before you commit."
+    "answer": "Essential is $1,995 to build plus $50/month, with additional capabilities scoped as needed. Enterprise covers larger websites and is individually priced; monthly development plans are available. <a href=\"/websites/\">See the options and example configurations</a>. Your complete quote shows setup, monthly service, any commitment, and what is included."
   },
   {
     "question": "What does the monthly fee cover?",
-    "answer": "Essential and Growth include hosting, basic monitoring, and one or two minor updates per month respectively. Additional systems include their agreed standard tools and support within defined limits. Advertising spend, payment processing, taxes, and exceptional purchases are separate when applicable."
+    "answer": "Essential includes hosting, basic monitoring, and one minor update per month. Additional systems include their agreed standard tools and support within defined limits. Enterprise support and hosting are defined in its proposal. Advertising spend, payment processing, taxes, and exceptional purchases are separate when applicable."
   },
   {
     "question": "How do payments and ownership work?",
-    "answer": "Essential and Growth development is paid 50% to start and 50% on completion. You own the site after development is paid, with month-to-month hosting. Enterprise is a 12-month commitment starting at kickoff; you own the site after all 12 payments. Hosting and support after year one are quoted separately."
+    "answer": "Essential development is paid 50% to start and 50% on completion. You own the site after development is paid, with month-to-month hosting. Enterprise payment schedules, any minimum commitment, ownership, and post-term hosting/support are agreed in the proposal before work starts. Existing client agreements remain in effect."
   },
   {
     "question": "Can I update the site myself?",
@@ -21,7 +21,7 @@
   },
   {
     "question": "What if I need more later?",
-    "answer": "We discuss the work and any price change before starting. A minor update is a small change to existing hours, contact details, or a short text correction. Extra work billed by time is $75/hour, with a $37.50 minimum. Existing agreements remain in effect."
+    "answer": "We discuss the work and any price change before starting. A minor update is a small change to existing hours, contact details, or a short text correction. Additional work is quoted before starting. Existing agreements remain in effect."
   },
   {
     "question": "Can you improve my existing website?",
@@ -38,5 +38,15 @@
   {
     "question": "Can I move my website elsewhere?",
     "answer": "We help coordinate a reasonable transfer of your paid-for website. Your domain should be registered in your name or business name. Provider licensing limits and additional transfer work are explained before proceeding. Enterprise early departure terms are defined in the proposal."
+  },
+  {
+    "id": "marketing-reports",
+    "question": "I’m already paying for digital marketing, but I don’t understand what I’m getting. Can you help?",
+    "answer": "Yes. We can review the reports and information you have, explain the terminology, and help you understand what the numbers show—and what they leave unanswered. We can also help you prepare questions for your current provider and identify information needed to evaluate the work. Verifying campaign activity or results may require account access and a separately agreed review. You don’t need to switch providers or buy an ongoing service to get advice."
+  },
+  {
+    "id": "consultation-preparation",
+    "question": "What should I bring to a consultation?",
+    "answer": "Your questions, recent reports, and a description of what you’re paying for. An existing proposal or service agreement can help us understand the promised deliverables. Please don’t send passwords; we’ll arrange appropriate access if needed. A 60-minute consultation is $125. Additional investigation or implementation is agreed separately."
   }
 ]

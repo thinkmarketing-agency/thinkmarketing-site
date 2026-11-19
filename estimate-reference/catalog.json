@@ -1,6 +1,6 @@
 {
-  "version": "2026-11-17-v4",
-  "status": "Unlisted assistant reference; no customer-facing assistant or quote builder is active",
+  "version": "2026-11-18-pricing-draft",
+  "status": "Local pricing review draft; not published. Essential plus options; Enterprise individually scoped.",
   "currency": "USD",
   "effective_on_publication": true,
   "hourly_rate": 75,
@@ -29,22 +29,22 @@
       "unit": "website",
       "additional_setup": null,
       "price_kind": "fixed",
-      "scope": "Up to 10 pages; 2 minor edits/month; quarterly Search & AI Visibility summary; supplied content; standard hosting. Website development payments 50% to start, 50% on completion.",
-      "delivery": "Confirm availability and scope before accepting a project."
+      "scope": "Legacy package for existing agreements only. Not offered for new projects. Up to 10 pages; 2 minor edits/month; quarterly Search & AI Visibility summary; supplied content; standard hosting. Website development payments 50% to start, 50% on completion.",
+      "delivery": "Confirm availability and scope before accepting a project.",
+      "available_for_new_projects": false
     },
     {
       "id": "enterprise",
       "group": "Websites",
       "name": "Enterprise website",
-      "setup": 0,
-      "monthly": 400,
+      "setup": null,
+      "monthly": null,
       "annual": 0,
       "unit": "website",
       "additional_setup": null,
-      "price_kind": "fixed",
-      "commitment_months": 12,
-      "scope": "Custom website with development, hosting and an agreed level of support in one monthly plan. $400/month for 12 months, $4,800 total commitment; billing begins at kickoff. Own the site after all 12 payments are made. Page count, features, supplied content and support are agreed in the proposal. Continued hosting/support after the year is quoted separately; third-party licenses retain provider terms.",
-      "delivery": "Confirm scope and availability before accepting the project."
+      "price_kind": "custom",
+      "scope": "Individually scoped larger websites: extensive services, locations, project libraries, migration, repeatable page types and integrations. Monthly development plans are available. Build/setup, recurring service, commitment, ownership and post-term hosting/support are set in the proposal. No universal $400 or $750 monthly price.",
+      "delivery": "Requires a requirements review and owner-approved custom quote. Never calculate an automatic price for this service."
     },
     {
       "id": "reviews",
@@ -542,11 +542,12 @@
     "discounts": "Only owner-approved discounts with explicit SKU, amount and duration. Jasper cannot independently waive setup or change monthly prices.",
     "setup": "All installations have setup fees. Ongoing-only services require their listed onboarding or a verified existing installation. Do not add fictitious setup to one-time advisory sessions.",
     "cancellation": "Proposed add-ons are month-to-month, with cancellation before next renewal. Annual third-party commitments are internal costs unless explicitly agreed otherwise. Do not change an existing customer agreement.",
-    "billing": "Add-on recurring charges begin when the service is activated. Website development uses existing 50/50 terms. Hardware/software procurement, annual registrations and waived setup must be accounted for internally.",
+    "billing": "Essential development: 50% to start and 50% on completion. Add-on charges begin at activation. Enterprise billing, minimum term, ownership and continued support are defined in its proposal. Existing agreements retain their terms.",
     "included_support": "Support allowances are per calendar month, do not roll over, and cover the installed configuration. New features, content creation and major revisions excluded; approved extra work is $75/hour, $37.50 minimum.",
     "hosting": "Feature add-ons do not include the base website hosting unless expressly stated. Determine whether the customer already has suitable hosting. Do not force a new website purchase for standalone email, scheduling or domains.",
     "exclusions": "No general copywriting, photography/video production, social content creation or review responses. Campaign ad text is included only in PPC.",
     "custom_work": "Custom project prices are starting estimates until requirements and delivery are confirmed.",
-    "assistant_status": "No live Jasper chat or customer-facing estimate builder is active. This reference can be explicitly loaded by a future assistant. Presence of this page does not connect or train an AI."
+    "assistant_status": "No live Jasper chat or customer-facing estimate builder is active. This reference can be explicitly loaded by a future assistant. Presence of this page does not connect or train an AI.",
+    "website_options": "New projects use Essential as the defined starting website, plus scoped additions, or Enterprise for an individually scoped larger project. Growth is legacy only. Enterprise requires a custom quote; do not invent a starting price."
   }
 }

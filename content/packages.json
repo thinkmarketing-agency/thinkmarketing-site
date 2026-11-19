@@ -1,4 +1,10 @@
 [
-  {"name":"Essential","development":1995,"monthly":50,"pages":5,"edits":1,"description":"A clear, professional home for your business."},
-  {"name":"Growth","development":2500,"monthly":80,"pages":10,"edits":2,"description":"More room for your services. A clearer view of your visibility."}
+  {
+    "name": "Essential",
+    "development": 1995,
+    "monthly": 50,
+    "pages": 5,
+    "edits": 1,
+    "description": "A clear, professional home for your business."
+  }
 ]
