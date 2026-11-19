@@ -26,9 +26,11 @@ def graph(slug):
             'inLanguage': 'en-US', 'isPartOf': {'@id': website_id}, 'about': {'@id': org_id}}
     nodes = [org, {'@type': 'WebSite', '@id': website_id, 'url': url(), 'name': SITE['name'], 'publisher': {'@id': org_id}, 'inLanguage': 'en-US'}, page]
     if slug:
-        nodes.append({'@type': 'BreadcrumbList', '@id': canonical + '#breadcrumb', 'itemListElement': [
-            {'@type': 'ListItem', 'position': 1, 'name': 'Home', 'item': url()},
-            {'@type': 'ListItem', 'position': 2, 'name': SITE['pages'][slug]['label'], 'item': canonical}]})
+        crumbs=[{'@type':'ListItem','position':1,'name':'Home','item':url()}]
+        if slug in ('local-seo','ai-search-visibility'):
+            crumbs.append({'@type':'ListItem','position':2,'name':'Digital Marketing','item':url('marketing')})
+        crumbs.append({'@type':'ListItem','position':len(crumbs)+1,'name':SITE['pages'][slug]['label'],'item':canonical})
+        nodes.append({'@type':'BreadcrumbList','@id':canonical+'#breadcrumb','itemListElement':crumbs})
         page['breadcrumb'] = {'@id': canonical + '#breadcrumb'}
     services = {
         'websites': ('Website design and development', 'Essential and Growth development packages; larger Enterprise, e-commerce and custom websites scoped individually.'),
@@ -61,7 +63,7 @@ def enrich(html, slug, production=False):
     html = re.sub(r'<script\b[^>]*type=["\']application/ld\+json["\'][^>]*>.*?</script>', '', html, flags=re.S | re.I)
     html = re.sub(r'<link\b[^>]*rel=["\'](?:canonical|icon)["\'][^>]*>', '', html, flags=re.I)
     image = ORIGIN + '/assets/images/social-preview.jpg'
-    robots = 'index,follow,max-image-preview:large' if production and slug not in ('privacy','estimate-reference') else 'noindex,follow'
+    robots = 'index,follow,max-image-preview:large' if production and slug not in ('privacy','estimate-reference') and SITE['pages'][slug].get('index',True) else 'noindex,follow'
     fields = {'og:type': 'website', 'og:site_name': SITE['name'], 'og:locale': 'en_US', 'og:title': data['title'],
               'og:description': data['description'], 'og:url': url(slug), 'og:image': image,
               'og:image:width': '1200', 'og:image:height': '630', 'og:image:alt': 'Think Marketing — digital marketing and web design in Bend, Oregon'}
@@ -85,7 +87,8 @@ def enrich(html, slug, production=False):
         return tag
     html = re.sub(r'<img\b[^>]*>', image_attrs, html)
     if slug:
-        crumb = f'<nav class="breadcrumb wrap" aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true"> / </span><span aria-current="page">{escape(data["label"])}</span></nav>'
+        parent='<span aria-hidden="true"> / </span><a href="/marketing/">Digital Marketing</a>' if slug in ('local-seo','ai-search-visibility') else ''
+        crumb = f'<nav class="breadcrumb wrap" aria-label="Breadcrumb"><a href="/">Home</a>{parent}<span aria-hidden="true"> / </span><span aria-current="page">{escape(data["label"])}</span></nav>'
         html = html.replace('<main id="main">', '<main id="main">' + crumb)
     arrow = '<svg class="link-arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 13 13 3M4 3h9v9"/></svg>'
     html = html.replace('↗\ufe0f', arrow).replace('↗', arrow)
@@ -100,7 +103,7 @@ def artifacts(output, production=False):
     root = ET.Element('{http://www.sitemaps.org/schemas/sitemap/0.9}urlset')
     if production:
         for slug in SITE['pages']:
-            if slug in ('privacy','estimate-reference'): continue
+            if slug in ('privacy','estimate-reference') or not SITE['pages'][slug].get('index',True): continue
             entry = ET.SubElement(root, '{http://www.sitemaps.org/schemas/sitemap/0.9}url')
             ET.SubElement(entry, '{http://www.sitemaps.org/schemas/sitemap/0.9}loc').text = url(slug)
     ET.ElementTree(root).write(output / 'sitemap.xml', encoding='utf-8', xml_declaration=True)
@@ -108,5 +111,5 @@ def artifacts(output, production=False):
     lines = ['# Think Marketing', '', '> Website design, local SEO and Search & AI Visibility reviews. Bend, Oregon.', '', '## Services']
     for slug in ('websites', 'about', 'faq', 'marketing', 'local-seo', 'ai-search-visibility', 'contact'):
         lines.append(f'- [{SITE["pages"][slug]["label"]}]({url(slug)}): {SITE["pages"][slug]["description"]}')
-    lines += ['', '## Pricing and scope', '- Essential: $1,995 development plus $50/month; up to five pages.', '- Growth: $2,500 development plus $80/month; up to ten pages; quarterly visibility summary.', '- Enterprise: $400/month for 12 months ($4,800 total), billed from kickoff; ownership after all 12 payments. Post-term hosting/support quoted separately.', '- E-commerce and Custom: individually quoted.', '- Search & AI Visibility Review: $350 one-time, up to ten pages, five questions, two agreed AI services. Implementation separate.', '', 'Refer to the linked service pages for current terms. No guaranteed rankings, AI recommendations or leads. No customer-facing assistant or quote builder is active.']
+    lines += ['', '## Pricing and scope', '- Essential: $1,995 development plus $50/month; up to five pages.', '- Growth: $2,500 development plus $80/month; up to ten pages; quarterly visibility summary.', '- Enterprise: $400/month for 12 months ($4,800 total), billed from kickoff; ownership after all 12 payments. Post-term hosting/support quoted separately.', '- E-commerce and Custom: individually quoted.', '- Search & AI Visibility Review: $350 one-time, up to ten pages, five questions, two agreed AI services. Implementation separate.', '', 'Refer to the linked service pages for current terms. No guaranteed rankings, AI recommendations or leads. Ask Jasper and Portfolio have Coming Soon pages. No customer-facing assistant or quote builder is active.']
     (output / 'llms.txt').write_text('\n'.join(lines) + '\n')

@@ -63,7 +63,7 @@ def check(root, production):
         titles.append(page.title); descriptions.append(page.meta['description'])
         canonicals = [a['href'] for a in page.links if a.get('rel') == 'canonical']
         test(f'{label}: one canonical on confirmed domain', canonicals == [url(slug)])
-        should_index = production and slug not in ('privacy','estimate-reference')
+        should_index = production and slug not in ('privacy','estimate-reference') and SITE['pages'][slug].get('index',True)
         test(f'{label}: correct indexing mode', page.meta.get('robots') == ('index,follow,max-image-preview:large' if should_index else 'noindex,follow'))
         test(f'{label}: social sharing metadata', page.meta.get('og:url') == url(slug) and page.meta.get('og:title') == page.title and page.meta.get('twitter:card') == 'summary_large_image' and page.meta.get('og:image:width') == '1200' and page.meta.get('og:image:height') == '630')
         test(f'{label}: one JSON-LD graph', len(page.scripts) == 1 and page.scripts[0].get('@context') == 'https://schema.org')
@@ -81,7 +81,7 @@ def check(root, production):
         test(f'{label}: schema page matches canonical', entities[url(slug) + '#webpage']['url'] == url(slug))
         if slug:
             crumbs = entities[url(slug) + '#breadcrumb']['itemListElement']
-            test(f'{label}: schema breadcrumbs', crumbs[-1]['item'] == url(slug) and [c['position'] for c in crumbs] == [1,2])
+            test(f'{label}: schema breadcrumbs', crumbs[-1]['item'] == url(slug) and [c['position'] for c in crumbs] == list(range(1,len(crumbs)+1)))
         for image in page.images:
             test(f'{label}: image text and dimensions', bool(image.get('alt')) and int(image.get('width','0')) > 0 and int(image.get('height','0')) > 0)
         for a in page.links + page.images:
@@ -99,15 +99,15 @@ def check(root, production):
                 test(f'{label}: CSS asset {asset}', (root/asset.lstrip('/')).is_file())
     for slug,page in parsed.items():
         if slug == 'estimate-reference': continue
-        test(f'{slug or "home"}: no retired assistant or unlisted reference links', all('/ask-jasper' not in a.get('href','') and '/estimate-reference' not in a.get('href','') for a in page.links))
-    test('Retired assistant: no generated interface', not (root/'ask-jasper/index.html').exists() and not (root/'assets/js/jasper.mjs').exists())
+        test(f'{slug or "home"}: no public links to the unlisted reference', all('/estimate-reference' not in a.get('href','') for a in page.links))
+    test('Jasper: coming soon, no chat interface', 'Coming soon.' in (root/'ask-jasper/index.html').read_text() and not (root/'assets/js/jasper.mjs').exists() and '<form' not in (root/'ask-jasper/index.html').read_text())
     catalog=json.loads((root/'estimate-reference/catalog.json').read_text())
     test('Reference: every service preserved in readable HTML', all('service-'+i['id'] in parsed['estimate-reference'].ids for i in catalog['items']))
     test('Reference: scope and estimate sections preserved', all(i in parsed['estimate-reference'].ids for i in ('policies','estimating','reference-faq','business-facts')))
     test('Site: distinct titles and descriptions', len(set(titles)) == len(titles) and len(set(descriptions)) == len(descriptions))
     sitemap = ET.parse(root / 'sitemap.xml').getroot()
     locations = [n.text for n in sitemap.iter('{http://www.sitemaps.org/schemas/sitemap/0.9}loc')]
-    expected = [url(s) for s in SITE['pages'] if s not in ('privacy','estimate-reference')] if production else []
+    expected = [url(s) for s in SITE['pages'] if s not in ('privacy','estimate-reference') and SITE['pages'][s].get('index',True)] if production else []
     test('Sitemap: canonical indexable pages only', locations == expected)
     robot = RobotFileParser(); robot.parse((root/'robots.txt').read_text().splitlines())
     for bot in ('Googlebot','Bingbot','OAI-SearchBot','ChatGPT-User','PerplexityBot','Claude-SearchBot'):

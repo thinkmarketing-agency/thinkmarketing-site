@@ -27,7 +27,7 @@
     "ai-search-visibility": {
       "title": "AI Search Visibility & SEO Reviews | Think Marketing",
       "description": "Get a $350 Search & AI Visibility Review: up to 10 pages, five questions and two AI services. Clear findings and prioritized next steps for your business.",
-      "label": "AI & Search Visibility"
+      "label": "AI Discoverability"
     },
     "contact": {
       "title": "Contact Think Marketing | Web Design & SEO in Bend",
@@ -50,14 +50,26 @@
       "label": "FAQ"
     },
     "marketing": {
-      "title": "Marketing Services in Bend | SEO, AI Visibility & PPC",
+      "title": "Digital Marketing in Bend | SEO, AI Discoverability & PPC",
       "description": "Marketing built around customer intent and geography. Consulting, local SEO, AI/search visibility and Google paid search for Bend and Central Oregon businesses.",
-      "label": "Marketing"
+      "label": "Digital Marketing"
     },
     "estimate-reference": {
       "title": "Complete Assistant Service Reference | Think Marketing",
       "description": "Unlisted reference for Think Marketing business facts, complete service pricing, scope limits, policies, detailed FAQs and informational estimate rules.",
       "label": "Estimate reference"
+    },
+    "portfolio": {
+      "title": "Portfolio \u2014 Coming Soon | Think Marketing",
+      "description": "The Think Marketing portfolio is coming soon. Contact us to discuss your website or digital marketing project in Bend and Central Oregon.",
+      "label": "Portfolio",
+      "index": false
+    },
+    "ask-jasper": {
+      "title": "Ask Jasper \u2014 Coming Soon | Think Marketing",
+      "description": "Jasper, the Think Marketing assistant, is in development. View website pricing, read the FAQ, or contact Think Marketing while we prepare the experience.",
+      "label": "Ask Jasper",
+      "index": false
     }
   }
 }

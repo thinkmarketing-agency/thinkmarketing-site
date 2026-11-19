@@ -14,7 +14,7 @@ args = parser.parse_args()
 OUTPUT = ROOT / 'dist' if args.production else ROOT
 OUTPUT.mkdir(exist_ok=True)
 
-NAV = [('websites', 'Websites & Pricing'), ('local-seo', 'Local SEO'), ('ai-search-visibility', 'AI & Search Visibility'), ('contact', 'Contact')]
+NAV = [('websites', 'Websites & Pricing'), ('marketing', 'Digital Marketing'), ('portfolio', 'Portfolio'), ('faq', 'FAQ'), ('ask-jasper', 'Ask Jasper')]
 
 def money(value):
     return f'${value:,.0f}'
@@ -63,7 +63,7 @@ shutil.copyfile(ROOT/'content/catalog.json', reference/'catalog.json')
 shutil.copyfile(ROOT/'content/knowledge-faq.json', reference/'faq.json')
 shutil.copyfile(ROOT/'content/estimator.mjs', reference/'estimator.mjs')
 # Remove only the explicitly retired assistant UI from generated outputs.
-for retired in ('ask-jasper/index.html','assets/js/jasper.mjs','assets/js/estimator.mjs'):
+for retired in ('assets/js/jasper.mjs','assets/js/estimator.mjs'):
     (OUTPUT/retired).unlink(missing_ok=True)
 if args.production:
     for name in ('home.css', 'styles.css'):

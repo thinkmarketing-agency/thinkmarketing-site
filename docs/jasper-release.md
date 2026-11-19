@@ -19,3 +19,11 @@ Customer pages shortened; About introduces Jacob and retains the two guiding que
 The public assistant and quote-builder interface is retired; /ask-jasper and descendants redirect to /contact/. No executable Jasper scripts are published. Source estimate arithmetic is retained for future work. The full static /estimate-reference/ page (catalog v4) includes 40 services, limits, terms, detailed knowledge FAQ, duplicate-billing rules, estimate examples and owner-confirmation requirements. Reference data includes JSON and arithmetic, but no supplier costs, margins or private client information. It has no inbound links from customer pages and is excluded from the sitemap with noindex metadata/headers. Anyone with the URL can still read it; a future AI needs explicit retrieval configuration.
 
 Verification: 541 generated production assertions, estimate arithmetic tests, mobile and desktop browser review, reference service coverage and no public reference/retired-assistant links. Deployment/redirect/headers are verified separately after publication.
+
+## Agreed site structure — November 18
+
+Primary navigation: Websites & Pricing, Digital Marketing, Portfolio, FAQ, Ask Jasper. The logo links home; About and Contact are available in the footer, with Call Now and Text Us retained. Local SEO and AI Discoverability retain their URLs, link from Digital Marketing, and have visible/schema breadcrumbs under that parent.
+
+Portfolio and Ask Jasper now have simple Coming Soon pages. No chat or quote controls are active. The old Jasper-to-contact redirects were removed. Both placeholders remain noindex and outside the sitemap until substantive content is ready. The unlisted full reference is preserved and has no public inbound links.
+
+The homepage main content and call/text buttons were compared byte-for-byte with the pre-change source; only navigation/footer links changed. Hero background and responsive rules were preserved. Desktop/mobile navigation and child-page breadcrumbs were checked in-browser.

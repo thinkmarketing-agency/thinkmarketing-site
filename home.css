@@ -636,3 +636,6 @@ img{max-width:100%}.breadcrumb{padding-top:16px;font-size:12px;color:#555}.bread
  .homepage .hero .subheadline{max-width:600px;font-size:18px;margin:0 auto 22px}
 }
 @media(orientation:landscape) and (min-width:568px) and (max-width:1199px) and (max-height:600px){.menu-chevron{width:6px;height:6px;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;transform:rotate(45deg);margin-top:-3px}.mobile-menu[open] .menu-chevron{transform:rotate(225deg);margin-top:3px}}
+
+/* Site structure and Coming Soon pages. */
+.structure-footer{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:8px 16px;margin-block:12px}.structure-footer a{color:#fff}.coming-soon{padding-bottom:64px}.coming-soon .button{margin-top:12px}.breadcrumb{overflow-wrap:anywhere}@media(max-width:767px){.structure-footer{justify-content:center}}
