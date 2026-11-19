@@ -17,3 +17,7 @@ Run `python3 scripts/check_seo.py` to validate the preview. Run `python3 scripts
 See `docs/seo-release-checklist.md` and `docs/refresh-status.md` before publication. A passing local check is not a Lighthouse score, rich-result eligibility guarantee, live indexing check or search ranking promise.
 
 The unlisted `/estimate-reference/` route and its JSON carry noindex and are excluded from the sitemap. It is public to anyone with the link; never store private supplier/margin notes there. Noindex is not access control.
+
+## Local comprehensive pricing review
+
+`python3 scripts/build.py` generates the unlisted, public-safe reference at `/estimate-reference/` and a local owner review at `/work/pricing-review/` when `work/internal-pricing.json` exists. The owner file is ignored and excluded from static export; it must be supplied privately to a future server-side assistant. Do not put it in public JavaScript or catalog JSON. `content/capability-map.json` maps all customer capability labels to catalog entries and clarification questions. New menu entries require scope and delivery-cost validation. `node scripts/check_estimates.mjs` checks mappings, internal calculation behavior, prerequisites and overlap warnings. See `docs/publication-hold.md` before any publishing.

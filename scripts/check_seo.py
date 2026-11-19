@@ -117,6 +117,7 @@ def check(root, production):
     test('404: explicit not-found page', 'noindex,follow' in (root/'404.html').read_text() and 'isn’t here' in (root/'404.html').read_text())
     test('Hero: image budget below 200KB', (root/'assets/images/think-marketing-hero.jpg').stat().st_size < 200_000)
     if production:
+        test('Production: private owner files excluded', not (root/'work').exists())
         test('Production: source files excluded', not (root/'scripts').exists() and not (root/'.git').exists() and not (root/'docs').exists())
     report = {'mode': 'production candidate' if production else 'preview', 'passed_assertions': len(results), 'pages': len(parsed), 'results': results,
               'not_verified': ['Live DNS/TLS/redirects/headers', 'Search engine indexing', 'Google Rich Results and Schema.org validators', 'Lighthouse lab scores and CrUX field metrics', 'AI citations/recommendations', 'Production privacy and commercial decisions']}

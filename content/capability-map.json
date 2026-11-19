@@ -1,0 +1,203 @@
+{
+  "version": "2026-11-19-comprehensive-draft",
+  "capabilities": [
+    {
+      "label": "Book appointments",
+      "service_ids": [
+        "scheduling",
+        "team_routing"
+      ],
+      "question": "How many booking staff, event types and routing rules?"
+    },
+    {
+      "label": "Request an estimate",
+      "service_ids": [
+        "base_features",
+        "form",
+        "calculator"
+      ],
+      "question": "A simple inquiry, conditional quote request, or automatic calculated price?"
+    },
+    {
+      "label": "Complete detailed inquiry forms",
+      "service_ids": [
+        "form",
+        "upload_form"
+      ],
+      "question": "Which fields, branches and file requirements?"
+    },
+    {
+      "label": "Make payments or deposits",
+      "service_ids": [
+        "payment",
+        "store"
+      ],
+      "question": "Fixed payment/deposit links or a full store checkout?"
+    },
+    {
+      "label": "Browse products and purchase online",
+      "service_ids": [
+        "store"
+      ],
+      "question": "How many products and variants, and which shipping rules?"
+    },
+    {
+      "label": "Access member or client areas",
+      "service_ids": [
+        "membership",
+        "client_portal",
+        "custom_system"
+      ],
+      "question": "Shared member resources or client-specific isolated information?"
+    },
+    {
+      "label": "Read customer reviews",
+      "service_ids": [
+        "reviews"
+      ],
+      "question": "Which business profile and expected widget loads?"
+    },
+    {
+      "label": "Get answers from an AI assistant",
+      "service_ids": [
+        "assistant"
+      ],
+      "question": "Which approved knowledge, message volume and allowed actions?"
+    },
+    {
+      "label": "Update text, photos, and hours",
+      "service_ids": [
+        "base_features",
+        "admin"
+      ],
+      "question": "An included minor update by Think Marketing or staff self-editing?"
+    },
+    {
+      "label": "Manage services and project galleries",
+      "service_ids": [
+        "base_features",
+        "admin",
+        "cms_area"
+      ],
+      "question": "Static supplied information within the page allowance, or an editable collection?"
+    },
+    {
+      "label": "Organize products and inventory",
+      "service_ids": [
+        "store",
+        "inventory",
+        "inventory_sync"
+      ],
+      "question": "Is simple store inventory enough, or are stock locations/POS connections needed?"
+    },
+    {
+      "label": "Manage staff access",
+      "service_ids": [
+        "admin",
+        "staff_access"
+      ],
+      "question": "How many users beyond the included allowance, and which permissions?"
+    },
+    {
+      "label": "Publish supplied articles or resources",
+      "service_ids": [
+        "publishing"
+      ],
+      "question": "Will staff publish their supplied content, and how much must be imported?"
+    },
+    {
+      "label": "View reports and dashboards",
+      "service_ids": [
+        "dashboard",
+        "analytics",
+        "tracking_care"
+      ],
+      "question": "Which data sources and reporting needs?"
+    },
+    {
+      "label": "Collect information and uploaded files",
+      "service_ids": [
+        "upload_form",
+        "client_portal"
+      ],
+      "question": "What files, volume, retention, access controls and sensitivity?"
+    },
+    {
+      "label": "Use custom calculators and business tools",
+      "service_ids": [
+        "calculator",
+        "custom_system"
+      ],
+      "question": "Which inputs, formulas and workflows?"
+    },
+    {
+      "label": "Business email and additional domains",
+      "service_ids": [
+        "email",
+        "domain",
+        "email_migration",
+        "domain_transfer"
+      ],
+      "question": "Inboxes versus aliases; new domains versus transfers; premium renewal costs?"
+    },
+    {
+      "label": "Calendars and scheduling",
+      "service_ids": [
+        "email",
+        "scheduling",
+        "team_routing"
+      ],
+      "question": "Ordinary staff calendars already included with email, or public booking?"
+    },
+    {
+      "label": "Customer relationship management",
+      "service_ids": [
+        "crm",
+        "managed_crm"
+      ],
+      "question": "Connect an existing CRM or supply/manage a basic CRM?"
+    },
+    {
+      "label": "Invoicing and payment platforms",
+      "service_ids": [
+        "invoicing",
+        "payment",
+        "custom_system"
+      ],
+      "question": "Which existing platforms and which events move information?"
+    },
+    {
+      "label": "Lead routing and follow-up workflows",
+      "service_ids": [
+        "automation",
+        "crm",
+        "managed_crm"
+      ],
+      "question": "One workflow or multiple distinct workflows?"
+    },
+    {
+      "label": "Analytics and call tracking",
+      "service_ids": [
+        "analytics",
+        "tracking_care",
+        "call_tracking"
+      ],
+      "question": "Which conversion events, phone numbers and call volumes?"
+    },
+    {
+      "label": "Review-request systems",
+      "service_ids": [
+        "review_requests"
+      ],
+      "question": "Which email trigger and volume? No review responses or SMS included."
+    },
+    {
+      "label": "Other supported integrations",
+      "service_ids": [
+        "automation",
+        "custom_system"
+      ],
+      "question": "Which systems, API access and task volume?"
+    }
+  ]
+}

@@ -1,9 +1,9 @@
-# Reviewed version authorized for publication — November 18, 2026
+# Publication authorized — November 19, 2026
 
-The owner explicitly requested publishing the current reviewed version through Git. This supersedes the earlier local-only hold for this release. Publish this version, verify Vercel, and stop further site changes while the owner reviews.
+The owner requested execution and preview of the revised Websites structure and comprehensive Jasper pricing menu. The owner subsequently explicitly authorized publishing this version on November 19, 2026. Commit and push the reviewed site through the existing Vercel workflow. Private local guidance remains excluded from publication.
 
-Included: approved homepage subheadline, two service introductions, four Why Think Marketing points, removal of the redundant local-discovery block; four Digital Marketing starting points and report-explanation consulting; Essential plus individually scoped Enterprise; feature capabilities table; revised FAQ; removal of hourly/minimum fees from customer-facing copy and removal of example pricing. Jasper and Portfolio remain Coming Soon. The full unlisted assistant reference is retained.
+Local changes: Websites navigation label; Essential plus capabilities first; Enterprise below those capabilities; 54-entry draft catalog covering all 24 public website capabilities plus marketing consulting, PPC, Local SEO, AI assessments and monitoring, email/domains, commerce and custom work. The public-safe reference remains /estimate-reference/.
 
-Final consistency cleanup: removed the obsolete Growth summary paragraph on the detailed AI service page. Growth is not a new-project offering; legacy agreements remain documented in the unlisted catalog.
+Owner preview: /work/pricing-review/. Private guidance: work/internal-pricing.json, ignored by Git and not copied to dist. Backup deliverable: /Users/jacob/Documents/Codex/2026-11-17/let/outputs/jasper-internal-pricing-guidance.json. Reference rate $75/hour, $40 minimum, for owner-reviewed off-menu effort estimates. Never expose the internal rate/minimum in customer answers. Actual provider expenses and recurring responsibilities still require validation.
 
-The next planned work is Jasper and portfolio implementation. This release does not authorize additional product changes beyond publication and necessary verification.
+A future Jasper must load the public catalog and mapping plus private server-side guidance explicitly; no assistant is connected now. New entries are proposed scope/prices until delivery and supplier-cost checks. Unknown effort or custom requirements must be referred, not invented. Do not charge twice for included/overlapping workflows. Growth remains legacy-only.

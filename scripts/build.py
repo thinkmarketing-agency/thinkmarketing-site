@@ -14,7 +14,7 @@ args = parser.parse_args()
 OUTPUT = ROOT / 'dist' if args.production else ROOT
 OUTPUT.mkdir(exist_ok=True)
 
-NAV = [('websites', 'Websites & Pricing'), ('marketing', 'Digital Marketing'), ('portfolio', 'Portfolio'), ('faq', 'FAQ'), ('ask-jasper', 'Ask Jasper')]
+NAV = [('websites', 'Websites'), ('marketing', 'Digital Marketing'), ('portfolio', 'Portfolio'), ('faq', 'FAQ'), ('ask-jasper', 'Ask Jasper')]
 
 def money(value):
     return f'${value:,.0f}'
@@ -57,9 +57,13 @@ for slug, (title, body) in PAGES.items():
         html = (ROOT / 'content/home.html').read_text()
     target.write_text(enrich(html, slug, args.production))
 artifacts(OUTPUT, args.production)
+if not args.production:
+    from pricing_reference import write_owner_preview
+    write_owner_preview(OUTPUT)
 reference=OUTPUT/'estimate-reference'
 reference.mkdir(exist_ok=True)
 shutil.copyfile(ROOT/'content/catalog.json', reference/'catalog.json')
+shutil.copyfile(ROOT/'content/capability-map.json', reference/'capability-map.json')
 shutil.copyfile(ROOT/'content/knowledge-faq.json', reference/'faq.json')
 shutil.copyfile(ROOT/'content/estimator.mjs', reference/'estimator.mjs')
 # Remove only the explicitly retired assistant UI from generated outputs.

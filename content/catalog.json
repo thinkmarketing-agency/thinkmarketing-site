@@ -1,10 +1,8 @@
 {
-  "version": "2026-11-18-pricing-draft",
-  "status": "Local pricing review draft; not published. Essential plus options; Enterprise individually scoped.",
+  "version": "2026-11-19-comprehensive-draft",
+  "status": "LOCAL REVIEW DRAFT \u2014 new entries and prices require scope and delivery-cost validation; not published.",
   "currency": "USD",
   "effective_on_publication": true,
-  "hourly_rate": 75,
-  "minimum_labor_charge": 37.5,
   "items": [
     {
       "id": "essential",
@@ -16,8 +14,17 @@
       "unit": "website",
       "additional_setup": null,
       "price_kind": "fixed",
-      "scope": "Up to 5 pages; 1 minor edit/month; supplied content; standard hosting. Website development payments 50% to start, 50% on completion.",
-      "delivery": "Confirm availability and scope before accepting a project."
+      "scope": "Up to 5 pages; 1 minor edit/month; supplied content; standard hosting. Website development payments 50% to start, 50% on completion. Included search foundation: titles/descriptions, crawlable navigation, sitemap, robots/indexability checks, Search Console verification/connection and sitemap submission with client access. Post-launch indexing status check; Google controls indexing and rankings. Existing URL redirects reviewed and agreed before quoting migration work.",
+      "delivery": "Confirm availability and scope before accepting a project.",
+      "readiness": "existing_menu_scope_confirmation_required",
+      "requires_any": [],
+      "includes": [],
+      "questions": [
+        "Does the requested work fit the listed scope and limits?",
+        "Are the necessary content, accounts and access available?"
+      ],
+      "jasper_action": "scope_checked_estimate",
+      "standard_tools_included": true
     },
     {
       "id": "growth",
@@ -31,7 +38,16 @@
       "price_kind": "fixed",
       "scope": "Legacy package for existing agreements only. Not offered for new projects. Up to 10 pages; 2 minor edits/month; quarterly Search & AI Visibility summary; supplied content; standard hosting. Website development payments 50% to start, 50% on completion.",
       "delivery": "Confirm availability and scope before accepting a project.",
-      "available_for_new_projects": false
+      "available_for_new_projects": false,
+      "readiness": "existing_menu_scope_confirmation_required",
+      "requires_any": [],
+      "includes": [],
+      "questions": [
+        "Does the requested work fit the listed scope and limits?",
+        "Are the necessary content, accounts and access available?"
+      ],
+      "jasper_action": "do_not_offer",
+      "standard_tools_included": true
     },
     {
       "id": "enterprise",
@@ -44,7 +60,16 @@
       "additional_setup": null,
       "price_kind": "custom",
       "scope": "Individually scoped larger websites: extensive services, locations, project libraries, migration, repeatable page types and integrations. Monthly development plans are available. Build/setup, recurring service, commitment, ownership and post-term hosting/support are set in the proposal. No universal $400 or $750 monthly price.",
-      "delivery": "Requires a requirements review and owner-approved custom quote. Never calculate an automatic price for this service."
+      "delivery": "Requires a requirements review and owner-approved custom quote. Never calculate an automatic price for this service.",
+      "readiness": "existing_menu_scope_confirmation_required",
+      "requires_any": [],
+      "includes": [],
+      "questions": [
+        "Does the requested work fit the listed scope and limits?",
+        "Are the necessary content, accounts and access available?"
+      ],
+      "jasper_action": "collect_requirements_owner_quote",
+      "standard_tools_included": true
     },
     {
       "id": "reviews",
@@ -57,7 +82,16 @@
       "additional_setup": null,
       "price_kind": "fixed",
       "scope": "One business profile, one display design, up to 5,000 widget loads/month; monthly display check and up to 5 minutes configuration support. No responses or review writing.",
-      "delivery": "Confirm availability and scope before accepting a project."
+      "delivery": "Confirm availability and scope before accepting a project.",
+      "readiness": "existing_menu_scope_confirmation_required",
+      "requires_any": [],
+      "includes": [],
+      "questions": [
+        "Does the requested work fit the listed scope and limits?",
+        "Are the necessary content, accounts and access available?"
+      ],
+      "jasper_action": "scope_checked_estimate",
+      "standard_tools_included": true
     },
     {
       "id": "scheduling",
@@ -70,7 +104,16 @@
       "additional_setup": 75,
       "price_kind": "fixed",
       "scope": "Per staff booking seat: one staff calendar, up to 3 appointment types, standard reminders and website booking integration. Up to 10 minutes configuration support per seat/month. No SMS or team routing. $250 covers the first seat setup; $75 each additional seat in the same project.",
-      "delivery": "Confirm availability and scope before accepting a project."
+      "delivery": "Confirm availability and scope before accepting a project.",
+      "readiness": "existing_menu_scope_confirmation_required",
+      "requires_any": [],
+      "includes": [],
+      "questions": [
+        "Does the requested work fit the listed scope and limits?",
+        "Are the necessary content, accounts and access available?"
+      ],
+      "jasper_action": "scope_checked_estimate",
+      "standard_tools_included": true
     },
     {
       "id": "team_routing",
@@ -83,7 +126,16 @@
       "additional_setup": null,
       "price_kind": "fixed",
       "scope": "Upgrade to staff scheduling; up to 3 staff seats, one round-robin routing rule. Includes upgraded scheduler licensing for those 3 seats; additional staff or complex routing requires a quote. Up to 10 minutes configuration support/month.",
-      "delivery": "Confirm availability and scope before accepting a project."
+      "delivery": "Confirm availability and scope before accepting a project.",
+      "readiness": "existing_menu_scope_confirmation_required",
+      "requires_any": [],
+      "includes": [],
+      "questions": [
+        "Does the requested work fit the listed scope and limits?",
+        "Are the necessary content, accounts and access available?"
+      ],
+      "jasper_action": "scope_checked_estimate",
+      "standard_tools_included": true
     },
     {
       "id": "admin",
@@ -96,7 +148,16 @@
       "additional_setup": null,
       "price_kind": "fixed",
       "scope": "One website; one content area; up to 5 editable fields, 3 staff logins, 1 GB stored files and 5 GB monthly transfer. Hosting/database, daily backups with 7-day retention, monthly check and up to 15 minutes configuration support included. No customer records, commerce, or bespoke workflows.",
-      "delivery": "Confirm availability and scope before accepting a project."
+      "delivery": "Confirm availability and scope before accepting a project.",
+      "readiness": "existing_menu_scope_confirmation_required",
+      "requires_any": [],
+      "includes": [],
+      "questions": [
+        "Does the requested work fit the listed scope and limits?",
+        "Are the necessary content, accounts and access available?"
+      ],
+      "jasper_action": "scope_checked_estimate",
+      "standard_tools_included": true
     },
     {
       "id": "form",
@@ -109,7 +170,16 @@
       "additional_setup": null,
       "price_kind": "fixed",
       "scope": "One form: up to 10 fields, one conditional branch, 500 submissions/month, basic email delivery; no file uploads. Monthly test and up to 10 minutes configuration support included.",
-      "delivery": "Confirm availability and scope before accepting a project."
+      "delivery": "Confirm availability and scope before accepting a project.",
+      "readiness": "existing_menu_scope_confirmation_required",
+      "requires_any": [],
+      "includes": [],
+      "questions": [
+        "Does the requested work fit the listed scope and limits?",
+        "Are the necessary content, accounts and access available?"
+      ],
+      "jasper_action": "scope_checked_estimate",
+      "standard_tools_included": true
     },
     {
       "id": "payment",
@@ -122,7 +192,16 @@
       "additional_setup": null,
       "price_kind": "fixed",
       "scope": "One provider; up to 3 fixed-price payment links or deposit options. Monthly test and up to 10 minutes configuration support. Payment processing and transaction fees excluded.",
-      "delivery": "Confirm availability and scope before accepting a project."
+      "delivery": "Confirm availability and scope before accepting a project.",
+      "readiness": "existing_menu_scope_confirmation_required",
+      "requires_any": [],
+      "includes": [],
+      "questions": [
+        "Does the requested work fit the listed scope and limits?",
+        "Are the necessary content, accounts and access available?"
+      ],
+      "jasper_action": "scope_checked_estimate",
+      "standard_tools_included": true
     },
     {
       "id": "review_requests",
@@ -135,7 +214,16 @@
       "additional_setup": null,
       "price_kind": "fixed",
       "scope": "One source, one trigger, up to 500 email requests/month; client supplies approved wording. Monthly test and up to 10 minutes support. SMS and review responses excluded.",
-      "delivery": "Confirm availability and scope before accepting a project."
+      "delivery": "Confirm availability and scope before accepting a project.",
+      "readiness": "existing_menu_scope_confirmation_required",
+      "requires_any": [],
+      "includes": [],
+      "questions": [
+        "Does the requested work fit the listed scope and limits?",
+        "Are the necessary content, accounts and access available?"
+      ],
+      "jasper_action": "scope_checked_estimate",
+      "standard_tools_included": true
     },
     {
       "id": "crm",
@@ -148,7 +236,16 @@
       "additional_setup": null,
       "price_kind": "fixed",
       "scope": "One supported lead connection into an existing client CRM; up to 1,000 automation tasks/month. Connector tooling included; a full CRM subscription is not included. Monthly test and up to 15 minutes support.",
-      "delivery": "Confirm availability and scope before accepting a project."
+      "delivery": "Confirm availability and scope before accepting a project.",
+      "readiness": "existing_menu_scope_confirmation_required",
+      "requires_any": [],
+      "includes": [],
+      "questions": [
+        "Does the requested work fit the listed scope and limits?",
+        "Are the necessary content, accounts and access available?"
+      ],
+      "jasper_action": "scope_checked_estimate",
+      "standard_tools_included": true
     },
     {
       "id": "automation",
@@ -161,20 +258,39 @@
       "additional_setup": null,
       "price_kind": "fixed",
       "scope": "One trigger, up to 3 actions, 1,000 tasks/month. Automation tooling included; destination platforms must already exist. Monthly check and up to 15 minutes support. No duplicate charge for a workflow already covered by another item.",
-      "delivery": "Confirm availability and scope before accepting a project."
+      "delivery": "Confirm availability and scope before accepting a project.",
+      "readiness": "existing_menu_scope_confirmation_required",
+      "requires_any": [],
+      "includes": [],
+      "questions": [
+        "Does the requested work fit the listed scope and limits?",
+        "Are the necessary content, accounts and access available?"
+      ],
+      "jasper_action": "scope_checked_estimate",
+      "standard_tools_included": true
     },
     {
       "id": "email",
       "group": "Business tools",
-      "name": "Managed business email",
+      "name": "Google Workspace Business Starter email",
       "setup": 150,
-      "monthly": 20,
+      "monthly": 10,
       "annual": 0,
       "unit": "inbox",
       "additional_setup": 25,
       "price_kind": "fixed",
-      "scope": "Business Starter-class email license and routine administration per inbox. 30 GB pooled storage entitlement per licensed user; up to 5 minutes routine support/inbox/month. $150 covers domain setup and first inbox; $25 each additional inbox. Migrations extra.",
-      "delivery": "Confirm availability and scope before accepting a project."
+      "scope": "Google Workspace Business Starter license and consolidated billing: $10 per licensed user/month; 30 GB pooled storage entitlement per user. $150 setup covers one domain and first inbox; $25 each additional inbox in the same project. Initial domain verification, mail routing and supported SPF/DKIM/DMARC configuration included. Ongoing hands-on administration, device troubleshooting, migrations and training separately scoped and approved; no monthly support allowance. Check existing email before replacing a suitable service. Standard/Plus require a separate quote.",
+      "delivery": "Confirm supplier price, plan suitability and billing/provisioning arrangement before acceptance. Do not assume authorized reseller status.",
+      "readiness": "existing_menu_scope_confirmation_required",
+      "requires_any": [],
+      "includes": [],
+      "questions": [
+        "Do existing messages, contacts or calendars need migration?",
+        "How many separate users versus aliases?",
+        "Is Starter suitable for storage and business requirements?"
+      ],
+      "jasper_action": "scope_checked_estimate",
+      "standard_tools_included": true
     },
     {
       "id": "domain",
@@ -187,7 +303,16 @@
       "additional_setup": null,
       "price_kind": "fixed",
       "scope": "Per non-premium domain: standard registration/renewal included, renewal administration, DNS and simple redirect to one existing website. No separate site or inbox included. Higher-renewal domains require an agreed bundled quote before purchase.",
-      "delivery": "Confirm availability and scope before accepting a project."
+      "delivery": "Confirm availability and scope before accepting a project.",
+      "readiness": "existing_menu_scope_confirmation_required",
+      "requires_any": [],
+      "includes": [],
+      "questions": [
+        "Does the requested work fit the listed scope and limits?",
+        "Are the necessary content, accounts and access available?"
+      ],
+      "jasper_action": "scope_checked_estimate",
+      "standard_tools_included": true
     },
     {
       "id": "domain_transfer",
@@ -200,7 +325,16 @@
       "additional_setup": null,
       "price_kind": "from",
       "scope": "One routine transfer; registrar transfer fee up to $25 included. If purchasing managed domain service together, transfer setup replaces the $75 domain setup; do not charge both.",
-      "delivery": "Confirm availability and scope before accepting a project."
+      "delivery": "Confirm availability and scope before accepting a project.",
+      "readiness": "existing_menu_scope_confirmation_required",
+      "requires_any": [],
+      "includes": [],
+      "questions": [
+        "Does the requested work fit the listed scope and limits?",
+        "Are the necessary content, accounts and access available?"
+      ],
+      "jasper_action": "starting_estimate_only",
+      "standard_tools_included": true
     },
     {
       "id": "email_migration",
@@ -213,7 +347,16 @@
       "additional_setup": null,
       "price_kind": "from",
       "scope": "Per inbox, up to 10 GB supported email data; one migration pass and verification. Migration tooling included. Calendar/contact migration requires confirmation.",
-      "delivery": "Confirm availability and scope before accepting a project."
+      "delivery": "Confirm availability and scope before accepting a project.",
+      "readiness": "existing_menu_scope_confirmation_required",
+      "requires_any": [],
+      "includes": [],
+      "questions": [
+        "Does the requested work fit the listed scope and limits?",
+        "Are the necessary content, accounts and access available?"
+      ],
+      "jasper_action": "starting_estimate_only",
+      "standard_tools_included": true
     },
     {
       "id": "page",
@@ -226,7 +369,16 @@
       "additional_setup": null,
       "price_kind": "fixed",
       "scope": "One page using an existing layout and client-supplied final copy/images; one revision round. Standard site hosting required. No writing or original media production.",
-      "delivery": "Confirm availability and scope before accepting a project."
+      "delivery": "Confirm availability and scope before accepting a project.",
+      "readiness": "existing_menu_scope_confirmation_required",
+      "requires_any": [],
+      "includes": [],
+      "questions": [
+        "Does the requested work fit the listed scope and limits?",
+        "Are the necessary content, accounts and access available?"
+      ],
+      "jasper_action": "scope_checked_estimate",
+      "standard_tools_included": true
     },
     {
       "id": "landing",
@@ -239,7 +391,16 @@
       "additional_setup": null,
       "price_kind": "from",
       "scope": "One landing page, supplied content, one agreed conversion action, one revision round. Existing standard site hosting required.",
-      "delivery": "Confirm availability and scope before accepting a project."
+      "delivery": "Confirm availability and scope before accepting a project.",
+      "readiness": "existing_menu_scope_confirmation_required",
+      "requires_any": [],
+      "includes": [],
+      "questions": [
+        "Does the requested work fit the listed scope and limits?",
+        "Are the necessary content, accounts and access available?"
+      ],
+      "jasper_action": "starting_estimate_only",
+      "standard_tools_included": true
     },
     {
       "id": "site_migration",
@@ -252,33 +413,38 @@
       "additional_setup": null,
       "price_kind": "from",
       "scope": "Supported existing website up to 5 pages; basic content transfer and redirects. Standard site hosting selected separately. Licensing restrictions require review.",
-      "delivery": "Confirm availability and scope before accepting a project."
+      "delivery": "Confirm availability and scope before accepting a project.",
+      "readiness": "existing_menu_scope_confirmation_required",
+      "requires_any": [],
+      "includes": [],
+      "questions": [
+        "Does the requested work fit the listed scope and limits?",
+        "Are the necessary content, accounts and access available?"
+      ],
+      "jasper_action": "starting_estimate_only",
+      "standard_tools_included": true
     },
     {
       "id": "training",
       "group": "One-time work",
       "name": "Additional staff training",
-      "setup": 75,
-      "monthly": 0,
+      "setup": null,
+      "monthly": null,
       "annual": 0,
       "unit": "hour",
       "additional_setup": null,
-      "price_kind": "fixed",
-      "scope": "One scheduled hour of staff training. Initial handoff training included in applicable installation fees is not charged again.",
-      "delivery": "Confirm availability and scope before accepting a project."
-    },
-    {
-      "id": "labor",
-      "group": "One-time work",
-      "name": "Additional agreed work",
-      "setup": 75,
-      "monthly": 0,
-      "annual": 0,
-      "unit": "hour",
-      "additional_setup": null,
-      "price_kind": "fixed",
-      "scope": "Per hour; $37.50 minimum for an approved half hour. Applies to new work beyond included scope; no charge without approval.",
-      "delivery": "Confirm availability and scope before accepting a project."
+      "price_kind": "custom",
+      "scope": "Additional training beyond included handoff is quoted for the requested session and staff. Initial handoff included in installation is not charged again.",
+      "delivery": "Confirm availability and scope before accepting a project.",
+      "readiness": "existing_menu_scope_confirmation_required",
+      "requires_any": [],
+      "includes": [],
+      "questions": [
+        "Does the requested work fit the listed scope and limits?",
+        "Are the necessary content, accounts and access available?"
+      ],
+      "jasper_action": "collect_requirements_owner_quote",
+      "standard_tools_included": true
     },
     {
       "id": "analytics",
@@ -291,7 +457,16 @@
       "additional_setup": null,
       "price_kind": "fixed",
       "scope": "One site, one analytics property and up to 3 conversion events; consent requirements assessed before installation. Standard analytics tooling included.",
-      "delivery": "Confirm availability and scope before accepting a project."
+      "delivery": "Confirm availability and scope before accepting a project.",
+      "readiness": "existing_menu_scope_confirmation_required",
+      "requires_any": [],
+      "includes": [],
+      "questions": [
+        "Does the requested work fit the listed scope and limits?",
+        "Are the necessary content, accounts and access available?"
+      ],
+      "jasper_action": "scope_checked_estimate",
+      "standard_tools_included": true
     },
     {
       "id": "tracking_care",
@@ -304,7 +479,16 @@
       "additional_setup": null,
       "price_kind": "fixed",
       "scope": "Monthly validation of up to 3 previously configured conversion events; short issue summary and up to 15 minutes repair time. Requires analytics setup or verified existing setup.",
-      "delivery": "Confirm availability and scope before accepting a project."
+      "delivery": "Confirm availability and scope before accepting a project.",
+      "readiness": "existing_menu_scope_confirmation_required",
+      "requires_any": [],
+      "includes": [],
+      "questions": [
+        "Does the requested work fit the listed scope and limits?",
+        "Are the necessary content, accounts and access available?"
+      ],
+      "jasper_action": "scope_checked_estimate",
+      "standard_tools_included": true
     },
     {
       "id": "call_tracking",
@@ -317,7 +501,16 @@
       "additional_setup": null,
       "price_kind": "fixed",
       "scope": "One standard local number, up to 100 inbound minutes/month, one destination and monthly test. Call recording off by default. Higher volume agreed before activation.",
-      "delivery": "Confirm availability and scope before accepting a project."
+      "delivery": "Confirm availability and scope before accepting a project.",
+      "readiness": "existing_menu_scope_confirmation_required",
+      "requires_any": [],
+      "includes": [],
+      "questions": [
+        "Does the requested work fit the listed scope and limits?",
+        "Are the necessary content, accounts and access available?"
+      ],
+      "jasper_action": "scope_checked_estimate",
+      "standard_tools_included": true
     },
     {
       "id": "dashboard",
@@ -330,7 +523,16 @@
       "additional_setup": null,
       "price_kind": "from",
       "scope": "One standard dashboard, up to 2 supported data sources and monthly connection check. Includes standard connector costs; premium data sources require a bundled quote.",
-      "delivery": "Confirm availability and scope before accepting a project."
+      "delivery": "Confirm availability and scope before accepting a project.",
+      "readiness": "existing_menu_scope_confirmation_required",
+      "requires_any": [],
+      "includes": [],
+      "questions": [
+        "Does the requested work fit the listed scope and limits?",
+        "Are the necessary content, accounts and access available?"
+      ],
+      "jasper_action": "starting_estimate_only",
+      "standard_tools_included": true
     },
     {
       "id": "gbp_setup",
@@ -343,7 +545,16 @@
       "additional_setup": null,
       "price_kind": "fixed",
       "scope": "One eligible business profile. Google controls verification; verification, reinstatement or approval is not guaranteed.",
-      "delivery": "Confirm availability and scope before accepting a project."
+      "delivery": "Confirm availability and scope before accepting a project.",
+      "readiness": "existing_menu_scope_confirmation_required",
+      "requires_any": [],
+      "includes": [],
+      "questions": [
+        "Does the requested work fit the listed scope and limits?",
+        "Are the necessary content, accounts and access available?"
+      ],
+      "jasper_action": "scope_checked_estimate",
+      "standard_tools_included": true
     },
     {
       "id": "gbp_care",
@@ -356,7 +567,16 @@
       "additional_setup": null,
       "price_kind": "fixed",
       "scope": "One location; monthly accuracy check and up to 2 client-supplied factual updates. Monitoring tools included. No posts/content creation, reviews or responses. If GBP setup is purchased together, waive this $100 onboarding.",
-      "delivery": "Confirm availability and scope before accepting a project."
+      "delivery": "Confirm availability and scope before accepting a project.",
+      "readiness": "existing_menu_scope_confirmation_required",
+      "requires_any": [],
+      "includes": [],
+      "questions": [
+        "Does the requested work fit the listed scope and limits?",
+        "Are the necessary content, accounts and access available?"
+      ],
+      "jasper_action": "scope_checked_estimate",
+      "standard_tools_included": true
     },
     {
       "id": "audit",
@@ -369,7 +589,16 @@
       "additional_setup": null,
       "price_kind": "fixed",
       "scope": "One-time review: up to 10 website pages, 5 agreed customer questions, 2 agreed AI services; findings and priorities. Implementation separate; no recommendations/rankings guaranteed.",
-      "delivery": "Confirm availability and scope before accepting a project."
+      "delivery": "Confirm availability and scope before accepting a project.",
+      "readiness": "existing_menu_scope_confirmation_required",
+      "requires_any": [],
+      "includes": [],
+      "questions": [
+        "Does the requested work fit the listed scope and limits?",
+        "Are the necessary content, accounts and access available?"
+      ],
+      "jasper_action": "scope_checked_estimate",
+      "standard_tools_included": true
     },
     {
       "id": "monitoring",
@@ -382,20 +611,38 @@
       "additional_setup": null,
       "price_kind": "fixed",
       "scope": "One site/location, up to 10 keywords, 5 customer questions across 2 agreed AI services; monthly snapshot and concise interpretation. Tools and test usage included. No implementation; isolated AI answers are samples, not complete market coverage. Waive onboarding after a qualifying review.",
-      "delivery": "Confirm availability and scope before accepting a project."
+      "delivery": "Confirm availability and scope before accepting a project.",
+      "readiness": "existing_menu_scope_confirmation_required",
+      "requires_any": [],
+      "includes": [],
+      "questions": [
+        "Does the requested work fit the listed scope and limits?",
+        "Are the necessary content, accounts and access available?"
+      ],
+      "jasper_action": "scope_checked_estimate",
+      "standard_tools_included": true
     },
     {
       "id": "local_seo",
       "group": "Visibility & measurement",
-      "name": "Local SEO maintenance",
+      "name": "Ongoing local SEO \u2014 assessed scope only",
       "setup": 400,
       "monthly": 395,
       "annual": 0,
       "unit": "location",
       "additional_setup": null,
       "price_kind": "from",
-      "scope": "One site/location; monthly profile/listing checks, visibility summary and up to 2 hours technical/listing improvements using existing or supplied material. Tools included. Includes GBP maintenance and search monitoring for this location; do not stack those fees. Paid directories require separate approval.",
-      "delivery": "Confirm availability and scope before accepting a project."
+      "scope": "One site/location; monthly profile/listing checks, visibility summary and up to 2 hours technical/listing improvements using existing or supplied material. Tools included. Includes GBP maintenance and search monitoring for this location; do not stack those fees. Paid directories require separate approval. Not a default add-on or required for Essential search setup. Offer only after assessment identifies recurring work; proposal must name tasks, priorities and reporting. Prefer bounded one-time fixes where appropriate.",
+      "delivery": "Confirm availability and scope before accepting a project.",
+      "readiness": "existing_menu_scope_confirmation_required",
+      "requires_any": [],
+      "includes": [],
+      "questions": [
+        "What specific problem remains after the included search foundation?",
+        "Which recurring tasks justify a monthly service rather than one-time corrections?"
+      ],
+      "jasper_action": "assessment_required_do_not_default_bundle",
+      "standard_tools_included": true
     },
     {
       "id": "consult",
@@ -408,7 +655,16 @@
       "additional_setup": null,
       "price_kind": "fixed",
       "scope": "60-minute advisory session, including brief preparation; no build work.",
-      "delivery": "Confirm availability and scope before accepting a project."
+      "delivery": "Confirm availability and scope before accepting a project.",
+      "readiness": "existing_menu_scope_confirmation_required",
+      "requires_any": [],
+      "includes": [],
+      "questions": [
+        "Does the requested work fit the listed scope and limits?",
+        "Are the necessary content, accounts and access available?"
+      ],
+      "jasper_action": "scope_checked_estimate",
+      "standard_tools_included": true
     },
     {
       "id": "action_plan",
@@ -421,7 +677,16 @@
       "additional_setup": null,
       "price_kind": "fixed",
       "scope": "One 60-minute meeting and a concise prioritized action plan; website/content production excluded.",
-      "delivery": "Confirm availability and scope before accepting a project."
+      "delivery": "Confirm availability and scope before accepting a project.",
+      "readiness": "existing_menu_scope_confirmation_required",
+      "requires_any": [],
+      "includes": [],
+      "questions": [
+        "Does the requested work fit the listed scope and limits?",
+        "Are the necessary content, accounts and access available?"
+      ],
+      "jasper_action": "scope_checked_estimate",
+      "standard_tools_included": true
     },
     {
       "id": "retainer",
@@ -434,7 +699,16 @@
       "additional_setup": null,
       "price_kind": "fixed",
       "scope": "One 60-minute meeting/month, preparation and up to 30 minutes follow-up. Implementation and production separate.",
-      "delivery": "Confirm availability and scope before accepting a project."
+      "delivery": "Confirm availability and scope before accepting a project.",
+      "readiness": "existing_menu_scope_confirmation_required",
+      "requires_any": [],
+      "includes": [],
+      "questions": [
+        "Does the requested work fit the listed scope and limits?",
+        "Are the necessary content, accounts and access available?"
+      ],
+      "jasper_action": "scope_checked_estimate",
+      "standard_tools_included": true
     },
     {
       "id": "ppc",
@@ -447,7 +721,16 @@
       "additional_setup": null,
       "price_kind": "fixed",
       "scope": "One business, Google Search only, up to 2 campaigns and $2,500/month ad spend. Campaign configuration, campaign ad text, conversion setup, routine optimization and monthly report included. Standard tools included; ad spend and landing pages excluded. No additional analytics setup charge for included PPC conversion setup.",
-      "delivery": "Confirm availability and scope before accepting a project."
+      "delivery": "Confirm availability and scope before accepting a project.",
+      "readiness": "existing_menu_scope_confirmation_required",
+      "requires_any": [],
+      "includes": [],
+      "questions": [
+        "Does the requested work fit the listed scope and limits?",
+        "Are the necessary content, accounts and access available?"
+      ],
+      "jasper_action": "scope_checked_estimate",
+      "standard_tools_included": true
     },
     {
       "id": "store",
@@ -460,7 +743,16 @@
       "additional_setup": null,
       "price_kind": "from",
       "scope": "Additional to base website; up to 10 client-supplied products, one payment provider and standard shipping rules. Includes standard store platform and up to 30 minutes support; no transaction/processing fees. Requirements must be confirmed.",
-      "delivery": "Confirm availability and scope before accepting a project."
+      "delivery": "Confirm availability and scope before accepting a project.",
+      "readiness": "existing_menu_scope_confirmation_required",
+      "requires_any": [],
+      "includes": [],
+      "questions": [
+        "Does the requested work fit the listed scope and limits?",
+        "Are the necessary content, accounts and access available?"
+      ],
+      "jasper_action": "starting_estimate_only",
+      "standard_tools_included": true
     },
     {
       "id": "membership",
@@ -473,7 +765,16 @@
       "additional_setup": null,
       "price_kind": "from",
       "scope": "Additional to base site; one membership tier, up to 100 members and client-supplied material. Standard platform included; transaction fees excluded. Up to 30 minutes support/month. Requirements must be confirmed.",
-      "delivery": "Confirm availability and scope before accepting a project."
+      "delivery": "Confirm availability and scope before accepting a project.",
+      "readiness": "existing_menu_scope_confirmation_required",
+      "requires_any": [],
+      "includes": [],
+      "questions": [
+        "Does the requested work fit the listed scope and limits?",
+        "Are the necessary content, accounts and access available?"
+      ],
+      "jasper_action": "starting_estimate_only",
+      "standard_tools_included": true
     },
     {
       "id": "calculator",
@@ -486,7 +787,16 @@
       "additional_setup": null,
       "price_kind": "from",
       "scope": "One calculator with up to 5 inputs and agreed deterministic formulas; monthly function check and up to 15 minutes support. No custom engineering estimate until formulas are agreed.",
-      "delivery": "Confirm availability and scope before accepting a project."
+      "delivery": "Confirm availability and scope before accepting a project.",
+      "readiness": "existing_menu_scope_confirmation_required",
+      "requires_any": [],
+      "includes": [],
+      "questions": [
+        "Does the requested work fit the listed scope and limits?",
+        "Are the necessary content, accounts and access available?"
+      ],
+      "jasper_action": "starting_estimate_only",
+      "standard_tools_included": true
     },
     {
       "id": "chat",
@@ -499,7 +809,16 @@
       "additional_setup": null,
       "price_kind": "fixed",
       "scope": "One site, client-operated inbox, up to 2 staff seats; widget tooling and monthly display check. No live staffing or AI answers.",
-      "delivery": "Confirm availability and scope before accepting a project."
+      "delivery": "Confirm availability and scope before accepting a project.",
+      "readiness": "existing_menu_scope_confirmation_required",
+      "requires_any": [],
+      "includes": [],
+      "questions": [
+        "Does the requested work fit the listed scope and limits?",
+        "Are the necessary content, accounts and access available?"
+      ],
+      "jasper_action": "scope_checked_estimate",
+      "standard_tools_included": true
     },
     {
       "id": "assistant",
@@ -512,7 +831,16 @@
       "additional_setup": null,
       "price_kind": "from",
       "scope": "One site, approved knowledge up to 20 pages, up to 500 text visitor messages/month, up to 2,000 characters/message. Monthly function check and 30 minutes approved knowledge maintenance. No autonomous actions or guaranteed answers.",
-      "delivery": "Confirm availability and scope before accepting a project."
+      "delivery": "Confirm availability and scope before accepting a project.",
+      "readiness": "existing_menu_scope_confirmation_required",
+      "requires_any": [],
+      "includes": [],
+      "questions": [
+        "Does the requested work fit the listed scope and limits?",
+        "Are the necessary content, accounts and access available?"
+      ],
+      "jasper_action": "starting_estimate_only",
+      "standard_tools_included": true
     },
     {
       "id": "portal_discovery",
@@ -525,7 +853,366 @@
       "additional_setup": null,
       "price_kind": "fixed",
       "scope": "Requirements and feasibility only. Build and ongoing fees require a custom quote; never present discovery price as the build price.",
-      "delivery": "Confirm availability and scope before accepting a project."
+      "delivery": "Confirm availability and scope before accepting a project.",
+      "readiness": "existing_menu_scope_confirmation_required",
+      "requires_any": [],
+      "includes": [],
+      "questions": [
+        "Does the requested work fit the listed scope and limits?",
+        "Are the necessary content, accounts and access available?"
+      ],
+      "jasper_action": "scope_checked_estimate",
+      "standard_tools_included": true
+    },
+    {
+      "id": "base_features",
+      "group": "Websites",
+      "name": "Included Essential functionality",
+      "setup": 0,
+      "monthly": 0,
+      "annual": 0,
+      "unit": "service",
+      "additional_setup": null,
+      "price_kind": "included",
+      "scope": "During an Essential build: supplied text/images within the 5 pages, standard inquiry/contact flow, click-to-call/email links, social links and a directions link as needed. Static service/project information can fit within the page allowance. One existing-information minor update/month remains in the service terms. No additional fee for these included features. Existing-site work requires review.",
+      "requires_any": [
+        "essential"
+      ],
+      "includes": [],
+      "questions": [
+        "Is this within the agreed five-page build and ordinary contact flow?"
+      ],
+      "readiness": "proposed_scope_and_cost_validation_required",
+      "delivery": "Proposed menu entry. Confirm requirements, compatible tooling, actual costs and delivery readiness before a final quote.",
+      "jasper_action": "include_without_duplicate_charge",
+      "standard_tools_included": true
+    },
+    {
+      "id": "cms_area",
+      "group": "Website features",
+      "name": "Additional editable content area",
+      "setup": 250,
+      "monthly": 15,
+      "annual": 0,
+      "unit": "service",
+      "additional_setup": null,
+      "price_kind": "from",
+      "scope": "One additional collection on an existing basic admin: up to 10 fields and 50 entries. Uses existing staff logins, storage allowance and authentication. Includes up to 5 minutes configuration support/month. New workflows require review.",
+      "requires_any": [
+        "admin"
+      ],
+      "includes": [],
+      "questions": [
+        "Which records and fields need editing?",
+        "Is this already covered by the admin or publishing configuration?"
+      ],
+      "readiness": "proposed_scope_and_cost_validation_required",
+      "delivery": "Proposed menu entry. Confirm requirements, compatible tooling, actual costs and delivery readiness before a final quote.",
+      "jasper_action": "starting_estimate_only",
+      "standard_tools_included": true
+    },
+    {
+      "id": "publishing",
+      "group": "Website features",
+      "name": "Supplied-content publishing system",
+      "setup": 350,
+      "monthly": 25,
+      "annual": 0,
+      "unit": "service",
+      "additional_setup": null,
+      "price_kind": "from",
+      "scope": "One article/resource collection, up to 50 entries, on an existing basic admin. Setup and handoff so the client can publish supplied material. Includes the equivalent additional content area; do not add cms_area for the same collection. Up to 5 minutes configuration support/month. No writing or routine posting service.",
+      "requires_any": [
+        "admin"
+      ],
+      "includes": [
+        "cms_area"
+      ],
+      "questions": [
+        "Will staff publish material themselves?",
+        "How many articles/resources need migration?"
+      ],
+      "readiness": "proposed_scope_and_cost_validation_required",
+      "delivery": "Proposed menu entry. Confirm requirements, compatible tooling, actual costs and delivery readiness before a final quote.",
+      "jasper_action": "starting_estimate_only",
+      "standard_tools_included": true
+    },
+    {
+      "id": "staff_access",
+      "group": "Website features",
+      "name": "Expanded staff access and roles",
+      "setup": 250,
+      "monthly": 25,
+      "annual": 0,
+      "unit": "service",
+      "additional_setup": null,
+      "price_kind": "from",
+      "scope": "Up to 5 additional named staff logins and 2 agreed permission roles on an existing supported admin or membership system. Licensing, monthly access check and up to 10 minutes routine support included. Base users already included must not be billed twice.",
+      "requires_any": [
+        "admin",
+        "membership",
+        "client_portal"
+      ],
+      "includes": [],
+      "questions": [
+        "How many users beyond the base allowance?",
+        "What should each role be able to see or change?"
+      ],
+      "readiness": "proposed_scope_and_cost_validation_required",
+      "delivery": "Proposed menu entry. Confirm requirements, compatible tooling, actual costs and delivery readiness before a final quote.",
+      "jasper_action": "starting_estimate_only",
+      "standard_tools_included": true
+    },
+    {
+      "id": "upload_form",
+      "group": "Website features",
+      "name": "Inquiry form with file uploads",
+      "setup": 450,
+      "monthly": 50,
+      "annual": 0,
+      "unit": "service",
+      "additional_setup": null,
+      "price_kind": "from",
+      "scope": "One form with up to 10 fields and one conditional branch; 100 uploads/month, up to 10 MB/file, 1 GB retained storage and 30-day retention. PDF/JPEG/PNG intake, agreed notification and restricted access. Includes the advanced form for the same workflow; do not add form separately. Standard tools, monthly test and up to 15 minutes support included. Sensitive/regulated data needs a separate review.",
+      "requires_any": [],
+      "includes": [
+        "form"
+      ],
+      "questions": [
+        "What files and volumes will people send?",
+        "Who needs access, and how long must files be retained?"
+      ],
+      "readiness": "proposed_scope_and_cost_validation_required",
+      "delivery": "Proposed menu entry. Confirm requirements, compatible tooling, actual costs and delivery readiness before a final quote.",
+      "jasper_action": "starting_estimate_only",
+      "standard_tools_included": true
+    },
+    {
+      "id": "inventory",
+      "group": "Custom projects",
+      "name": "Product and inventory management",
+      "setup": 1500,
+      "monthly": 125,
+      "annual": 0,
+      "unit": "service",
+      "additional_setup": null,
+      "price_kind": "from",
+      "scope": "One supported product/stock catalog, up to 100 products, one stock location, and an agreed import. Standard platform and up to 30 minutes support/month included. Does not include custom fulfillment or POS integration. Basic inventory already included in a simple store is not billed again.",
+      "requires_any": [],
+      "includes": [],
+      "questions": [
+        "How many products, variants and stock locations?",
+        "Is checkout needed, and is the store already providing the required inventory features?"
+      ],
+      "readiness": "proposed_scope_and_cost_validation_required",
+      "delivery": "Proposed menu entry. Confirm requirements, compatible tooling, actual costs and delivery readiness before a final quote.",
+      "jasper_action": "starting_estimate_only",
+      "standard_tools_included": true
+    },
+    {
+      "id": "inventory_sync",
+      "group": "Custom projects",
+      "name": "Inventory or POS connection",
+      "setup": 750,
+      "monthly": 75,
+      "annual": 0,
+      "unit": "service",
+      "additional_setup": null,
+      "price_kind": "from",
+      "scope": "One supported source-to-destination stock connection, one stock location and up to 1,000 sync tasks/month. Connector tooling and up to 15 minutes support/month included. The client already has the source/POS platform; multi-location, custom APIs or near-real-time requirements need a separate quote.",
+      "requires_any": [
+        "store",
+        "inventory"
+      ],
+      "includes": [],
+      "questions": [
+        "Which POS/inventory platforms already exist?",
+        "What update frequency and transaction volume are needed?"
+      ],
+      "readiness": "proposed_scope_and_cost_validation_required",
+      "delivery": "Proposed menu entry. Confirm requirements, compatible tooling, actual costs and delivery readiness before a final quote.",
+      "jasper_action": "starting_estimate_only",
+      "standard_tools_included": true
+    },
+    {
+      "id": "invoicing",
+      "group": "Business tools",
+      "name": "Invoicing/accounting connection",
+      "setup": 500,
+      "monthly": 50,
+      "annual": 0,
+      "unit": "service",
+      "additional_setup": null,
+      "price_kind": "from",
+      "scope": "One supported workflow into an existing invoicing/accounting platform; up to 1,000 automation tasks/month. Connector tooling, monthly test and up to 15 minutes support included. Client supplies the existing platform account. Bookkeeping, reconciliation, tax advice and new platform licensing are not this connection service.",
+      "requires_any": [],
+      "includes": [],
+      "questions": [
+        "Which platform is already in use?",
+        "What event creates or updates an invoice?"
+      ],
+      "readiness": "proposed_scope_and_cost_validation_required",
+      "delivery": "Proposed menu entry. Confirm requirements, compatible tooling, actual costs and delivery readiness before a final quote.",
+      "jasper_action": "starting_estimate_only",
+      "standard_tools_included": true
+    },
+    {
+      "id": "managed_crm",
+      "group": "Business tools",
+      "name": "Managed basic CRM configuration",
+      "setup": 750,
+      "monthly": 95,
+      "annual": 0,
+      "unit": "service",
+      "additional_setup": null,
+      "price_kind": "from",
+      "scope": "One supported CRM, up to 3 staff users, 1 pipeline and 1,000 contacts. Standard platform licensing, one website lead connection, monthly check and up to 15 minutes support included. Do not add crm for the same included lead workflow. Data cleanup, campaigns and extra seats are separately scoped.",
+      "requires_any": [],
+      "includes": [
+        "crm"
+      ],
+      "questions": [
+        "Do you already have a CRM?",
+        "How many users, pipelines and contacts are needed?"
+      ],
+      "readiness": "proposed_scope_and_cost_validation_required",
+      "delivery": "Proposed menu entry. Confirm requirements, compatible tooling, actual costs and delivery readiness before a final quote.",
+      "jasper_action": "starting_estimate_only",
+      "standard_tools_included": true
+    },
+    {
+      "id": "client_portal",
+      "group": "Custom projects",
+      "name": "Basic client portal build",
+      "setup": 2000,
+      "monthly": 150,
+      "annual": 0,
+      "unit": "service",
+      "additional_setup": null,
+      "price_kind": "from",
+      "scope": "One site, up to 25 client accounts, one document/resource area, 1 GB files and 5 GB monthly transfer. Supported authentication, isolated client access, standard infrastructure and up to 30 minutes support/month. Access isolation and backup/recovery must be verified before launch. Custom order, payment or approval workflows are not included. Discovery is optional and separate only if agreed.",
+      "requires_any": [],
+      "includes": [],
+      "questions": [
+        "What should clients see and do?",
+        "How must information be separated between clients?",
+        "Are uploads or sensitive records involved?"
+      ],
+      "readiness": "proposed_scope_and_cost_validation_required",
+      "delivery": "Proposed menu entry. Confirm requirements, compatible tooling, actual costs and delivery readiness before a final quote.",
+      "jasper_action": "starting_estimate_only",
+      "standard_tools_included": true
+    },
+    {
+      "id": "custom_system",
+      "group": "Custom projects",
+      "name": "Custom portal, integration or business system",
+      "setup": null,
+      "monthly": null,
+      "annual": 0,
+      "unit": "service",
+      "additional_setup": null,
+      "price_kind": "custom",
+      "scope": "Requirements-led quote for bespoke portals, complex inventory, custom APIs, unusual permission models, multi-step approvals, or other work outside a bounded menu entry. No invented build or monthly price. Collect a brief and refer to the owner.",
+      "requires_any": [],
+      "includes": [],
+      "questions": [
+        "What problem should the system solve?",
+        "Which systems, users, data and volumes are involved?",
+        "What constraints or deadline apply?"
+      ],
+      "readiness": "proposed_scope_and_cost_validation_required",
+      "delivery": "Proposed menu entry. Confirm requirements, compatible tooling, actual costs and delivery readiness before a final quote.",
+      "jasper_action": "collect_requirements_owner_quote",
+      "standard_tools_included": true
+    },
+    {
+      "id": "ppc_review",
+      "group": "Consulting & advertising",
+      "name": "Existing Google Search campaign review",
+      "setup": 350,
+      "monthly": 0,
+      "annual": 0,
+      "unit": "service",
+      "additional_setup": null,
+      "price_kind": "from",
+      "scope": "One business/account, up to 2 existing Google Search campaigns. Read-only review of structure, targeting, conversion configuration and available results, with written priorities. Not campaign rebuilding or ongoing management. No extra fee for an identical review already included in a PPC onboarding scope.",
+      "requires_any": [],
+      "includes": [],
+      "questions": [
+        "How many campaigns and which date range?",
+        "Can appropriate read-only access be arranged?"
+      ],
+      "readiness": "proposed_scope_and_cost_validation_required",
+      "delivery": "Proposed menu entry. Confirm requirements, compatible tooling, actual costs and delivery readiness before a final quote.",
+      "jasper_action": "starting_estimate_only",
+      "standard_tools_included": true
+    },
+    {
+      "id": "report_review",
+      "group": "Consulting & advertising",
+      "name": "Marketing report explanation and review",
+      "setup": 250,
+      "monthly": 0,
+      "annual": 0,
+      "unit": "service",
+      "additional_setup": null,
+      "price_kind": "from",
+      "scope": "Review up to 3 recent reports from one provider plus the supplied service description; concise findings and a 30-minute discussion. Clarifies measures, missing information and questions to ask. Not forensic verification of delivery or legal review. Do not add a consultation fee for the included discussion.",
+      "requires_any": [],
+      "includes": [],
+      "questions": [
+        "What are you paying for, and what is unclear?",
+        "Which reports and promised deliverables can you share?"
+      ],
+      "readiness": "proposed_scope_and_cost_validation_required",
+      "delivery": "Proposed menu entry. Confirm requirements, compatible tooling, actual costs and delivery readiness before a final quote.",
+      "jasper_action": "starting_estimate_only",
+      "standard_tools_included": true
+    },
+    {
+      "id": "listing_cleanup",
+      "group": "Visibility & measurement",
+      "name": "Business listing cleanup",
+      "setup": 250,
+      "monthly": 0,
+      "annual": 0,
+      "unit": "service",
+      "additional_setup": null,
+      "price_kind": "from",
+      "scope": "One business/location, up to 10 agreed listings. Review details and submit supported corrections with supplied access. Third parties control acceptance and timing. Paid directory placements remain separately approved; recurring work included in local SEO must not be charged again.",
+      "requires_any": [],
+      "includes": [],
+      "questions": [
+        "Which business/location and listings?",
+        "Who controls the existing accounts?"
+      ],
+      "readiness": "proposed_scope_and_cost_validation_required",
+      "delivery": "Proposed menu entry. Confirm requirements, compatible tooling, actual costs and delivery readiness before a final quote.",
+      "jasper_action": "starting_estimate_only",
+      "standard_tools_included": true
+    },
+    {
+      "id": "visibility_fixes",
+      "group": "Visibility & measurement",
+      "name": "Search and AI discoverability improvements",
+      "setup": 450,
+      "monthly": 0,
+      "annual": 0,
+      "unit": "service",
+      "additional_setup": null,
+      "price_kind": "from",
+      "scope": "Up to 3 agreed technical/information-structure changes across up to 5 existing pages after review. Uses existing or client-supplied material. No content production or guaranteed rankings/recommendations. Additional work requires a scoped quote; the audit itself is not included.",
+      "requires_any": [],
+      "includes": [],
+      "questions": [
+        "Which findings are being addressed?",
+        "What CMS/account access is available?"
+      ],
+      "readiness": "proposed_scope_and_cost_validation_required",
+      "delivery": "Proposed menu entry. Confirm requirements, compatible tooling, actual costs and delivery readiness before a final quote.",
+      "jasper_action": "starting_estimate_only",
+      "standard_tools_included": true
     }
   ],
   "rules": {
@@ -540,14 +1227,21 @@
     ],
     "estimate": "Informational estimate, valid 30 days, subject to requirements, availability and owner confirmation. From items produce a starting estimate, never a fixed total.",
     "discounts": "Only owner-approved discounts with explicit SKU, amount and duration. Jasper cannot independently waive setup or change monthly prices.",
-    "setup": "All installations have setup fees. Ongoing-only services require their listed onboarding or a verified existing installation. Do not add fictitious setup to one-time advisory sessions.",
+    "setup": "Installation products have listed setup fees unless explicitly included in another product. Onboarding-only fees apply only when listed. Do not invent setup charges for advisory sessions or already included functionality.",
     "cancellation": "Proposed add-ons are month-to-month, with cancellation before next renewal. Annual third-party commitments are internal costs unless explicitly agreed otherwise. Do not change an existing customer agreement.",
     "billing": "Essential development: 50% to start and 50% on completion. Add-on charges begin at activation. Enterprise billing, minimum term, ownership and continued support are defined in its proposal. Existing agreements retain their terms.",
-    "included_support": "Support allowances are per calendar month, do not roll over, and cover the installed configuration. New features, content creation and major revisions excluded; approved extra work is $75/hour, $37.50 minimum.",
+    "included_support": "Support allowances are per calendar month and do not roll over. They cover the installed configuration; new features, content production and major revisions are excluded. Additional work is quoted and agreed before starting. Existing agreements remain in effect.",
     "hosting": "Feature add-ons do not include the base website hosting unless expressly stated. Determine whether the customer already has suitable hosting. Do not force a new website purchase for standalone email, scheduling or domains.",
     "exclusions": "No general copywriting, photography/video production, social content creation or review responses. Campaign ad text is included only in PPC.",
     "custom_work": "Custom project prices are starting estimates until requirements and delivery are confirmed.",
     "assistant_status": "No live Jasper chat or customer-facing estimate builder is active. This reference can be explicitly loaded by a future assistant. Presence of this page does not connect or train an AI.",
-    "website_options": "New projects use Essential as the defined starting website, plus scoped additions, or Enterprise for an individually scoped larger project. Growth is legacy only. Enterprise requires a custom quote; do not invent a starting price."
+    "website_options": "New projects use Essential as the defined starting website, plus scoped additions, or Enterprise for an individually scoped larger project. Growth is legacy only. Enterprise requires a custom quote; do not invent a starting price.",
+    "readiness": "This is a proposed comprehensive menu. Existing fixed entries still require scope confirmation; new or unbuilt capabilities require implementation and supplier-cost validation before a final offer. A starting price is not proof that a system is already built.",
+    "internal_guidance": "Off-menu work requires a requirements brief and owner-reviewed estimate. Internal effort guidance is supplied separately to a future server-side assistant and is not part of this public-readable reference.",
+    "overlap": "Ask which site/location/workflow is shared. Included child capabilities are not separately charged for the same work. Missing prerequisites, excess usage, or ambiguous overlaps must be resolved before presenting a complete estimate.",
+    "quote_presentation": "Customer estimates show build/setup, monthly service, applicable commitments, inclusions, exclusions and assumptions. No itemized internal time rate or internal minimum is displayed.",
+    "portfolio": "Future portfolio examples must describe what a comparable configuration would cost today, dated and scoped; never expose client invoices. Price each example from current catalog IDs and quantities. Jasper may start from these examples once they exist, but no examples are currently connected.",
+    "needs_first": "Lead with the smallest complete solution. Keep optional services separate. Never automatically bundle local SEO or monitoring because a customer asks to be found. Assess existing email and aliases. Discuss paid search for time-bound demand after clarifying intent, geography, capacity, budget and measurement; it does not replace organic search setup.",
+    "seo_deliverables": "Extra SEO must identify paid work: existing-site assessment, profile creation, listing corrections, or agreed technical/information-structure fixes. Never resell Essential search foundation on the same build. Ongoing SEO requires an assessed recurring backlog and explicit deliverables; do not default to the $395 service. Do not stack included profile maintenance or monitoring."
   }
 }

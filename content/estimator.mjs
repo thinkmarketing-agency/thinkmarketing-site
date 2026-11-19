@@ -17,6 +17,11 @@ export function estimate(catalog, selections) {
   for (const id of ['essential','growth','enterprise','team_routing','audit','retainer','ppc','action_plan','portal_discovery']) {
     if (selected.has(id) && selected.get(id).quantity !== 1) throw new Error(`${id} requires one project per estimate.`);
   }
+  for(const {item} of selected.values()){
+    if(item.requires_any?.length && !item.requires_any.some(id=>selected.has(id))) questions.push(`${item.name}: confirm an existing prerequisite (${item.requires_any.join(', ')}) or add the required configuration.`);
+    for(const child of item.includes||[]) if(selected.has(child)) questions.push(`${item.name} already includes ${child} for the same workflow; confirm overlap and remove duplicate fees before estimating.`);
+    if(item.readiness==='proposed_scope_and_cost_validation_required') questions.push(`${item.name}: proposed entry; validate delivery and tool costs before a final quote.`);
+  }
   if (selected.has('local_seo')) {
     for (const id of ['gbp_care','monitoring']) if (selected.has(id)) {
       questions.push(`Confirm ${id} covers the same site/location as Local SEO before removing the overlapping fee.`);
@@ -47,7 +52,16 @@ export function estimate(catalog, selections) {
   const setup=lines.reduce((s,l)=>s+l.setup,0),monthly=lines.reduce((s,l)=>s+l.monthly,0),annual=lines.reduce((s,l)=>s+l.annual,0);
   return {catalog_version:catalog.version,status:'Informational estimate; owner confirmation required',lines,setup,monthly,annual,
     twelve_recurring_payments_plus_setup:setup+monthly*12+annual,
-    starting_estimate:lines.some(l=>l.price_kind==='from'),requires_scope_review:questions.length>0,questions,warnings,
+    customer_estimate_ready:questions.length===0,starting_estimate:lines.some(l=>l.price_kind==='from'),requires_scope_review:questions.length>0,questions,warnings,
     commitments:[...selected.values()].filter(({item})=>item.commitment_months).map(({item,quantity})=>({id:item.id,months:item.commitment_months,total:item.monthly*quantity*item.commitment_months})),
     exclusions:catalog.rules.exceptions,discounts_applied:[],valid_days:30};
+}
+
+
+// Guidance must come from private configuration, never the public catalog.
+export function estimateInternalWork(hours, guidance) {
+  if(!Number.isFinite(hours)||hours<=0) throw new Error('A defensible positive effort estimate is required.');
+  const {hourly_rate,minimum_labor_charge}=guidance||{};
+  if(!Number.isFinite(hourly_rate)||hourly_rate<=0||!Number.isFinite(minimum_labor_charge)||minimum_labor_charge<0) throw new Error('Valid private pricing guidance is required.');
+  return {internal_only:true,reference_amount:Math.round(Math.max(minimum_labor_charge,hours*hourly_rate)*100)/100,owner_confirmation_required:true};
 }
