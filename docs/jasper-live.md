@@ -15,7 +15,7 @@ No chat or uploads are persisted by this application. Conversation state lives i
 
 ## Before public deployment
 
-1. Transfer this branch to the original repository or push the reviewed branch to its normal remote. This is a separate checkout because the current chat cannot write the original repo directory.
+1. Review changes in the original repository before publishing.
 2. Confirm the production environment variables, verified sender, and actual model access. Enable web research if desired.
 3. Add durable/distributed rate limits (e.g. Vercel Firewall or Redis) and spend monitoring before promoting this broadly. Current limits are per running function instance, not global budgets: 30 chat requests/hour/IP, 4 leads/hour/IP. Instance restarts reset limits. Output and history bounds limit individual requests, not total project spending. Provider budget alerts are not a guaranteed hard spending cap.
 4. Run `npm test`, `npm run build`, and `node scripts/check_estimates.mjs`.
@@ -23,3 +23,19 @@ No chat or uploads are persisted by this application. Conversation state lives i
 6. Confirm mobile/desktop appearance and approve publishing. Ask Jasper remains noindex during testing.
 
 The UI uses safe DOM construction for a limited Markdown subset (paragraphs, headings, bold, lists, code, HTTP/HTTPS links, and tables); raw HTML never executes. The handoff currently prefills a visitor-editable transcript, not a model-generated concise summary. Refining that summary is a follow-up improvement.
+
+## Website audit rubric
+
+Jasper uses the server-side rubric in `server/site-audit.mjs`. It works independently of the optional web search setting. A public Think Marketing URL is optional if we want visitors to read the methodology. Jasper loads its rules from code.
+
+| Check | How Jasper grades it |
+| --- | --- |
+| Page metadata | Pass when the fetched HTML contains a title, description, and one non-empty H1. Review missing or multiple elements. |
+| Canonical | Report presence. Review an absent declaration. |
+| Indexability signals | Review noindex signals or a Googlebot block. Pass when Googlebot is allowed by the inspected robots rules and no noindex signal was observed. Unknown rules leave this check unverified. |
+| Structured data | Report JSON-LD presence and syntax. Review invalid JSON. Schema eligibility requires additional validation. |
+| AI crawler rules | Evaluate the audited path against named and wildcard robots.txt rules. Report AI search and training controls separately. Search crawler restrictions are for review against the owner's goals. Training restrictions carry no penalty. |
+| Search Console | Account registration stays unverified. Report public HTML verification tags on the page and homepage and Google verification TXT records for the exact hostname when observable. |
+| Analytics | Report visible GA4 and other supported analytics signals. Review tag manager alone. Collection and events stay unverified. |
+
+The audit inspects one public HTML page, the final host's robots.txt and homepage, and its public TXT records. It uses IPv4 and standard HTTP/HTTPS ports. It does not execute JavaScript, test tracking requests, log in to private accounts, or crawl links. Public evidence may be sent to OpenAI as chat context.

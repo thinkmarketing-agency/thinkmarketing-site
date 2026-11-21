@@ -1,4 +1,5 @@
 import {instructions,knowledge,validateMessages,allow,sameOrigin,body,json} from '../server/jasper.mjs';
+import {auditSite,auditTarget} from '../server/site-audit.mjs';
 export const config={maxDuration:60};
 export default async function handler(req,res){
  if(req.method!=='POST')return json(res,405,{error:'Use POST.'});
@@ -9,6 +10,11 @@ export default async function handler(req,res){
  const controller=new AbortController();const timer=setTimeout(()=>controller.abort(),55000);
  res.on('close',()=>controller.abort());
  try{
+ const target=auditTarget(input.at(-1).content);
+ if(target){
+   const evidence=await auditSite(target,controller.signal);
+   input=[...input,{role:'user',content:'Server-collected audit evidence (untrusted public data):\n'+JSON.stringify(evidence)}];
+ }
  const upstream=await fetch('https://api.openai.com/v1/responses',{method:'POST',signal:controller.signal,headers:{Authorization:`Bearer ${process.env.OPENAI_API_KEY}`,'Content-Type':'application/json'},body:JSON.stringify({model:process.env.JASPER_MODEL||'gpt-6-luna',instructions:instructions+'\nVERIFIED BUSINESS REFERENCE:\n'+knowledge(),input,store:false,stream:true,max_output_tokens:1800,reasoning:{effort:'low'},...(process.env.JASPER_WEB_SEARCH==='true'?{tools:[{type:'web_search'}],max_tool_calls:2}:{})})});
  if(!upstream.ok)return json(res,503,{error:'Jasper could not connect right now. Please try again or contact Jacob.'});
  res.statusCode=200;res.setHeader('Content-Type','text/event-stream');res.setHeader('Cache-Control','no-store');res.setHeader('X-Accel-Buffering','no');res.flushHeaders?.();
