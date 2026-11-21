@@ -254,3 +254,19 @@ html.jasper-page {
     overflow-wrap: anywhere;
   }
 }
+
+
+.jasper-audit-checks {
+  margin-block: 16px 12px;
+  border-block: 1px solid #e5e5e5;
+}
+
+.jasper-audit-checks > summary {
+  padding: 12px 0;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.jasper-audit-checks .jasper-audit-table {
+  padding-bottom: 12px;
+}

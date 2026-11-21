@@ -49,7 +49,11 @@ function renderTable(lines, start) {
   }
   table.append(head, body);
   wrapper.append(table);
-  return {wrapper, lastRow};
+  if (!audit) return {wrapper, lastRow};
+  const checks = el('details');
+  checks.className = 'jasper-audit-checks';
+  checks.append(el('summary', 'See all audit checks'), wrapper);
+  return {wrapper: checks, lastRow};
 }
 
 function render(target,text){target.replaceChildren();const lines=text.split('\n');let list=null,paragraph=null,code=null;
@@ -73,6 +77,10 @@ function renderReply(target, text, streaming = false) {
   }
   const next = document.createDocumentFragment();
   render(next, text);
+  const earlierChecks = [...target.querySelectorAll('.jasper-audit-checks')];
+  next.querySelectorAll('.jasper-audit-checks').forEach((checks, index) => {
+    checks.open = earlierChecks[index]?.open ?? false;
+  });
   let current = target.firstChild;
   while (current && next.firstChild?.isEqualNode(current)) {
     next.firstChild.remove();

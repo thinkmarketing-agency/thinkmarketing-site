@@ -1,8 +1,8 @@
+import {attrs, readLinks, webUrl, additionalPages} from './site-links.mjs';
 import {estimate} from '../content/estimator.mjs';
-import {attrs, auditTarget, fetchPublicPage, inspectHtml} from './site-audit.mjs';
+import {auditTarget, fetchPublicPage, inspectHtml, inspectRobots, inspectSitemap} from './site-audit.mjs';
 
 const estimateIntent = /\b(?:estimat\w*|quot(?:e|es|ing)|pric(?:e|es|ing)|cost\w*|budget|charg(?:e|es)|rebuild|replicat\w*|recreat\w*|redesign|build (?:a |me a |something )?(?:similar|like|this)|site like)\b/i;
-const relevantPage = /\b(?:menu|specials|order|book|reservations?|services?|products?|shop|contact|about|locations?|appointments?)\b/i;
 const featurePatterns = {
   menu: /\b(?:food menu|drink menu|dinner menu|lunch menu|breakfast menu|restaurant menu|menu and specials)\b/i,
   specials: /\b(?:daily specials|weekly specials|today[’']s specials|happy hour|menu and specials)\b/i,
@@ -14,33 +14,23 @@ const featurePatterns = {
 
 export function siteEstimateTarget(messages) {
   const latest = messages.at(-1).content;
-  const previousRequest = messages.slice(0, -1).findLast(message => message.role === 'user')?.content || '';
-  if (estimateIntent.test(latest)) {
-    const current = auditTarget(latest);
-    if (current) return current;
-    // Resolve a follow-up request such as “What would that cost?” from a recent URL.
-    if (/\b(?:it|that|this|same|similar)\b/i.test(latest)) return auditTarget(previousRequest);
+  const prior = messages.slice(0, -1);
+  const previousRequest = prior.findLast(message => message.role === 'user')?.content || '';
+  const latestUrl = auditTarget(latest);
+  const previousUrl = prior.filter(message => message.role === 'user').slice(-6).map(message => auditTarget(message.content))
+    .findLast(Boolean);
+  const sameSiteScope = /\b(?:same (?:site|structure|pages|page count|number)|however many|how many pages|keep (?:the |its )?structure|page count|same number of pages)\b/i.test(latest);
+  if (estimateIntent.test(latest) || sameSiteScope) {
+    if (latestUrl) return latestUrl;
+    if (sameSiteScope || /\b(?:it|that|this|same|similar)\b/i.test(latest)) return previousUrl;
   }
   if (estimateIntent.test(previousRequest) && !auditTarget(previousRequest) &&
-      !/\b(?:audit|review|inspect)\b/i.test(latest)) return auditTarget(latest);
-}
-
-function webUrl(value, base) {
-  if (!value || value.startsWith('#') || value.length > 1000) return null;
-  try {
-    const url = new URL(value.replaceAll('&amp;', '&'), base);
-    return ['http:', 'https:'].includes(url.protocol) && !url.username && !url.password ? url : null;
-  } catch {
-    return null;
-  }
+      !/\b(?:audit|review|inspect)\b/i.test(latest)) return latestUrl;
 }
 
 function inspectSitePage(page) {
   const markup = page.text.replace(/<!--[\s\S]*?-->|<(script|style|template)\b[^>]*>[\s\S]*?<\/\1\s*>/gi, '');
-  const links = [...markup.matchAll(/<a\b([^>]*)>([\s\S]*?)<\/a\s*>/gi)].map(([, attributes, text]) => ({
-    url: webUrl(attrs(attributes).href, page.url),
-    text: text.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim().slice(0, 120),
-  })).filter(link => link.url);
+  const links = readLinks(page.text, page.url).filter(link => link.url);
   const headings = [...markup.matchAll(/<h[1-3]\b[^>]*>([\s\S]*?)<\/h[1-3]\s*>/gi)]
     .slice(0, 12).map(match => match[1].replace(/<[^>]*>/g, ' ').trim().slice(0, 120));
   const pageInfo = inspectHtml(page.text, page.headers);
@@ -79,40 +69,16 @@ function inspectSitePage(page) {
     vendors: [...new Map(vendors.map(item => [item.name + item.placement, item])).values()].slice(0, 8), links};
 }
 
-function additionalPages(seed) {
-  const base = new URL(seed.url);
-  const cleanUrl = url => new URL(url.pathname.replace(/\/$/, '') || '/', base.origin).href;
-  const visited = new Set([cleanUrl(base)]);
-  const candidates = [];
-  if (base.pathname !== '/') {
-    const home = new URL('/', base);
-    visited.add(home.href);
-    candidates.push({url: home, priority: 0});
-  }
-  for (const {url, text} of seed.links) {
-    if (url.origin !== base.origin || url.search || url.username || url.password ||
-        /\.(?:pdf|zip|png|jpe?g|webp|svg|docx?|xlsx?)$/i.test(url.pathname) ||
-        !relevantPage.test(text + ' ' + url.pathname.replace(/[-_]+/g, ' '))) continue;
-    const key = cleanUrl(url);
-    if (visited.has(key)) continue;
-    visited.add(key);
-    const priority = /\b(?:menu|specials|order|book|reservations?|shop)\b/i.test(text + ' ' + url.pathname.replace(/[-_]+/g, ' ')) ? 0 : 1;
-    url.hash = '';
-    candidates.push({url, priority});
-  }
-  return candidates.sort((a, b) => a.priority - b.priority).slice(0, 3).map(candidate => candidate.url);
-}
-
-function estimateOptions(catalog, pages, request) {
+function estimateOptions(catalog, pages, request, sitemap) {
   const has = feature => pages.some(page => page.features.includes(feature));
   const restaurant = has('menu') || has('specials') || (/\brestaurant\b/i.test(request) && has('ordering'));
   const editing = /\b(?:editable|edit (?:the|our|my) (?:menu|specials|content)|update (?:the|our|my) (?:menu|specials)|manage (?:the|our|my) menu)\b/i.test(request);
   const embed = pages.some(page => page.vendors.some(vendor => vendor.placement !== 'link')) ||
     /\b(?:embed|widget)\b/i.test(request);
   const routes = ['essential', ...(restaurant ? ['restaurant_essentials'] : [])];
-  const option = (name, ids, assumption) => {
-    const {lines, setup, monthly, annual} = estimate(catalog, ids.map(id => ({id, quantity: 1})));
-    return {name, assumption, lines: lines.map(({name, setup, monthly, annual}) => ({name, setup, monthly, annual})),
+  const option = (name, ids, assumption, extraPages = 0) => {
+    const {lines, setup, monthly, annual} = estimate(catalog, [...ids.map(id => ({id, quantity: 1})), ...(extraPages ? [{id: 'page', quantity: extraPages}] : [])]);
+    return {name, assumption, lines: lines.map(({name, quantity, setup, monthly, annual}) => ({name, quantity, setup, monthly, annual})),
       totals: {setup, monthly, annual}};
   };
   const options = [option('Essential website', routes,
@@ -123,6 +89,15 @@ function estimateOptions(catalog, pages, request) {
     [...routes, ...(editing ? ['editable_section'] : []), 'existing_embed'],
     'One standard compatible embed. Customer retains an active vendor account and pays that vendor directly.'));
   const scopeQuestions = [];
+  const includedPages = 5;
+  if (sitemap.status === 'read' && sitemap.urlCount > includedPages && sitemap.urlCount <= 15) {
+    options.push(option('Illustrative rebuild at the sitemap URL count', routes,
+      `Assumes all ${sitemap.urlCount} listed URLs are standard pages to keep. Confirm which URLs should carry over and whether any need custom functionality.`,
+      sitemap.urlCount - includedPages));
+  }
+  if (sitemap.status !== 'read' || sitemap.urlCount > includedPages) {
+    scopeQuestions.push('Confirm which pages and templates should carry over. Sitemap URLs can include posts, products, or other entries outside the rebuild scope.');
+  }
   if (restaurant) scopeQuestions.push('Do staff need to edit the menu and specials, and can those share one section?');
   if (has('ordering') || has('booking') || pages.some(page => page.vendors.length)) {
     scopeQuestions.push('Keep an ordinary link, reuse an existing vendor widget, or source a tool or sync with a POS?');
@@ -148,16 +123,24 @@ export async function inspectSiteForEstimate(target, request, catalog, parentSig
   }
   const candidates = additionalPages(seed);
   const origin = new URL(seed.url).origin;
-  const secondary = await Promise.allSettled(candidates.map(async url => {
-    const page = await fetchPage(url, signal, 0, origin);
-    if (!isHtml(page) || new URL(page.url).origin !== origin) throw Error('Page unavailable for inspection.');
-    return inspectSitePage(page);
-  }));
+  const [secondary, sitemap] = await Promise.all([
+    Promise.allSettled(candidates.map(async url => {
+      const page = await fetchPage(url, signal, 0, origin);
+      if (!isHtml(page) || new URL(page.url).origin !== origin) throw Error('Page unavailable for inspection.');
+      return inspectSitePage(page);
+    })),
+    (async () => {
+      const robots = await fetchPage(new URL('/robots.txt', origin), signal, 0, origin).catch(() => null);
+      const declared = robots?.status === 200 && /^text\/plain\b/i.test(robots.headers['content-type'] || '')
+        ? inspectRobots(robots.text, '/').sitemaps : [];
+      return inspectSitemap(origin, declared, signal, fetchPage);
+    })(),
+  ]);
   const inspected = new Map([[seed.url, seed]]);
   for (const result of secondary) {
     if (result.status === 'fulfilled') inspected.set(result.value.url, result.value);
   }
   const pages = [...inspected.values()].map(({links, ...page}) => page);
-  return {requestedUrl: target, pages, unavailablePages: candidates.filter((_, index) => secondary[index].status === 'rejected').map(url => url.href),
-    ...estimateOptions(catalog, pages, request)};
+  return {requestedUrl: target, pages, sitemap, unavailablePages: candidates.filter((_, index) => secondary[index].status === 'rejected').map(url => url.href),
+    ...estimateOptions(catalog, pages, request, sitemap)};
 }

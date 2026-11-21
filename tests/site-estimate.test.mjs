@@ -51,3 +51,30 @@ test('does not price an unreachable URL and omits pages redirected to another or
   assert.deepEqual(redirect.pages.map(page => page.url), [target + '/']);
   assert.deepEqual(redirect.unavailablePages, [target + '/about']);
 });
+
+test('reuses the earlier URL when the visitor wants the existing page count', () => {
+  const user = content => ({role: 'user', content});
+  const history = [user('Audit https://example.org'), user('It is my site'), user('I want a new look'), user('However many pages are there now')];
+  assert.equal(siteEstimateTarget(history), 'https://example.org');
+});
+
+test('uses a complete sitemap inventory for a conditional additional-pages estimate', async () => {
+  const origin = 'https://example.org';
+  const response = (url, contentType, text) => ({url: url.href, status: 200, headers: {'content-type': contentType}, text});
+  const result = await inspectSiteForEstimate(origin, 'Keep the same structure', pricingCatalog(), AbortSignal.timeout(2000),
+    async value => {
+      const url = new URL(value);
+      if (url.pathname === '/robots.txt') return response(url, 'text/plain', 'Sitemap: '+origin+'/sitemap_index.xml');
+      if (url.pathname === '/sitemap_index.xml') return response(url, 'application/xml', '<sitemapindex><sitemap><loc>'+origin+'/pages.xml</loc></sitemap></sitemapindex>');
+      if (url.pathname === '/pages.xml') {
+        const entries = Array.from({length: 7}, (_, i) => '<url><loc>'+origin+'/page-'+i+'</loc></url>');
+        return response(url, 'application/xml', '<urlset>'+entries.join('')+entries[0]+'</urlset>');
+      }
+      return response(url, 'text/html', '<title>Example Business</title>');
+    });
+  assert.equal(result.sitemap.status, 'read');
+  assert.equal(result.sitemap.urlCount, 7);
+  assert.deepEqual(result.sitemap.sources, [origin+'/sitemap_index.xml', origin+'/pages.xml']);
+  assert.deepEqual(result.options.map(option => option.totals.setup), [1995, 2395]);
+  assert.equal(result.options[1].lines.at(-1).quantity, 2);
+});

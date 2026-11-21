@@ -1,3 +1,5 @@
+import {readAuditPage, summarizeAuditPages} from './audit-evidence.mjs';
+import {attrs, readLinks, additionalPages} from './site-links.mjs';
 import {lookup, Resolver} from 'node:dns/promises';
 import {request as httpRequest} from 'node:http';
 import {request as httpsRequest} from 'node:https';
@@ -72,9 +74,6 @@ export async function fetchPublicPage(address, signal, redirects = 0, requiredOr
 }
 
 const clean = value => (value || '').replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim().slice(0, 240);
-export const attrs = tag => Object.fromEntries([...tag.matchAll(/([\w:-]+)\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s"'=`<>]+))/g)]
-  .map(([, key, double, single, bare]) => [key.toLowerCase(), double ?? single ?? bare]));
-
 export function inspectHtml(source, headers = {}) {
   const html = source.replace(/<!--[\s\S]*?-->/g, '');
   const scripts = [...html.matchAll(/<script\b([^>]*)>([\s\S]*?)<\/script\s*>/gi)];
@@ -177,6 +176,76 @@ export function inspectRobots(text, path) {
   })};
 }
 
+export async function inspectSitemap(origin, advertised, signal, fetchPage = fetchPublicPage) {
+  const candidates = new Set();
+  const urls = new Set();
+  const sources = [];
+  let incomplete = false;
+  const fileLimit = 6;
+
+  function sitemapUrl(value) {
+    try {
+      const url = new URL(value.replaceAll('&amp;', '&'));
+      return url.origin === origin && !url.username && !url.password && !url.hash ? url.href : null;
+    } catch {
+      return null;
+    }
+  }
+
+  for (const value of advertised) {
+    const url = sitemapUrl(value);
+    if (url) candidates.add(url);
+    else incomplete = true;
+  }
+  if (!candidates.size) candidates.add(new URL('/sitemap.xml', origin).href);
+  const seen = new Set();
+  while (candidates.size && seen.size < fileLimit && !signal.aborted) {
+    const batch = [...candidates].slice(0, fileLimit - seen.size);
+    const results = await Promise.allSettled(batch.map(url => {
+      candidates.delete(url);
+      seen.add(url);
+      return fetchPage(url, signal, 0, origin);
+    }));
+    for (const result of results) {
+      if (result.status === 'rejected' || result.value.status !== 200 || typeof result.value.text !== 'string' ||
+          new URL(result.value.url).origin !== origin) {
+        incomplete = true;
+        continue;
+      }
+      const xml = result.value.text.replace(/<!--[\s\S]*?-->/g, '').trim();
+      const root = xml.match(/^(?:<\?xml[^?]*\?>\s*)?<(urlset|sitemapindex)\b[^>]*>([\s\S]*)<\/\1>$/i);
+      if (!root) {
+        incomplete = true;
+        continue;
+      }
+      sources.push(result.value.url);
+      const index = root[1].toLowerCase() === 'sitemapindex';
+      const entries = index ? /<sitemap\b[^>]*>\s*<loc>([^<]+)<\/loc>[\s\S]*?<\/sitemap>/gi
+        : /<url\b[^>]*>\s*<loc>([^<]+)<\/loc>[\s\S]*?<\/url>/gi;
+      const matches = [...root[2].matchAll(entries)];
+      const entryTags = index ? /<sitemap\b/gi : /<url\b/gi;
+      if (matches.length !== [...root[2].matchAll(entryTags)].length) incomplete = true;
+      for (const [, value] of matches) {
+        const url = sitemapUrl(value.trim());
+        if (!url) {
+          incomplete = true;
+          continue;
+        }
+        if (index) {
+          if (!seen.has(url)) candidates.add(url);
+        } else {
+          urls.add(url);
+        }
+      }
+    }
+  }
+  return {
+    status: !sources.length ? 'unavailable' : incomplete || candidates.size ? 'partial' : 'read',
+    urlCount: sources.length ? urls.size : null,
+    sources,
+  };
+}
+
 export async function auditSite(target, parentSignal, fetchPage = fetchPublicPage) {
   const signal = AbortSignal.any([parentSignal, AbortSignal.timeout(9500)]);
   let page;
@@ -192,23 +261,45 @@ export async function auditSite(target, parentSignal, fetchPage = fetchPublicPag
   result.page = inspectHtml(page.text, page.headers);
   const url = new URL(page.url);
   const robotsUrl = new URL('/robots.txt', url);
+  const origin = url.origin;
   const resolver = new Resolver({timeout: 1200, tries: 1});
-  const [robots, homepage, dns] = await Promise.allSettled([
-    fetchPage(robotsUrl, signal),
-    url.pathname === '/' && !url.search ? Promise.resolve(page) : fetchPage(new URL('/', url), signal),
+  const candidates = additionalPages({url: page.url, links: readLinks(page.text, page.url)}, 4);
+  const [robots, dns, sampled] = await Promise.allSettled([
+    fetchPage(robotsUrl, signal, 0, origin),
     resolver.resolveTxt(url.hostname),
+    Promise.allSettled(candidates.map(candidate => fetchPage(candidate, signal, 0, origin))),
   ]);
+  const pages = new Map([[page.url, page]]);
+  const statuses = new Map([[page.url, page.status]]);
+  for (const [index, response] of (sampled.value || []).entries()) {
+    if (response.status !== 'fulfilled') continue;
+    const candidate = response.value;
+    if (new URL(candidate.url).origin !== origin) continue;
+    statuses.set(candidates[index].href, candidate.status);
+    statuses.set(candidate.url, candidate.status);
+    if (candidate.status === 200 && /^(text\/html|application\/xhtml\+xml)\b/i.test(candidate.headers['content-type'] || '')) {
+      pages.set(candidate.url, candidate);
+    }
+  }
+  const homepage = [...pages.values()].find(candidate => {
+    const address = new URL(candidate.url);
+    return address.pathname === '/' && !address.search;
+  });
   result.robots = {url: robotsUrl.href, status: robots.status === 'fulfilled' ? robots.value.status : 'unavailable'};
   if (robots.status === 'fulfilled' && robots.value.status === 200 &&
       /^text\/plain\b/i.test(robots.value.headers['content-type'] || '') && robots.value.text.length <= 500 * 1024) {
     Object.assign(result.robots, inspectRobots(robots.value.text, url.pathname + url.search));
   }
+  const pageEvidence = [...pages.values()].map(candidate =>
+    readAuditPage(candidate, candidate === page ? result.page : inspectHtml(candidate.text, candidate.headers)));
+  [result.sitemap, result.siteReview] = await Promise.all([
+    inspectSitemap(origin, result.robots.sitemaps || [], signal, fetchPage),
+    summarizeAuditPages(pageEvidence, origin, signal, fetchPage, statuses),
+  ]);
   result.searchConsole = {
     verifiedAccountStatus: 'unverified',
     pageMeta: result.page.verificationMeta,
-    homepageMeta: homepage.status === 'fulfilled' && homepage.value.status === 200 &&
-      /^(text\/html|application\/xhtml\+xml)\b/i.test(homepage.value.headers['content-type'] || '')
-      ? inspectHtml(homepage.value.text).verificationMeta : null,
+    homepageMeta: homepage ? inspectHtml(homepage.text).verificationMeta : null,
     exactHostnameDnsTxt: dns.status === 'fulfilled' ? dns.value.some(record => /^google-site-verification=/i.test(record.join(''))) : null,
   };
   result.grades = gradeAudit(result);
