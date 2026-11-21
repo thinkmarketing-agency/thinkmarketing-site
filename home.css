@@ -642,3 +642,53 @@ img{max-width:100%}.breadcrumb{padding-top:16px;font-size:12px;color:#555}.bread
 
 /* Homepage: two service introductions matching the primary site structure. */
 .homepage .services-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.homepage .services-grid>.service-card:last-child{grid-column:auto}@media(max-width:767px){.homepage .services-grid{grid-template-columns:1fr}}
+
+.homepage .hero .subheadline {
+    font-weight: 700;
+}
+
+.home-jasper {
+    background: var(--primary-red);
+    color: var(--white);
+}
+
+.home-jasper .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px 32px;
+}
+
+.home-jasper h2 {
+    color: inherit;
+    font-size: clamp(22px, 3vw, 27px);
+    margin-bottom: 8px;
+}
+
+.home-jasper p {
+    color: var(--white);
+    max-width: 62ch;
+    margin: 0;
+}
+
+.home-jasper .btn {
+    flex: none;
+    background-color: #000;
+    color: var(--white);
+}
+
+.home-jasper .btn:hover {
+    background-color: #222;
+}
+
+.home-jasper .btn:focus-visible {
+    outline-color: var(--white);
+}
+
+@media (max-width: 767px) {
+    .home-jasper .container {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+}

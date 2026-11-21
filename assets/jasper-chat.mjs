@@ -13,7 +13,7 @@ function render(target,text){target.replaceChildren();const lines=text.split('\n
  if(heading){const h=el('h3');inline(h,heading[1]);target.append(h);list=paragraph=null;}else if(bullet){const kind=/\d/.test(bullet[1])?'ol':'ul';if(!list||list.tagName.toLowerCase()!==kind){list=el(kind);target.append(list);}const li=el('li');inline(li,bullet[2]);list.append(li);paragraph=null;}else{list=null;if(!paragraph){paragraph=el('p');target.append(paragraph);}else paragraph.append(document.createTextNode(' '));inline(paragraph,line);}}
 }
 function bubble(role,text){const article=el('article');article.className='jasper-message '+role;article.append(el('strong',role==='user'?'You':'Jasper'));const content=el('div');render(content,text);article.append(content);$('#jasper-messages').append(article);return {article,content};}
-function setBusy(value){busy=value;$('#jasper-send').disabled=value;$('#jasper-stop').hidden=!value;$('#jasper-new').disabled=value;document.querySelectorAll('[data-prompt]').forEach(b=>b.disabled=value);}
+function setBusy(value){busy=value;$('#jasper-send').disabled=value;$('#jasper-stop').hidden=!value;$('#jasper-new').disabled=value;$('#jasper-attach').disabled=value;document.querySelectorAll('[data-prompt]').forEach(b=>b.disabled=value);}
 const transcript = $('#jasper-transcript');
 const status = $('#jasper-status');
 const nearBottom = () => transcript.scrollHeight - transcript.scrollTop - transcript.clientHeight < 48;
@@ -32,6 +32,50 @@ window.visualViewport?.addEventListener('resize', fitViewport);
 window.visualViewport?.addEventListener('scroll', fitViewport);
 fitViewport();
 
+const fileInput = $('#jasper-file');
+let pendingFile = null;
+let chatFile = null;
+let dialogFile = null;
+const handoffFile = () => pendingFile || chatFile?.file;
+
+function showPendingFile(file) {
+  pendingFile = file;
+  $('#jasper-file-selection').hidden = !file;
+  $('#jasper-file-name').textContent = file?.name || '';
+}
+
+$('#jasper-attach').addEventListener('click', () => fileInput.click());
+$('#jasper-file-remove').addEventListener('click', () => showPendingFile(null));
+fileInput.addEventListener('change', () => {
+  const file = fileInput.files[0];
+  fileInput.value = '';
+  if (!file) return;
+  const type = fileType(file);
+  if (!type || !file.size || file.size > 2 * 1024 * 1024) {
+    status.textContent = 'Choose a PDF, PNG or JPEG up to 2 MB.';
+    return;
+  }
+  showPendingFile(file);
+  status.textContent = '';
+});
+
+function fileType(file) {
+  if (/\.pdf$/i.test(file.name)) return 'application/pdf';
+  if (/\.png$/i.test(file.name)) return 'image/png';
+  if (/\.jpe?g$/i.test(file.name)) return 'image/jpeg';
+}
+
+async function encodeFile(file) {
+  if (!file) return;
+  const url = await new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = () => reject(Error('Could not read the selected file.'));
+    reader.readAsDataURL(file);
+  });
+  return {name: file.name, type: fileType(file), content: url.slice(url.indexOf(',') + 1)};
+}
+
 let handoff = null;
 const handoffRequested = text => /^(?:(?:can|could|would|will) you |please )?(?:send|email|forward|share) (?:this|it|(?:the |my |our )?(?:chat|conversation|summary|details|audit|results|findings|an email|a message)) (?:over )?to jacob(?: please)?[.!?]*$/i.test(text)
   || /^(?:(?:can|could|would|will) you |please )?(?:email|contact) jacob(?: (?:about|with) (?:this|it|the summary|the chat))?(?: please)?[.!?]*$/i.test(text);
@@ -46,6 +90,7 @@ function handoffMessage(text) {
 function reviewHandoff() {
   handoffMessage('Here’s what I’ll send Jacob.\n\nName: ' + handoff.name +
     '\nReply email: ' + handoff.email + '\n\n' + handoff.summary +
+    (handoff.file ? '\n\nAttachment: ' + handoff.file.name + '\nType “Remove attachment” to send without the file.' : '') +
     '\n\nType “Send it” to confirm, “Edit summary” to replace the summary, or “Cancel” to stop.');
 }
 
@@ -67,7 +112,7 @@ async function handleHandoff(text) {
     const sections = [];
     if (latest('user')) sections.push('Visitor request: ' + excerpt(latest('user'), 900));
     if (latest('assistant')) sections.push('Jasper’s assessment: ' + excerpt(latest('assistant'), 1200));
-    handoff = {stage: 'name', summary: sections.join('\n\n') || 'The visitor requested a follow-up from Jacob.'};
+    handoff = {stage: 'name', file: handoffFile(), summary: sections.join('\n\n') || 'The visitor requested a follow-up from Jacob.'};
     handoffMessage('I can send Jacob a summary from here. What’s your name?');
   } else if (/^(?:cancel|never mind|nevermind)[.!]?$/i.test(reply)) {
     handoff = null;
@@ -91,6 +136,9 @@ async function handleHandoff(text) {
     handoff.summary = reply;
     handoff.stage = 'review';
     reviewHandoff();
+  } else if (/^remove attachment[.!]?$/i.test(reply)) {
+    handoff.file = null;
+    reviewHandoff();
   } else if (/^edit summary[.!]?$/i.test(reply)) {
     handoff.stage = 'edit';
     handoffMessage('Type the replacement summary you’d like Jacob to receive.');
@@ -99,8 +147,8 @@ async function handleHandoff(text) {
     $('#jasper-stop').hidden = true;
     status.textContent = 'Sending to Jacob…';
     try {
-      const {name, email, summary} = handoff;
-      await sendLead({name, email, summary, consent: true});
+      const {name, email, summary, file} = handoff;
+      await sendLead({name, email, summary, consent: true}, file);
       handoff = null;
       handoffMessage('Your summary was sent to Jacob. You can keep chatting here.');
     } catch (error) {
@@ -114,11 +162,12 @@ async function handleHandoff(text) {
   }
 }
 
-async function sendLead(payload) {
+async function sendLead(payload, file) {
+  const attachment = await encodeFile(file);
   const response = await fetch('/api/jasper-lead', {
     method: 'POST',
     headers: {'Content-Type': 'application/json'},
-    body: JSON.stringify(payload),
+    body: JSON.stringify({...payload, attachment}),
     signal: AbortSignal.timeout(20000),
   });
   const data = await response.json();
@@ -126,7 +175,8 @@ async function sendLead(payload) {
 }
 
 async function send(text, retry = false) {
-  if (busy || !text.trim()) return;
+  if (busy || (!text.trim() && !pendingFile)) return;
+  if (!text.trim()) text = 'Please review this attachment. If it is a bill, compare the itemized charges with Think Marketing pricing.';
   if (!retry && (handoff || handoffRequested(text.trim()) || acceptedHandoffOffer(text))){
     await handleHandoff(text);
     return;
@@ -135,7 +185,12 @@ async function send(text, retry = false) {
   $('#jasper-welcome').hidden = true;
   if (!retry) {
     messages.push({role: 'user', content: text});
-    bubble('user', text);
+    const message = bubble('user', text);
+    if (pendingFile) {
+      chatFile = {file: pendingFile, messageIndex: messages.length - 1};
+      message.content.append(el('p', 'Attachment: ' + pendingFile.name));
+      showPendingFile(null);
+    }
   }
   $('#jasper-input').value = '';
   setBusy(true);
@@ -183,10 +238,11 @@ async function send(text, retry = false) {
 
   let succeeded = false;
   try {
+    const attachment = chatFile?.messageIndex === messages.length - 1 ? await encodeFile(chatFile.file) : undefined;
     const response = await fetch('/api/jasper', {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({messages}),
+      body: JSON.stringify({messages, attachment}),
       signal: controller.signal,
     });
     if (!response.ok) {
@@ -248,10 +304,10 @@ $('#jasper-input').addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKe
 document.querySelectorAll('[data-prompt]').forEach(b=>b.addEventListener('click',()=>send(b.dataset.prompt)));
 $('#jasper-stop').addEventListener('click',()=>controller?.abort());
 $('#jasper-retry').addEventListener('click',()=>{const last=$('#jasper-messages').lastElementChild;if(last?.classList.contains('assistant'))last.remove();send(messages.at(-1)?.content||'',true);});
-$('#jasper-new').addEventListener('click',()=>{messages.length=0;handoff=null;$('#jasper-messages').replaceChildren();$('#jasper-welcome').hidden=false;$('#jasper-status').textContent='';$('#jasper-retry').hidden=true;$('#jasper-input').focus({preventScroll:true});});
-$('#jasper-connect').addEventListener('click',()=>{$('#lead-summary').value=messages.map(m=>(m.role==='user'?'Visitor':'Jasper')+': '+m.content).join('\n\n').slice(0,12000);$('#lead-status').textContent='';$('#jasper-lead-dialog').showModal();updateMailto();});
+$('#jasper-new').addEventListener('click',()=>{messages.length=0;handoff=null;chatFile=null;showPendingFile(null);$('#jasper-messages').replaceChildren();$('#jasper-welcome').hidden=false;$('#jasper-status').textContent='';$('#jasper-retry').hidden=true;$('#jasper-input').focus({preventScroll:true});});
+$('#jasper-connect').addEventListener('click',()=>{$('#lead-summary').value=messages.map(m=>(m.role==='user'?'Visitor':'Jasper')+': '+m.content).join('\n\n').slice(0,12000);$('#lead-status').textContent='';dialogFile=handoffFile();if(dialogFile&&!$('#lead-summary').value)$('#lead-summary').value='Please follow up about the attached file.';$('#lead-file-row').hidden=!dialogFile;$('#lead-file-name').textContent=dialogFile?'Include attachment: '+dialogFile.name:'';$('#jasper-lead-form').elements.includeFile.checked=!!dialogFile;$('#jasper-lead-dialog').showModal();updateMailto();});
 $('#jasper-lead-close').addEventListener('click',()=>$('#jasper-lead-dialog').close());
-function updateMailto(){$('#lead-mailto').href='mailto:thinkmarketingbend@gmail.com?subject='+encodeURIComponent('Following up with Jasper')+'&body='+encodeURIComponent('Name: '+$('#lead-name').value+'\nEmail: '+$('#lead-email').value+'\n\n'+$('#lead-summary').value);}
+function updateMailto(){$('#lead-mailto').href='mailto:thinkmarketingbend@gmail.com?subject='+encodeURIComponent('Following up with Jasper')+'&body='+encodeURIComponent('Name: '+$('#lead-name').value+'\nEmail: '+$('#lead-email').value+'\n\n'+$('#lead-summary').value+(dialogFile?'\n\nPlease attach '+dialogFile.name+' manually if you want to include it.':''));}
 $('#jasper-lead-form').addEventListener('input',updateMailto);
-$('#jasper-lead-form').addEventListener('submit',async e=>{e.preventDefault();const form=e.target;$('#lead-send').disabled=true;$('#lead-status').textContent='Sending…';try{await sendLead({name:form.elements.name.value,email:form.elements.email.value,summary:form.elements.summary.value,website:form.elements.website.value,consent:form.elements.consent.checked});$('#lead-status').textContent='Your message has been sent to Jacob. Thank you!';form.reset();}catch(error){$('#lead-status').textContent=error.message;}finally{$('#lead-send').disabled=false;}});
+$('#jasper-lead-form').addEventListener('submit',async e=>{e.preventDefault();const form=e.target;$('#lead-send').disabled=true;$('#lead-status').textContent='Sending…';try{await sendLead({name:form.elements.name.value,email:form.elements.email.value,summary:form.elements.summary.value,website:form.elements.website.value,consent:form.elements.consent.checked},form.elements.includeFile.checked?dialogFile:undefined);$('#lead-status').textContent='Your message has been sent to Jacob. Thank you!';form.reset();}catch(error){$('#lead-status').textContent=error.message;}finally{$('#lead-send').disabled=false;}});
 const prompt=new URLSearchParams(location.search).get('prompt');if(prompt){$('#jasper-input').value=prompt.slice(0,6000);$('#jasper-input').focus();}

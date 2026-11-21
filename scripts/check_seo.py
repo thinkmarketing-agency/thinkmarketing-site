@@ -35,7 +35,7 @@ class Page(HTMLParser):
             if a.get('type') == 'application/ld+json':
                 self.in_json = True; self.buffer = ''
             else:
-                assert a.get('type') == 'module' and a.get('src') == '/assets/jasper-chat.mjs', 'Unexpected executable script'
+                assert a.get('type') == 'module' and a.get('src', '').partition('?')[0] == '/assets/jasper-chat.mjs', 'Unexpected executable script'
                 self.links.append({'href': a['src']})
     def handle_data(self, data):
         if self.in_title: self.title += data
@@ -102,7 +102,7 @@ def check(root, production):
         test(f'{slug or "home"}: no public links to the unlisted reference', all('/estimate-reference' not in a.get('href','') for a in page.links))
     test('Jasper: chat and lead handoff present', all(x in (root/'ask-jasper/index.html').read_text() for x in ('jasper-form','jasper-lead-form','/assets/jasper-chat.mjs')))
     jasper = (root/'ask-jasper/index.html').read_text()
-    test('Jasper: dedicated chat page', all(term not in jasper for term in ('<footer', '<aside', 'A good place to start.')) and 'class="jasper-page"' in jasper)
+    test('Jasper: dedicated chat page', all(term not in jasper for term in ('<footer', '<aside', 'aria-label="Breadcrumb"', 'A good place to start.')) and 'class="jasper-page"' in jasper)
     test('Jasper: no secret in public output', not any('sk-proj-' in p.read_text(errors='ignore') for p in root.rglob('*') if p.is_file() and p.suffix in ('.html','.mjs','.json')))
     catalog=json.loads((root/'estimate-reference/catalog.json').read_text())
     test('Reference: every service preserved in readable HTML', all('service-'+i['id'] in parsed['estimate-reference'].ids for i in catalog['items']))

@@ -14,13 +14,14 @@ for (const [address, prefix] of [
 export function auditTarget(message) {
   const explicit = message.match(/https?:\/\/[^\s<>"`]+/i);
   const bare = message.match(/(?:^|[\s(])((?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z]{2,}(?:[/?#][^\s<>"`]*)?)(?=$|[\s).,!])/i);
-  if (explicit) return explicit[0].replace(/[),.!]+$/, '');
-  if (bare) return 'https://' + bare[1].replace(/[),.!]+$/, '');
+  if (explicit) return explicit[0].replace(/[),.!?]+$/, '');
+  if (bare) return 'https://' + bare[1].replace(/[),.!?]+$/, '');
 }
 
-export async function fetchPublicPage(address, signal, redirects = 0) {
+export async function fetchPublicPage(address, signal, redirects = 0, requiredOrigin) {
   const url = new URL(address);
   url.hash = '';
+  if (requiredOrigin && url.origin !== requiredOrigin) throw Error('The page moved outside the inspected site.');
   if (!['http:', 'https:'].includes(url.protocol) || url.username || url.password ||
       url.port || isIP(url.hostname) || url.hostname.startsWith('[') ||
       !url.hostname.includes('.') || url.hostname.endsWith('.') ||
@@ -65,13 +66,13 @@ export async function fetchPublicPage(address, signal, redirects = 0) {
   });
   if ([301, 302, 303, 307, 308].includes(result.status) && result.headers.location) {
     if (redirects >= 4) throw Error('The URL exceeded the redirect limit.');
-    return fetchPublicPage(new URL(result.headers.location, url), signal, redirects + 1);
+    return fetchPublicPage(new URL(result.headers.location, url), signal, redirects + 1, requiredOrigin);
   }
   return result;
 }
 
 const clean = value => (value || '').replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim().slice(0, 240);
-const attrs = tag => Object.fromEntries([...tag.matchAll(/([\w:-]+)\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s"'=`<>]+))/g)]
+export const attrs = tag => Object.fromEntries([...tag.matchAll(/([\w:-]+)\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s"'=`<>]+))/g)]
   .map(([, key, double, single, bare]) => [key.toLowerCase(), double ?? single ?? bare]));
 
 export function inspectHtml(source, headers = {}) {

@@ -1,6 +1,6 @@
 # Jasper implementation
 
-This version replaces the Coming Soon page with streaming AI chat and makes Ask Jasper the homepage hero action. It uses Vercel Node functions alongside the existing static build; no framework migration is needed.
+This version replaces the Coming Soon page with streaming AI chat and introduces Jasper in a dedicated section below the homepage hero. It uses Vercel Node functions alongside the existing static build; no framework migration is needed.
 
 ## Configuration
 
@@ -11,7 +11,7 @@ This version replaces the Coming Soon page with streaming AI chat and makes Ask 
 
 Instructions and verified reference selection live in `server/jasper.mjs`. The draft comprehensive catalog is deliberately not loaded as approved pricing. No private supplier or margin notes are included. Public reference files already in the existing site remain public.
 
-No chat or uploads are persisted by this application. Conversation state lives in page memory. OpenAI receives messages and context with `store:false`; this does not eliminate provider abuse-monitoring retention. Explicitly submitted, visitor-reviewed lead details go to Resend and the configured recipient. The privacy notice has been updated accordingly. File uploads are deferred; visitors can paste redacted excerpts.
+No chat or uploads are persisted by this application. Conversation state lives in page memory. OpenAI receives messages and context with `store:false`; this does not eliminate provider abuse-monitoring retention. Explicitly submitted, visitor-reviewed lead details go to Resend and the configured recipient. The privacy notice has been updated accordingly. Visitors can send one PDF, PNG or JPEG up to 2 MB with a chat message. The original stays in page memory and goes to Jacob through Resend only when it is included in the reviewed handoff and the visitor confirms. The selected OpenAI model must accept PDF and image inputs.
 
 ## Before public deployment
 
@@ -22,7 +22,7 @@ No chat or uploads are persisted by this application. Conversation state lives i
 5. Test an actual model response, stop/retry, website research limitations, a failed upstream request, and one owner-approved real lead email on a deployment. Local tests mock external providers and do not spend API credits or send email.
 6. Confirm mobile/desktop appearance and approve publishing. Ask Jasper remains noindex during testing.
 
-The UI uses safe DOM construction for a limited Markdown subset (paragraphs, headings, bold, lists, code, HTTP/HTTPS links, and tables); raw HTML never executes. The in-chat handoff previews a summary built from the latest request and answer. Visitors can replace it, cancel, or type “Send it” to authorize sending. The Jasper page contains the site header and chat workspace. Only the transcript scrolls, and the workspace adjusts to the visual viewport when a mobile keyboard opens. Jasper receives scope-checked catalog prices and an estimate for Essential plus one editable admin area. Proposed pricing entries and private guidance stay outside its business reference.
+The UI uses safe DOM construction for a limited Markdown subset (paragraphs, headings, bold, lists, code, HTTP/HTTPS links, and tables); raw HTML never executes. The in-chat handoff previews a summary built from the latest request and answer. Visitors can replace it, cancel, or type “Send it” to authorize sending. The Jasper page contains the site header and chat workspace. Only the transcript scrolls, and the workspace adjusts to the visual viewport when a mobile keyboard opens. Jasper receives scope-checked catalog prices and an estimate for Essential plus one staff-editable section. Proposed pricing entries and private guidance stay outside its business reference.
 
 ## Website audit rubric
 
@@ -39,3 +39,7 @@ Jasper uses the server-side rubric in `server/site-audit.mjs`. It works independ
 | Analytics | Report visible GA4 and other supported analytics signals. Review tag manager alone. Collection and events stay unverified. |
 
 The audit inspects one public HTML page, the final host's robots.txt and homepage, and its public TXT records. It uses IPv4 and standard HTTP/HTTPS ports. It does not execute JavaScript, test tracking requests, log in to private accounts, or crawl links. Public evidence may be sent to OpenAI as chat context.
+
+## URL-to-estimate
+
+Ask Jasper to estimate a public URL, or select **Estimate a website from a URL** and paste the address. Jasper fetches the submitted HTML and samples up to three relevant linked pages on the final origin. It checks for visible menus, ordering, booking, forms, commerce, and account features, then calculates scoped options with the catalog estimator. Public indications of vendor links or widgets are evidence for follow-up questions. The crawl cannot establish owner access, vendor contracts, custom workflows, hidden integrations, or every page on the site. Keep unknown work outside priced totals. A request for a website audit continues to use the audit rubric.

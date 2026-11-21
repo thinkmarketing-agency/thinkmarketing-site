@@ -86,7 +86,7 @@ def enrich(html, slug, production=False):
                     tag = tag[:-1] + ' loading="lazy">'
         return tag
     html = re.sub(r'<img\b[^>]*>', image_attrs, html)
-    if slug:
+    if slug and slug != 'ask-jasper':
         parent='<span aria-hidden="true"> / </span><a href="/marketing/">Digital Marketing</a>' if slug in ('local-seo','ai-search-visibility') else ''
         crumb = f'<nav class="breadcrumb wrap" aria-label="Breadcrumb"><a href="/">Home</a>{parent}<span aria-hidden="true"> / </span><span aria-current="page">{escape(data["label"])}</span></nav>'
         html = html.replace('<main id="main">', '<main id="main">' + crumb)

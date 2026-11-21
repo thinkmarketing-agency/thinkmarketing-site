@@ -6,8 +6,8 @@ const packages=JSON.parse(fs.readFileSync(new URL('../content/packages.json',imp
 const selections=o=>Object.entries(o).map(([id,quantity])=>({id,quantity}));
 for(const p of packages){const i=catalog.items.find(i=>i.id===p.name.toLowerCase());assert.deepEqual([i.setup,i.monthly],[p.development,p.monthly]);}
 let q=estimate(catalog,selections({email:3,scheduling:3,admin:1,domain:2}));
-assert.deepEqual([q.setup,q.monthly],[1500,210]);
-q=estimate(catalog,selections({essential:1,email:3,scheduling:3,admin:1,domain:2}));assert.deepEqual([q.setup,q.monthly],[3495,260]);
+assert.deepEqual([q.setup,q.monthly],[1450,210]);
+q=estimate(catalog,selections({essential:1,email:3,scheduling:3,admin:1,domain:2}));assert.deepEqual([q.setup,q.monthly],[3445,260]);
 assert.throws(()=>estimate(catalog,selections({email:1.5})),/Invalid quantity/);
 assert.throws(()=>estimate(catalog,selections({email:-1})),/Invalid quantity/);
 assert.throws(()=>estimate(catalog,selections({missing:1})),/Unknown service/);
@@ -30,7 +30,7 @@ assert.equal(estimateInternalWork(2,privateGuidance).reference_amount,150);
 assert.throws(()=>estimateInternalWork(0,privateGuidance),/positive effort/);
 assert.throws(()=>estimateInternalWork(1),/private pricing/);
 const mapping=JSON.parse(fs.readFileSync(new URL('../content/capability-map.json',import.meta.url)));
-assert.equal(mapping.capabilities.length,24);
+assert.equal(mapping.capabilities.length,26);
 for(const capability of mapping.capabilities){assert.ok(capability.question);for(const id of capability.service_ids)assert.ok(catalog.items.some(i=>i.id===id),`Unmapped price: ${id}`);}
 assert.ok(!('hourly_rate' in catalog));assert.ok(!('minimum_labor_charge' in catalog));
 assert.ok(catalog.items.some(i=>i.id==='ppc'));assert.ok(catalog.items.some(i=>i.id==='consult'));assert.ok(catalog.items.some(i=>i.id==='audit'));
@@ -40,4 +40,8 @@ q=estimate(catalog,selections({cms_area:1}));assert.equal(q.requires_scope_revie
 assert.equal(estimate(catalog,selections({client_portal:1})).starting_estimate,true);
 console.log('PASS: complete capability mapping, internal minimum, dependencies, overlaps and public/private separation.');
 
-q=estimate(catalog,selections({essential:1,email:20}));assert.deepEqual([q.setup,q.monthly],[2620,250]);
+q=estimate(catalog,selections({essential:1,email:20}));assert.deepEqual([q.setup,q.monthly],[2995,250]);
+
+assert.deepEqual(estimate(catalog,selections({essential:1,restaurant_essentials:1,editable_section:1,existing_embed:1,email:1})).lines.map(i=>[i.setup,i.monthly]),[[1995,50],[0,0],[450,25],[75,0],[50,10]]);
+assert.equal(estimate(catalog,selections({essential:1,existing_embed:1,scheduling:1})).requires_scope_review,true);
+assert.throws(()=>estimate(catalog,selections({custom_integration:1})),/individually scoped quote/);

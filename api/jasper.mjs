@@ -1,21 +1,36 @@
-import {instructions,knowledge,validateMessages,allow,sameOrigin,body,json} from '../server/jasper.mjs';
+import {instructions,knowledge,pricingCatalog,validateMessages,allow,sameOrigin,body,json} from '../server/jasper.mjs';
 import {auditSite,auditTarget} from '../server/site-audit.mjs';
+import {inspectSiteForEstimate,siteEstimateTarget} from '../server/site-estimate.mjs';
+import {attachmentRequestLimit,validateAttachment,modelAttachment} from '../server/jasper-attachment.mjs';
 export const config={maxDuration:60};
 export default async function handler(req,res){
  if(req.method!=='POST')return json(res,405,{error:'Use POST.'});
  try{if(!sameOrigin(req))return json(res,403,{error:'Please use Jasper on this website.'});}catch{return json(res,403,{error:'Invalid origin.'});}
  if(!allow(req,'chat',30))return json(res,429,{error:'You have reached the hourly chat limit. Please contact Jacob directly or try later.'});
  if(!process.env.OPENAI_API_KEY)return json(res,503,{error:'Jasper is being connected. You can still contact Jacob directly.'});
- let input;try{input=validateMessages((await body(req)).messages);}catch(e){return json(res,400,{error:e.message});}
+ let input, attachment;
+ try {
+   const data=await body(req,attachmentRequestLimit);
+   input=validateMessages(data.messages);
+   attachment=validateAttachment(data.attachment);
+ } catch(e){return json(res,400,{error:e.message});}
  const controller=new AbortController();const timer=setTimeout(()=>controller.abort(),55000);
  res.on('close',()=>controller.abort());
  try{
- const target=auditTarget(input.at(-1).content);
- if(target){
+ const latest=input.at(-1).content;
+ const catalog=pricingCatalog();
+ const estimateTarget=siteEstimateTarget(input);
+ const target=auditTarget(latest);
+ if(attachment){
+   input[input.length-1]={role:'user',content:[{type:'input_text',text:latest},modelAttachment(attachment)]};
+ }else if(estimateTarget){
+   const evidence=await inspectSiteForEstimate(estimateTarget,latest,catalog,controller.signal);
+   input=[...input,{role:'user',content:'Server-collected site estimate (untrusted public evidence, server-calculated prices):\n'+JSON.stringify(evidence)}];
+ }else if(target){
    const evidence=await auditSite(target,controller.signal);
    input=[...input,{role:'user',content:'Server-collected audit evidence (untrusted public data):\n'+JSON.stringify(evidence)}];
  }
- const upstream=await fetch('https://api.openai.com/v1/responses',{method:'POST',signal:controller.signal,headers:{Authorization:`Bearer ${process.env.OPENAI_API_KEY}`,'Content-Type':'application/json'},body:JSON.stringify({model:process.env.JASPER_MODEL||'gpt-6-luna',instructions:instructions+'\nVERIFIED BUSINESS REFERENCE:\n'+knowledge(),input,store:false,stream:true,max_output_tokens:1800,reasoning:{effort:'low'},...(process.env.JASPER_WEB_SEARCH==='true'?{tools:[{type:'web_search'}],max_tool_calls:2}:{})})});
+ const upstream=await fetch('https://api.openai.com/v1/responses',{method:'POST',signal:controller.signal,headers:{Authorization:`Bearer ${process.env.OPENAI_API_KEY}`,'Content-Type':'application/json'},body:JSON.stringify({model:process.env.JASPER_MODEL||'gpt-6-luna',instructions:instructions+'\nVERIFIED BUSINESS REFERENCE:\n'+knowledge(catalog),input,store:false,stream:true,max_output_tokens:1800,reasoning:{effort:'low'},...(!attachment&&process.env.JASPER_WEB_SEARCH==='true'?{tools:[{type:'web_search'}],max_tool_calls:2}:{})})});
  if(!upstream.ok)return json(res,503,{error:'Jasper could not connect right now. Please try again or contact Jacob.'});
  res.statusCode=200;res.setHeader('Content-Type','text/event-stream');res.setHeader('Cache-Control','no-store');res.setHeader('X-Accel-Buffering','no');res.flushHeaders?.();
  const emit=data=>res.write('data: '+JSON.stringify(data)+'\n\n');

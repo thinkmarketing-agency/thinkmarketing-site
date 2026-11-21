@@ -4,10 +4,12 @@
     {
       "label": "Book appointments",
       "service_ids": [
+        "existing_embed",
         "scheduling",
-        "team_routing"
+        "team_routing",
+        "custom_integration"
       ],
-      "question": "How many booking staff, event types and routing rules?"
+      "question": "Do you already use booking software with an embed, or do you need a new booking setup?"
     },
     {
       "label": "Request an estimate",
@@ -68,6 +70,7 @@
       "label": "Update text, photos, and hours",
       "service_ids": [
         "base_features",
+        "editable_section",
         "admin"
       ],
       "question": "An included minor update by Think Marketing or staff self-editing?"
@@ -198,6 +201,25 @@
         "custom_system"
       ],
       "question": "Which systems, API access and task volume?"
+    },
+    {
+      "label": "Show a restaurant menu and specials",
+      "service_ids": [
+        "restaurant_essentials",
+        "editable_section",
+        "admin"
+      ],
+      "question": "Who updates the menu and specials, and can they share one editable section?"
+    },
+    {
+      "label": "Connect existing ordering or booking software",
+      "service_ids": [
+        "restaurant_essentials",
+        "existing_embed",
+        "scheduling",
+        "custom_integration"
+      ],
+      "question": "Do you need a link, a vendor-provided embed, or account setup or data syncing?"
     }
   ]
 }

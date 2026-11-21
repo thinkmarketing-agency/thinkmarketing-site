@@ -140,7 +140,7 @@
     {
       "id": "admin",
       "group": "Website features",
-      "name": "Basic editable admin panel",
+      "name": "Managed editable admin panel",
       "setup": 750,
       "monthly": 65,
       "annual": 0,
@@ -273,13 +273,13 @@
       "id": "email",
       "group": "Business tools",
       "name": "Google Workspace Business Starter email",
-      "setup": 150,
+      "setup": 50,
       "monthly": 10,
       "annual": 0,
       "unit": "inbox",
-      "additional_setup": 25,
+      "additional_setup": null,
       "price_kind": "fixed",
-      "scope": "Google Workspace Business Starter license and consolidated billing: $10 per licensed user/month; 30 GB pooled storage entitlement per user. $150 setup covers one domain and first inbox; $25 each additional inbox in the same project. Initial domain verification, mail routing and supported SPF/DKIM/DMARC configuration included. Ongoing hands-on administration, device troubleshooting, migrations and training separately scoped and approved; no monthly support allowance. Check existing email before replacing a suitable service. Standard/Plus require a separate quote.",
+      "scope": "Google Workspace Business Starter license and consolidated billing: $10 per licensed user/month; 30 GB pooled storage entitlement per user. $50 one-time setup per licensed inbox on one supported domain. Initial domain verification, mail routing and supported SPF/DKIM/DMARC configuration included. Ongoing hands-on administration, device troubleshooting, migrations and training separately scoped and approved; no monthly support allowance. Check existing email before replacing a suitable service. Standard/Plus require a separate quote.",
       "delivery": "Confirm supplier price, plan suitability and billing/provisioning arrangement before acceptance. Do not assume authorized reseller status.",
       "readiness": "existing_menu_scope_confirmation_required",
       "requires_any": [],
@@ -1213,6 +1213,92 @@
       "delivery": "Proposed menu entry. Confirm requirements, compatible tooling, actual costs and delivery readiness before a final quote.",
       "jasper_action": "starting_estimate_only",
       "standard_tools_included": true
+    },
+    {
+      "id": "restaurant_essentials",
+      "group": "Website features",
+      "name": "Restaurant essentials",
+      "setup": 0,
+      "monthly": 0,
+      "annual": 0,
+      "unit": "website",
+      "additional_setup": null,
+      "price_kind": "included",
+      "scope": "Within an Essential build and its five-page allowance: a mobile-friendly HTML menu and specials using supplied content, hours and location, and standard links to existing ordering, reservations or gift cards. Staff editing, embedded widgets, and setting up or syncing third-party systems are separately scoped.",
+      "delivery": "Confirm compatibility and scope before acceptance.",
+      "readiness": "existing_menu_scope_confirmation_required",
+      "requires_any": [
+        "essential"
+      ],
+      "includes": [],
+      "questions": [
+        "Will staff update the menu themselves, and which ordering or booking tools are already in use?"
+      ],
+      "jasper_action": "include_without_duplicate_charge",
+      "standard_tools_included": true
+    },
+    {
+      "id": "editable_section",
+      "group": "Website features",
+      "name": "Staff-editable website section",
+      "setup": 450,
+      "monthly": 25,
+      "annual": 0,
+      "unit": "website",
+      "additional_setup": null,
+      "price_kind": "fixed",
+      "scope": "One structured editable section on a compatible site, such as a combined menu and specials. Includes initial entry of supplied content, one staff login, short handoff, and keeping the editor available on the agreed site. Staff make routine content changes. Multiple sections, custom workflows and POS syncing require scope review.",
+      "delivery": "Confirm compatibility and scope before acceptance.",
+      "readiness": "existing_menu_scope_confirmation_required",
+      "requires_any": [],
+      "includes": [],
+      "questions": [
+        "Can one staff member update the content in a single section?"
+      ],
+      "jasper_action": "scope_checked_estimate",
+      "standard_tools_included": true
+    },
+    {
+      "id": "existing_embed",
+      "group": "Website features",
+      "name": "Install an existing booking or ordering embed",
+      "setup": 75,
+      "monthly": 0,
+      "annual": 0,
+      "unit": "embed",
+      "additional_setup": null,
+      "price_kind": "fixed",
+      "scope": "Install and test one standard vendor-supplied widget on a compatible website. The customer provides access or embed code and keeps paying the vendor directly. Covers a standard embed from an existing tool such as Square or booking software. An ordinary link in an Essential build is included. Account setup, sourcing, custom styling, code changes, data syncing and workflow support require separate scope.",
+      "delivery": "Confirm compatibility and scope before acceptance.",
+      "readiness": "existing_menu_scope_confirmation_required",
+      "requires_any": [],
+      "includes": [],
+      "questions": [
+        "What tool is already in use, and does it provide a ready-to-use embed?"
+      ],
+      "jasper_action": "scope_checked_estimate",
+      "standard_tools_included": false
+    },
+    {
+      "id": "custom_integration",
+      "group": "Website features",
+      "name": "Custom integration or software setup",
+      "setup": null,
+      "monthly": null,
+      "annual": null,
+      "unit": "project",
+      "additional_setup": null,
+      "price_kind": "custom",
+      "scope": "Individually scoped for software selection or setup outside a listed package, tailored booking or ordering, Square/POS sync, API connections, or custom data flows. Quote implementation and any ongoing care separately. Identify vendor subscriptions and transaction fees separately.",
+      "delivery": "Confirm compatibility and scope before acceptance.",
+      "readiness": "existing_menu_scope_confirmation_required",
+      "requires_any": [],
+      "includes": [],
+      "questions": [
+        "Which system is in use, what must connect or sync, and who will pay for the vendor subscription?"
+      ],
+      "jasper_action": "collect_requirements_owner_quote",
+      "standard_tools_included": false
     }
   ],
   "rules": {
@@ -1234,7 +1320,7 @@
     "hosting": "Feature add-ons do not include the base website hosting unless expressly stated. Determine whether the customer already has suitable hosting. Do not force a new website purchase for standalone email, scheduling or domains.",
     "exclusions": "No general copywriting, photography/video production, social content creation or review responses. Campaign ad text is included only in PPC.",
     "custom_work": "Custom project prices are starting estimates until requirements and delivery are confirmed.",
-    "assistant_status": "No live Jasper chat or customer-facing estimate builder is active. This reference can be explicitly loaded by a future assistant. Presence of this page does not connect or train an AI.",
+    "assistant_status": "Jasper reads the scope-checked catalog prices and selected routing options. Proposed prices require owner review.",
     "website_options": "New projects use Essential as the defined starting website, plus scoped additions, or Enterprise for an individually scoped larger project. Growth is legacy only. Enterprise requires a custom quote; do not invent a starting price.",
     "readiness": "This is a proposed comprehensive menu. Existing fixed entries still require scope confirmation; new or unbuilt capabilities require implementation and supplier-cost validation before a final offer. A starting price is not proof that a system is already built.",
     "internal_guidance": "Off-menu work requires a requirements brief and owner-reviewed estimate. Internal effort guidance is supplied separately to a future server-side assistant and is not part of this public-readable reference.",
@@ -1242,6 +1328,8 @@
     "quote_presentation": "Customer estimates show build/setup, monthly service, applicable commitments, inclusions, exclusions and assumptions. No itemized internal time rate or internal minimum is displayed.",
     "portfolio": "Future portfolio examples must describe what a comparable configuration would cost today, dated and scoped; never expose client invoices. Price each example from current catalog IDs and quantities. Jasper may start from these examples once they exist, but no examples are currently connected.",
     "needs_first": "Lead with the smallest complete solution. Keep optional services separate. Never automatically bundle local SEO or monitoring because a customer asks to be found. Assess existing email and aliases. Discuss paid search for time-bound demand after clarifying intent, geography, capacity, budget and measurement; it does not replace organic search setup.",
-    "seo_deliverables": "Extra SEO must identify paid work: existing-site assessment, profile creation, listing corrections, or agreed technical/information-structure fixes. Never resell Essential search foundation on the same build. Ongoing SEO requires an assessed recurring backlog and explicit deliverables; do not default to the $395 service. Do not stack included profile maintenance or monitoring."
+    "seo_deliverables": "Extra SEO must identify paid work: existing-site assessment, profile creation, listing corrections, or agreed technical/information-structure fixes. Never resell Essential search foundation on the same build. Ongoing SEO requires an assessed recurring backlog and explicit deliverables; do not default to the $395 service. Do not stack included profile maintenance or monitoring.",
+    "integration_selection": "Ask what the customer already uses and what the website needs to do. An ordinary link in Essential is included. A compatible vendor-supplied embed on an account the client already pays for is $75 one time per embed, with $0 monthly from Think Marketing. If the client needs a new booking tool, use Staff scheduling only if its published scope fits. If sourcing, configuring an unlisted tool, syncing POS data, or writing custom code is required, route to Custom integration for a Jacob quote. Show alternate routes as separate choices when both fit or a scope answer would change the price. Never stack the alternatives for one workflow.",
+    "editable_selection": "For a new restaurant include Restaurant essentials. For one staff-editable area add Staff-editable website section. Use Managed editable admin panel only when the project needs its staff access, dedicated infrastructure, backups or defined support. Quote one editing route per workflow. For multiple collections, scheduling specials, or POS synchronization, ask about scope and refer work beyond listed limits to Jacob. Keep optional ordering, booking and email separate."
   }
 }

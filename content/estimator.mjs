@@ -22,6 +22,8 @@ export function estimate(catalog, selections) {
     for(const child of item.includes||[]) if(selected.has(child)) questions.push(`${item.name} already includes ${child} for the same workflow; confirm overlap and remove duplicate fees before estimating.`);
     if(item.readiness==='proposed_scope_and_cost_validation_required') questions.push(`${item.name}: proposed entry; validate delivery and tool costs before a final quote.`);
   }
+  if (selected.has('editable_section') && selected.has('admin')) questions.push('Use one editing option per workflow. Confirm separate needs before including both.');
+  if (selected.has('existing_embed') && selected.has('scheduling')) questions.push('Confirm the embed and new booking setup cover distinct workflows before charging for both.');
   if (selected.has('local_seo')) {
     for (const id of ['gbp_care','monitoring']) if (selected.has(id)) {
       questions.push(`Confirm ${id} covers the same site/location as Local SEO before removing the overlapping fee.`);
@@ -38,7 +40,7 @@ export function estimate(catalog, selections) {
   if (selected.has('crm') && selected.has('automation')) questions.push('Confirm these are separate workflows; one workflow must not be billed twice.');
   if (selected.has('gbp_setup') && selected.has('gbp_care')) questions.push('For the same location, waive $100 GBP maintenance onboarding after profile setup. Owner must confirm the location match.');
   if (selected.has('audit') && selected.has('monitoring')) questions.push('If this review qualifies for monitoring onboarding, owner should apply the $150 onboarding waiver.');
-  const websiteNeeded=['admin','reviews','form','payment','page','landing','site_migration','analytics','store','membership','calculator','chat','assistant'];
+  const websiteNeeded=['editable_section','existing_embed','admin','reviews','form','payment','page','landing','site_migration','analytics','store','membership','calculator','chat','assistant'];
   if (websiteNeeded.some(id=>selected.has(id)) && !selected.has('essential') && !selected.has('growth') && !selected.has('enterprise')) warnings.push('Website hosting is not included in this estimate. Confirm existing suitable hosting or add a website/hosting quote.');
   if (selected.has('domain')) warnings.push('Confirm the actual domains: each must qualify for standard managed-domain pricing. Specialty or premium domains need a confirmed bundled price before purchase.');
   if (selected.has('ppc')) warnings.push('Advertising spend is additional and paid to Google.');
