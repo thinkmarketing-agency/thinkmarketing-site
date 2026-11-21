@@ -35,7 +35,7 @@ class Page(HTMLParser):
             if a.get('type') == 'application/ld+json':
                 self.in_json = True; self.buffer = ''
             else:
-                assert a.get('type') == 'module' and a.get('src') == '/assets/js/jasper.mjs', 'Unexpected executable script'
+                assert a.get('type') == 'module' and a.get('src') == '/assets/jasper-chat.mjs', 'Unexpected executable script'
                 self.links.append({'href': a['src']})
     def handle_data(self, data):
         if self.in_title: self.title += data
@@ -100,7 +100,8 @@ def check(root, production):
     for slug,page in parsed.items():
         if slug == 'estimate-reference': continue
         test(f'{slug or "home"}: no public links to the unlisted reference', all('/estimate-reference' not in a.get('href','') for a in page.links))
-    test('Jasper: coming soon, no chat interface', 'Coming soon.' in (root/'ask-jasper/index.html').read_text() and not (root/'assets/js/jasper.mjs').exists() and '<form' not in (root/'ask-jasper/index.html').read_text())
+    test('Jasper: chat and lead handoff present', all(x in (root/'ask-jasper/index.html').read_text() for x in ('jasper-form','jasper-lead-form','/assets/jasper-chat.mjs')))
+    test('Jasper: no secret in public output', not any('sk-proj-' in p.read_text(errors='ignore') for p in root.rglob('*') if p.is_file() and p.suffix in ('.html','.mjs','.json')))
     catalog=json.loads((root/'estimate-reference/catalog.json').read_text())
     test('Reference: every service preserved in readable HTML', all('service-'+i['id'] in parsed['estimate-reference'].ids for i in catalog['items']))
     test('Reference: scope and estimate sections preserved', all(i in parsed['estimate-reference'].ids for i in ('policies','estimating','reference-faq','business-facts')))

@@ -32,8 +32,7 @@ def custom_pages(intro,cta):
     ai+=section('Useful information. Measured observations.','<p>We work from existing and client-supplied material. No special formula can guarantee a ranking or AI recommendation; sampled answers can change over time.</p><p><a href="/marketing/">Our approach to marketing</a> · <a href="/local-seo/">Explore local SEO</a></p>')+cta()
     portfolio=intro('Portfolio','Portfolio','Coming soon.')
     portfolio+='<section class="section wrap prose coming-soon"><h2>Our work, in one place.</h2><p>We’re putting together a selection of Think Marketing projects. In the meantime, tell us what you have in mind.</p><a class="button" href="/contact/">Contact Think Marketing</a></section>'
-    jasper=intro('Ask Jasper','Ask Jasper','Coming soon.')
-    jasper+='<section class="section wrap prose coming-soon"><h2>A new way to explore Think Marketing.</h2><p>Jasper is in development. We’re working on an assistant to help you explore website options and get answers about our services.</p><p>For now, you can <a href="/websites/">view website pricing</a>, <a href="/faq/">read the FAQ</a>, or get in touch directly.</p><a class="button" href="/contact/">Contact Think Marketing</a></section>'
+    jasper=(ROOT/'content/jasper.html').read_text()
     from pricing_reference import render_reference
     reference=render_reference(intro)
     return {'portfolio':('Portfolio',portfolio),'ask-jasper':('Ask Jasper',jasper),'websites':('Website pricing',websites),'about':('About Think Marketing',about),'faq':('Frequently asked questions',faq),'marketing':('Marketing services',marketing),'local-seo':('Local SEO',local),'ai-search-visibility':('AI & search visibility',ai),'estimate-reference':('Assistant reference',reference)}

@@ -1,0 +1,1 @@
+{"private":true,"type":"module","scripts":{"test":"node --test tests/*.test.mjs","build":"python3 scripts/build.py --production && python3 scripts/check_seo.py --production"},"engines":{"node":"24.x"}}
