@@ -49,7 +49,9 @@ for slug, (title, body) in PAGES.items():
     header = re.sub(r'<nav class="home-nav".*?</nav>', lambda _: f'<nav class="home-nav" aria-label="Main navigation">{nav}</nav>', header, flags=re.S)
     footer = re.search(r'<footer.*?</footer>', home, re.S).group()
     html = re.sub(r'<header.*?</header>', lambda _: header, html, flags=re.S)
-    html = re.sub(r'<footer.*?</footer>', lambda _: footer, html, flags=re.S)
+    html = re.sub(r'<footer.*?</footer>', lambda _: '' if slug == 'ask-jasper' else footer, html, flags=re.S)
+    if slug == 'ask-jasper':
+        html = html.replace('<html lang="en">', '<html lang="en" class="jasper-page">')
     html = html.replace('<link rel="stylesheet" href="/styles.css">', '<link rel="stylesheet" href="/home.css"><link rel="stylesheet" href="/styles.css">')
     target = OUTPUT / slug / 'index.html' if slug else OUTPUT / 'index.html' 
     target.parent.mkdir(exist_ok=True)

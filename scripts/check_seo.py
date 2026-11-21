@@ -101,6 +101,8 @@ def check(root, production):
         if slug == 'estimate-reference': continue
         test(f'{slug or "home"}: no public links to the unlisted reference', all('/estimate-reference' not in a.get('href','') for a in page.links))
     test('Jasper: chat and lead handoff present', all(x in (root/'ask-jasper/index.html').read_text() for x in ('jasper-form','jasper-lead-form','/assets/jasper-chat.mjs')))
+    jasper = (root/'ask-jasper/index.html').read_text()
+    test('Jasper: dedicated chat page', all(term not in jasper for term in ('<footer', '<aside', 'A good place to start.')) and 'class="jasper-page"' in jasper)
     test('Jasper: no secret in public output', not any('sk-proj-' in p.read_text(errors='ignore') for p in root.rglob('*') if p.is_file() and p.suffix in ('.html','.mjs','.json')))
     catalog=json.loads((root/'estimate-reference/catalog.json').read_text())
     test('Reference: every service preserved in readable HTML', all('service-'+i['id'] in parsed['estimate-reference'].ids for i in catalog['items']))

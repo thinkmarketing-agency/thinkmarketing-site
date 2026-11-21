@@ -19,48 +19,18 @@ const status = $('#jasper-status');
 const nearBottom = () => transcript.scrollHeight - transcript.scrollTop - transcript.clientHeight < 48;
 const scrollToLatest = () => { transcript.scrollTop = transcript.scrollHeight; };
 
-const panel = $('#jasper-chat');
-let background = [];
 function fitViewport() {
   const viewport = window.visualViewport;
-  if (!viewport || !panel.classList.contains('is-fullscreen')) return;
+  if (!viewport || viewport.scale !== 1) return;
   const follow = nearBottom();
-  panel.style.setProperty('--jasper-viewport-height', viewport.height + 'px');
-  panel.style.setProperty('--jasper-viewport-top', viewport.offsetTop + 'px');
+  document.body.style.setProperty('--jasper-viewport-height', viewport.height + 'px');
+  document.body.style.setProperty('--jasper-viewport-top', viewport.offsetTop + 'px');
   if (follow) scrollToLatest();
-}
-
-function setFullscreen(active) {
-  if (panel.classList.contains('is-fullscreen') === active) return;
-  panel.classList.toggle('is-fullscreen', active);
-  document.body.classList.toggle('jasper-immersive', active);
-  $('#jasper-fullscreen').hidden = active;
-  $('#jasper-exit').hidden = !active;
-  if (active) {
-    for (let node = panel; node !== document.body; node = node.parentElement) {
-      for (const sibling of node.parentElement.children) {
-        if (sibling !== node && !sibling.inert) {
-          sibling.inert = true;
-          background.push(sibling);
-        }
-      }
-    }
-    fitViewport();
-    if (!panel.contains(document.activeElement)) $('#jasper-exit').focus({preventScroll: true});
-  } else {
-    background.forEach(node => { node.inert = false; });
-    background = [];
-    $('#jasper-fullscreen').focus();
-  }
 }
 
 window.visualViewport?.addEventListener('resize', fitViewport);
 window.visualViewport?.addEventListener('scroll', fitViewport);
-$('#jasper-fullscreen').addEventListener('click', () => setFullscreen(true));
-$('#jasper-exit').addEventListener('click', () => setFullscreen(false));
-panel.addEventListener('keydown', event => {
-  if (event.key === 'Escape' && panel.classList.contains('is-fullscreen')) setFullscreen(false);
-});
+fitViewport();
 
 let handoff = null;
 const handoffRequested = text => /^(?:(?:can|could|would|will) you |please )?(?:send|email|forward|share) (?:this|it|(?:the |my |our )?(?:chat|conversation|summary|details|audit|results|findings|an email|a message)) (?:over )?to jacob(?: please)?[.!?]*$/i.test(text)
@@ -87,7 +57,6 @@ function acceptedHandoffOffer(text) {
 
 async function handleHandoff(text) {
   const reply = text.trim();
-  setFullscreen(true);
   $('#jasper-welcome').hidden = true;
   $('#jasper-retry').hidden = true;
   $('#jasper-input').value = '';
@@ -133,7 +102,7 @@ async function handleHandoff(text) {
       const {name, email, summary} = handoff;
       await sendLead({name, email, summary, consent: true});
       handoff = null;
-      handoffMessage('Your summary was sent to Jacob. You can keep chatting or choose “Exit chat”.');
+      handoffMessage('Your summary was sent to Jacob. You can keep chatting here.');
     } catch (error) {
       handoffMessage(error.message + ' Type “Send it” to retry or “Cancel” to stop.');
     } finally {
@@ -162,8 +131,6 @@ async function send(text, retry = false) {
     await handleHandoff(text);
     return;
   }
-  const startingConversation = !messages.length;
-  if (startingConversation) setFullscreen(true);
   $('#jasper-retry').hidden = true;
   $('#jasper-welcome').hidden = true;
   if (!retry) {
