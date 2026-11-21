@@ -15,6 +15,8 @@
   flex: 1 1 auto;
   min-height: 0;
   overflow: auto;
+  overflow-anchor: none;
+  container-type: size;
   overscroll-behavior-y: contain;
   scrollbar-gutter: stable;
 }
@@ -191,4 +193,64 @@ html.jasper-page {
   border: 0;
   background: transparent;
   text-decoration: underline;
+}
+
+/* Leave room below the latest reply so its start can sit at the top while it streams. */
+.jasper-active-reply {
+  box-sizing: border-box;
+  min-height: 100cqh;
+}
+
+
+.jasper-audit-table thead th:nth-child(2),
+.jasper-audit-table tbody td:nth-child(2) {
+  white-space: nowrap;
+}
+
+@media (max-width: 760px) {
+  .jasper-audit-table,
+  .jasper-audit-table table,
+  .jasper-audit-table tbody {
+    display: block;
+    overflow: visible;
+  }
+
+  .jasper-audit-table thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  .jasper-audit-table tbody tr {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: start;
+    gap: 6px 12px;
+    padding: 12px 0;
+    border-top: 1px solid #e5e5e5;
+  }
+
+  .jasper-audit-table tbody :is(th, td) {
+    border: 0;
+    padding: 0;
+    overflow-wrap: break-word;
+  }
+
+  .jasper-audit-table tbody td:nth-child(2) {
+    border-radius: 4px;
+    background: #f3f3f3;
+    color: #333;
+    padding: 2px 8px;
+    font-size: 12px;
+    font-weight: 600;
+  }
+
+  .jasper-audit-table tbody td:nth-child(3) {
+    grid-column: 1 / -1;
+    line-height: 1.5;
+    overflow-wrap: anywhere;
+  }
 }

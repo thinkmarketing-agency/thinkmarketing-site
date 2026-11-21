@@ -6,26 +6,97 @@ function inline(parent,text){
  const re=/\*\*([^*]+)\*\*|`([^`]+)`|\[([^\]]+)\]\((https?:\/\/[^\s)]+|\/[^\s)]*)\)/g;let end=0;
  for(const m of text.matchAll(re)){parent.append(document.createTextNode(text.slice(end,m.index)));if(m[1])parent.append(el('strong',m[1]));else if(m[2])parent.append(el('code',m[2]));else{const a=el('a',m[3]);a.href=m[4];if(m[4].startsWith('http')){a.target='_blank';a.rel='noopener noreferrer';}parent.append(a);}end=m.index+m[0].length;}parent.append(document.createTextNode(text.slice(end)));
 }
+function renderTable(lines, start) {
+  const splitCells = line => line.trim().replace(/^\||\|$/g, '').split('|').map(cell => cell.trim());
+  const headers = splitCells(lines[start]);
+  const audit = headers.length === 3 &&
+    /^(area|check|audit area)$/i.test(headers[0]) &&
+    /^(grade|status)$/i.test(headers[1]) &&
+    /^evidence$/i.test(headers[2]);
+  const wrapper = el('div');
+  wrapper.className = audit ? 'jasper-table jasper-audit-table' : 'jasper-table';
+  const table = el('table');
+  const head = el('thead');
+  const body = el('tbody');
+  const headRow = el('tr');
+  if (audit) {
+    table.setAttribute('role', 'table');
+    table.setAttribute('aria-label', 'Website audit findings');
+    head.setAttribute('role', 'rowgroup');
+    body.setAttribute('role', 'rowgroup');
+    headRow.setAttribute('role', 'row');
+  }
+  for (const label of headers) {
+    const cell = el('th');
+    cell.scope = 'col';
+    if (audit) cell.setAttribute('role', 'columnheader');
+    inline(cell, label);
+    headRow.append(cell);
+  }
+  head.append(headRow);
+  let lastRow = start + 1;
+  while (lines[lastRow + 1]?.includes('|')) {
+    const row = el('tr');
+    if (audit) row.setAttribute('role', 'row');
+    for (const [index, value] of splitCells(lines[++lastRow]).entries()) {
+      const cell = el(audit && index === 0 ? 'th' : 'td');
+      if (audit && index === 0) cell.scope = 'row';
+      if (audit) cell.setAttribute('role', index === 0 ? 'rowheader' : 'cell');
+      inline(cell, value);
+      row.append(cell);
+    }
+    body.append(row);
+  }
+  table.append(head, body);
+  wrapper.append(table);
+  return {wrapper, lastRow};
+}
+
 function render(target,text){target.replaceChildren();const lines=text.split('\n');let list=null,paragraph=null,code=null;
  for(let i=0;i<lines.length;i++){const line=lines[i];if(line.startsWith('```')){if(code)code=null;else{code=el('pre');target.append(code);}list=paragraph=null;continue;}if(code){code.textContent+=line+'\n';continue;}if(!line.trim()){list=paragraph=null;continue;}
- if(line.includes('|')&&/^\s*\|?\s*:?-{3,}/.test(lines[i+1]||'')){const wrap=el('div');wrap.className='jasper-table';const table=el('table');const cells=s=>s.replace(/^\s*\||\|\s*$/g,'').split('|');const head=el('tr');cells(line).forEach(s=>{const th=el('th');inline(th,s.trim());head.append(th);});table.append(head);i++;while(lines[i+1]?.includes('|')){const tr=el('tr');cells(lines[++i]).forEach(s=>{const td=el('td');inline(td,s.trim());tr.append(td);});table.append(tr);}wrap.append(table);target.append(wrap);list=paragraph=null;continue;}
+ if (line.includes('|') && /^\s*\|?\s*:?-{3,}/.test(lines[i + 1] || '')) {
+   const parsed = renderTable(lines, i);
+   target.append(parsed.wrapper);
+   i = parsed.lastRow;
+   list = paragraph = null;
+   continue;
+ }
+
  const heading=line.match(/^#{1,4}\s+(.+)/),bullet=line.match(/^\s*([-*]|\d+\.)\s+(.+)/);
  if(heading){const h=el('h3');inline(h,heading[1]);target.append(h);list=paragraph=null;}else if(bullet){const kind=/\d/.test(bullet[1])?'ol':'ul';if(!list||list.tagName.toLowerCase()!==kind){list=el(kind);target.append(list);}const li=el('li');inline(li,bullet[2]);list.append(li);paragraph=null;}else{list=null;if(!paragraph){paragraph=el('p');target.append(paragraph);}else paragraph.append(document.createTextNode(' '));inline(paragraph,line);}}
 }
+function renderReply(target, text, streaming = false) {
+  if (streaming) {
+    // Hold a possible table header or fence until there is enough syntax to render it.
+    text = text.replace(/(^|\n)[ \t]*\|[^\n]*(?:\n[ \t]*\|?[ |:\-]*)?$/, '$1');
+    text = text.replace(/(^|\n)(?:`{1,2}|#{1,4}|[-*])[ \t]*$/, '$1');
+  }
+  const next = document.createDocumentFragment();
+  render(next, text);
+  let current = target.firstChild;
+  while (current && next.firstChild?.isEqualNode(current)) {
+    next.firstChild.remove();
+    current = current.nextSibling;
+  }
+  while (current) {
+    const following = current.nextSibling;
+    current.remove();
+    current = following;
+  }
+  target.append(next);
+}
+
 function bubble(role,text){const article=el('article');article.className='jasper-message '+role;article.append(el('strong',role==='user'?'You':'Jasper'));const content=el('div');render(content,text);article.append(content);$('#jasper-messages').append(article);return {article,content};}
 function setBusy(value){busy=value;$('#jasper-send').disabled=value;$('#jasper-stop').hidden=!value;$('#jasper-new').disabled=value;$('#jasper-attach').disabled=value;document.querySelectorAll('[data-prompt]').forEach(b=>b.disabled=value);}
 const transcript = $('#jasper-transcript');
 const status = $('#jasper-status');
-const nearBottom = () => transcript.scrollHeight - transcript.scrollTop - transcript.clientHeight < 48;
 const scrollToLatest = () => { transcript.scrollTop = transcript.scrollHeight; };
 
 function fitViewport() {
   const viewport = window.visualViewport;
   if (!viewport || viewport.scale !== 1) return;
-  const follow = nearBottom();
   document.body.style.setProperty('--jasper-viewport-height', viewport.height + 'px');
   document.body.style.setProperty('--jasper-viewport-top', viewport.offsetTop + 'px');
-  if (follow) scrollToLatest();
 }
 
 window.visualViewport?.addEventListener('resize', fitViewport);
@@ -97,7 +168,7 @@ function reviewHandoff() {
 function acceptedHandoffOffer(text) {
   const previous = messages.at(-1);
   return /^(?:yes|sure|yes please|please do|go ahead|send it)[.!?]*$/i.test(text.trim()) &&
-    previous?.role === 'assistant' && /(?:send|share|forward).{0,100}(?:to|with) jacob/i.test(previous.content);
+    previous?.role === 'assistant' && /(?:\bsend jacob an email\b|(?:send|share|forward).{0,100}(?:to|with) jacob)/i.test(previous.content);
 }
 
 async function handleHandoff(text) {
@@ -196,30 +267,24 @@ async function send(text, retry = false) {
   setBusy(true);
   status.textContent = 'Jasper is thinking…';
 
+  $('.jasper-active-reply')?.classList.remove('jasper-active-reply');
   const answer = bubble('assistant', '');
-  const draft = el('div');
-  draft.className = 'jasper-streaming';
-  const draftText = document.createTextNode('');
-  draft.append(draftText);
-  answer.content.append(draft);
-  scrollToLatest();
+  answer.article.classList.add('jasper-active-reply');
+  // Move to the start once. Streaming and keyboard resizing leave the reader in control.
+  transcript.scrollTop += answer.article.getBoundingClientRect().top - transcript.getBoundingClientRect().top;
 
-  let output = '', displayed = 0, frame = null, completed = false;
+  let output = '', frame = null, completed = false;
   const sources = new Map();
   controller = new AbortController();
 
   function paintDraft() {
     frame = null;
-    const follow = nearBottom();
-    draftText.appendData(output.slice(displayed));
-    displayed = output.length;
-    if (follow) scrollToLatest();
+    renderReply(answer.content, output, true);
   }
 
   function finishAnswer(includeSources) {
     if (frame !== null) cancelAnimationFrame(frame);
-    const follow = nearBottom();
-    if (output) render(answer.content, output);
+    if (output) renderReply(answer.content, output);
     else answer.article.remove();
     if (includeSources && sources.size) {
       const refs = el('div');
@@ -233,7 +298,6 @@ async function send(text, retry = false) {
       }
       answer.article.append(refs);
     }
-    if (follow) scrollToLatest();
   }
 
   let succeeded = false;
