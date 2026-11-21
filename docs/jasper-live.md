@@ -22,7 +22,7 @@ No chat or uploads are persisted by this application. Conversation state lives i
 5. Test an actual model response, stop/retry, website research limitations, a failed upstream request, and one owner-approved real lead email on a deployment. Local tests mock external providers and do not spend API credits or send email.
 6. Confirm mobile/desktop appearance and approve publishing. Ask Jasper remains noindex during testing.
 
-The UI uses safe DOM construction for a limited Markdown subset (paragraphs, headings, bold, lists, code, HTTP/HTTPS links, and tables); raw HTML never executes. The handoff currently prefills a visitor-editable transcript, not a model-generated concise summary. Refining that summary is a follow-up improvement.
+The UI uses safe DOM construction for a limited Markdown subset (paragraphs, headings, bold, lists, code, HTTP/HTTPS links, and tables); raw HTML never executes. The in-chat handoff previews a summary built from the latest request and answer. Visitors can replace it, cancel, or type “Send it” to authorize sending. The full-screen conversation adjusts to the visual viewport when a mobile keyboard opens. Jasper receives scope-checked catalog prices and an estimate for Essential plus one editable admin area. Proposed pricing entries and private guidance stay outside its business reference.
 
 ## Website audit rubric
 

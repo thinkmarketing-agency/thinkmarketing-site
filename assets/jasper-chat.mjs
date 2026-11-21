@@ -19,9 +19,151 @@ const status = $('#jasper-status');
 const nearBottom = () => transcript.scrollHeight - transcript.scrollTop - transcript.clientHeight < 48;
 const scrollToLatest = () => { transcript.scrollTop = transcript.scrollHeight; };
 
+const panel = $('#jasper-chat');
+let background = [];
+function fitViewport() {
+  const viewport = window.visualViewport;
+  if (!viewport || !panel.classList.contains('is-fullscreen')) return;
+  const follow = nearBottom();
+  panel.style.setProperty('--jasper-viewport-height', viewport.height + 'px');
+  panel.style.setProperty('--jasper-viewport-top', viewport.offsetTop + 'px');
+  if (follow) scrollToLatest();
+}
+
+function setFullscreen(active) {
+  if (panel.classList.contains('is-fullscreen') === active) return;
+  panel.classList.toggle('is-fullscreen', active);
+  document.body.classList.toggle('jasper-immersive', active);
+  $('#jasper-fullscreen').hidden = active;
+  $('#jasper-exit').hidden = !active;
+  if (active) {
+    for (let node = panel; node !== document.body; node = node.parentElement) {
+      for (const sibling of node.parentElement.children) {
+        if (sibling !== node && !sibling.inert) {
+          sibling.inert = true;
+          background.push(sibling);
+        }
+      }
+    }
+    fitViewport();
+    if (!panel.contains(document.activeElement)) $('#jasper-exit').focus({preventScroll: true});
+  } else {
+    background.forEach(node => { node.inert = false; });
+    background = [];
+    $('#jasper-fullscreen').focus();
+  }
+}
+
+window.visualViewport?.addEventListener('resize', fitViewport);
+window.visualViewport?.addEventListener('scroll', fitViewport);
+$('#jasper-fullscreen').addEventListener('click', () => setFullscreen(true));
+$('#jasper-exit').addEventListener('click', () => setFullscreen(false));
+panel.addEventListener('keydown', event => {
+  if (event.key === 'Escape' && panel.classList.contains('is-fullscreen')) setFullscreen(false);
+});
+
+let handoff = null;
+const handoffRequested = text => /^(?:(?:can|could|would|will) you |please )?(?:send|email|forward|share) (?:this|it|(?:the |my |our )?(?:chat|conversation|summary|details|audit|results|findings|an email|a message)) (?:over )?to jacob(?: please)?[.!?]*$/i.test(text)
+  || /^(?:(?:can|could|would|will) you |please )?(?:email|contact) jacob(?: (?:about|with) (?:this|it|the summary|the chat))?(?: please)?[.!?]*$/i.test(text);
+
+function handoffMessage(text) {
+  const reply = bubble('assistant', '');
+  reply.content.className = 'jasper-streaming';
+  reply.content.textContent = text;
+  scrollToLatest();
+}
+
+function reviewHandoff() {
+  handoffMessage('Here’s what I’ll send Jacob.\n\nName: ' + handoff.name +
+    '\nReply email: ' + handoff.email + '\n\n' + handoff.summary +
+    '\n\nType “Send it” to confirm, “Edit summary” to replace the summary, or “Cancel” to stop.');
+}
+
+function acceptedHandoffOffer(text) {
+  const previous = messages.at(-1);
+  return /^(?:yes|sure|yes please|please do|go ahead|send it)[.!?]*$/i.test(text.trim()) &&
+    previous?.role === 'assistant' && /(?:send|share|forward).{0,100}(?:to|with) jacob/i.test(previous.content);
+}
+
+async function handleHandoff(text) {
+  const reply = text.trim();
+  setFullscreen(true);
+  $('#jasper-welcome').hidden = true;
+  $('#jasper-retry').hidden = true;
+  $('#jasper-input').value = '';
+  bubble('user', reply);
+  if (!handoff) {
+    const latest = role => messages.findLast(message => message.role === role)?.content;
+    const excerpt = (value, size) => value.length > size ? value.slice(0, size) + '…' : value;
+    const sections = [];
+    if (latest('user')) sections.push('Visitor request: ' + excerpt(latest('user'), 900));
+    if (latest('assistant')) sections.push('Jasper’s assessment: ' + excerpt(latest('assistant'), 1200));
+    handoff = {stage: 'name', summary: sections.join('\n\n') || 'The visitor requested a follow-up from Jacob.'};
+    handoffMessage('I can send Jacob a summary from here. What’s your name?');
+  } else if (/^(?:cancel|never mind|nevermind)[.!]?$/i.test(reply)) {
+    handoff = null;
+    handoffMessage('Email canceled. We can keep talking here.');
+  } else if (handoff.stage === 'name') {
+    if (reply.length > 100) handoffMessage('Please enter a name under 100 characters.');
+    else {
+      handoff.name = reply;
+      handoff.stage = 'email';
+      handoffMessage('What email address should Jacob reply to?');
+    }
+  } else if (handoff.stage === 'email') {
+    if (reply.length > 254 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(reply)) {
+      handoffMessage('Please enter just your reply email address, or type “Cancel”.');
+    } else {
+      handoff.email = reply;
+      handoff.stage = 'review';
+      reviewHandoff();
+    }
+  } else if (handoff.stage === 'edit') {
+    handoff.summary = reply;
+    handoff.stage = 'review';
+    reviewHandoff();
+  } else if (/^edit summary[.!]?$/i.test(reply)) {
+    handoff.stage = 'edit';
+    handoffMessage('Type the replacement summary you’d like Jacob to receive.');
+  } else if (/^send it[.!]?$/i.test(reply)) {
+    setBusy(true);
+    $('#jasper-stop').hidden = true;
+    status.textContent = 'Sending to Jacob…';
+    try {
+      const {name, email, summary} = handoff;
+      await sendLead({name, email, summary, consent: true});
+      handoff = null;
+      handoffMessage('Your summary was sent to Jacob. You can keep chatting or choose “Exit chat”.');
+    } catch (error) {
+      handoffMessage(error.message + ' Type “Send it” to retry or “Cancel” to stop.');
+    } finally {
+      status.textContent = '';
+      setBusy(false);
+    }
+  } else {
+    handoffMessage('Type “Send it” to confirm, “Edit summary” to make a change, or “Cancel” to stop.');
+  }
+}
+
+async function sendLead(payload) {
+  const response = await fetch('/api/jasper-lead', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify(payload),
+    signal: AbortSignal.timeout(20000),
+  });
+  const data = await response.json();
+  if (!response.ok || data.ok !== true) throw Error(data.error || 'Your message could not be sent.');
+}
+
 async function send(text, retry = false) {
   if (busy || !text.trim()) return;
+  if (!retry && (handoff || handoffRequested(text.trim()) || acceptedHandoffOffer(text))){
+    await handleHandoff(text);
+    return;
+  }
   const startingConversation = !messages.length;
+  if (startingConversation) setFullscreen(true);
   $('#jasper-retry').hidden = true;
   $('#jasper-welcome').hidden = true;
   if (!retry) {
@@ -39,7 +181,6 @@ async function send(text, retry = false) {
   draft.append(draftText);
   answer.content.append(draft);
   scrollToLatest();
-  if (startingConversation) transcript.parentElement.scrollIntoView({block: 'nearest'});
 
   let output = '', displayed = 0, frame = null, completed = false;
   const sources = new Map();
@@ -140,10 +281,10 @@ $('#jasper-input').addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKe
 document.querySelectorAll('[data-prompt]').forEach(b=>b.addEventListener('click',()=>send(b.dataset.prompt)));
 $('#jasper-stop').addEventListener('click',()=>controller?.abort());
 $('#jasper-retry').addEventListener('click',()=>{const last=$('#jasper-messages').lastElementChild;if(last?.classList.contains('assistant'))last.remove();send(messages.at(-1)?.content||'',true);});
-$('#jasper-new').addEventListener('click',()=>{messages.length=0;$('#jasper-messages').replaceChildren();$('#jasper-welcome').hidden=false;$('#jasper-status').textContent='';$('#jasper-retry').hidden=true;$('#jasper-input').focus({preventScroll:true});});
+$('#jasper-new').addEventListener('click',()=>{messages.length=0;handoff=null;$('#jasper-messages').replaceChildren();$('#jasper-welcome').hidden=false;$('#jasper-status').textContent='';$('#jasper-retry').hidden=true;$('#jasper-input').focus({preventScroll:true});});
 $('#jasper-connect').addEventListener('click',()=>{$('#lead-summary').value=messages.map(m=>(m.role==='user'?'Visitor':'Jasper')+': '+m.content).join('\n\n').slice(0,12000);$('#lead-status').textContent='';$('#jasper-lead-dialog').showModal();updateMailto();});
 $('#jasper-lead-close').addEventListener('click',()=>$('#jasper-lead-dialog').close());
 function updateMailto(){$('#lead-mailto').href='mailto:thinkmarketingbend@gmail.com?subject='+encodeURIComponent('Following up with Jasper')+'&body='+encodeURIComponent('Name: '+$('#lead-name').value+'\nEmail: '+$('#lead-email').value+'\n\n'+$('#lead-summary').value);}
 $('#jasper-lead-form').addEventListener('input',updateMailto);
-$('#jasper-lead-form').addEventListener('submit',async e=>{e.preventDefault();const form=e.target;$('#lead-send').disabled=true;$('#lead-status').textContent='Sending…';try{const response=await fetch('/api/jasper-lead',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name:form.elements.name.value,email:form.elements.email.value,summary:form.elements.summary.value,website:form.elements.website.value,consent:form.elements.consent.checked})});const data=await response.json();if(!response.ok)throw Error(data.error);$('#lead-status').textContent='Your message has been sent to Jacob. Thank you!';form.reset();}catch(error){$('#lead-status').textContent=error.message;}finally{$('#lead-send').disabled=false;}});
+$('#jasper-lead-form').addEventListener('submit',async e=>{e.preventDefault();const form=e.target;$('#lead-send').disabled=true;$('#lead-status').textContent='Sending…';try{await sendLead({name:form.elements.name.value,email:form.elements.email.value,summary:form.elements.summary.value,website:form.elements.website.value,consent:form.elements.consent.checked});$('#lead-status').textContent='Your message has been sent to Jacob. Thank you!';form.reset();}catch(error){$('#lead-status').textContent=error.message;}finally{$('#lead-send').disabled=false;}});
 const prompt=new URLSearchParams(location.search).get('prompt');if(prompt){$('#jasper-input').value=prompt.slice(0,6000);$('#jasper-input').focus();}

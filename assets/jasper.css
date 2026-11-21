@@ -42,3 +42,51 @@
   white-space: pre-wrap;
   line-height: 1.75;
 }
+
+.jasper-header-actions {
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+body.jasper-immersive {
+  overflow: hidden;
+}
+
+#jasper-chat.is-fullscreen {
+  position: fixed;
+  z-index: 10000;
+  top: var(--jasper-viewport-top, 0px);
+  left: 0;
+  width: 100%;
+  height: var(--jasper-viewport-height, 100dvh);
+  box-sizing: border-box;
+  border: 0;
+  border-radius: 0;
+  padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+}
+
+#jasper-chat.is-fullscreen > *,
+#jasper-chat.is-fullscreen #jasper-messages,
+#jasper-chat.is-fullscreen #jasper-welcome {
+  box-sizing: border-box;
+}
+
+#jasper-chat.is-fullscreen #jasper-messages,
+#jasper-chat.is-fullscreen #jasper-welcome {
+  max-width: 840px;
+  margin-inline: auto;
+}
+
+#jasper-chat.is-fullscreen #jasper-form {
+  width: calc(100% - 32px);
+  max-width: 800px;
+  margin-inline: auto;
+}
+
+@media (max-width: 760px) {
+  #jasper-chat.is-fullscreen .jasper-chat-heading { padding-block: 10px; }
+  #jasper-chat.is-fullscreen #jasper-input { font-size: 16px; }
+  #jasper-chat.is-fullscreen .jasper-disclosure { margin-block: 4px 8px; }
+}
