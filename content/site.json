@@ -8,6 +8,15 @@
     "Central Oregon"
   ],
   "description": "Custom websites and practical marketing for small and medium-sized businesses in Bend and Central Oregon.",
+  "owner": {
+    "name": "Jacob Lecesne",
+    "role": "Owner and founder of Think Marketing",
+    "foundedYear": 2016,
+    "education": "BBA in Marketing from the University of Georgia",
+    "basedIn": "Bend, Oregon",
+    "livedInBendSince": 2013,
+    "approach": "Make enterprise-level digital marketing accessible to local businesses, scope work around each business and budget, and measure what the investment is doing."
+  },
   "pages": {
     "": {
       "title": "Web Design & Local SEO in Bend, OR | Think Marketing",
@@ -41,7 +50,7 @@
     },
     "about": {
       "title": "About Think Marketing | Custom Websites in Bend, Oregon",
-      "description": "Meet Jacob and the approach behind Think Marketing: custom websites that explain your expertise and do useful work for your business. Based in Bend, Oregon.",
+      "description": "Meet Jacob in Bend, Oregon, and learn how Think Marketing helps turn your domain into a useful website that explains your business and serves your customers.",
       "label": "About"
     },
     "faq": {

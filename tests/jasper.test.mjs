@@ -76,3 +76,11 @@ test('sends a chat attachment to the model and forwards the original only with h
     filename: 'invoice.pdf', content: attachment.content, content_type: 'application/pdf',
   }]);
 });
+
+test('Jasper receives approved owner facts and the About page URL', () => {
+  const {owner} = JSON.parse(knowledge());
+  assert.equal(owner.name, 'Jacob Lecesne');
+  assert.equal(owner.education, 'BBA in Marketing from the University of Georgia');
+  assert.equal(owner.foundedYear, 2016);
+  assert.equal(owner.aboutUrl, 'https://www.thinkmarketingbend.com/about/');
+});
